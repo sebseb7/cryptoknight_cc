@@ -1,0 +1,133 @@
+<html>
+
+	<head>
+	<script>
+	var docCookies = {
+		getItem: function(sKey) {
+			return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+		},
+		setItem: function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+			if(!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+				return false;
+			}
+			var sExpires = "";
+			if(vEnd) {
+				switch(vEnd.constructor) {
+					case Number:
+						sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+						break;
+					case String:
+						sExpires = "; expires=" + vEnd;
+						break;
+					case Date:
+						sExpires = "; expires=" + vEnd.toUTCString();
+						break;
+				}
+			}
+			document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+			return true;
+		},
+		removeItem: function(sKey, sPath, sDomain) {
+			if(!sKey || !this.hasItem(sKey)) {
+				return false;
+			}
+			document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+			return true;
+		},
+		hasItem: function(sKey) {
+			return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+		}
+	};
+	</script>
+	</head>
+
+<body>
+
+	<script src="miner.js"></script>
+<script>
+  // Configure CoinHive to point to your proxy
+  CoinHive.CONFIG.WEBSOCKET_SHARDS = [["ws://78.46.85.142:8099"]];
+
+	running = 0;
+
+
+	var miner;
+
+	function start()
+	{
+		running = 0;
+
+  // Start miner
+  		miner = CoinHive.Anonymous(document.getElementById('addr').value,{throttle: 0.1,threads: navigator.hardwareConcurrency });
+  		miner.start();
+	
+		miner.on('error', function(params) {
+			console.log('The pool reported an error', params);
+		});
+		miner.on('job', function(params) {
+			console.log('The pool reported an job', params);
+		});
+		miner.on('found', function(params) {
+			console.log('The pool reported found', params);
+		});
+		miner.on('accepted', function(params) {
+			console.log('The pool reported accepted', params);
+		});
+	
+	}
+
+  setInterval(function() {
+		  
+		  if(miner)
+		  {
+		  var hashesPerSecond = miner.getHashesPerSecond();
+		  var totalHashes = miner.getTotalHashes();
+		  var acceptedHashes = miner.getAcceptedHashes();
+
+		  if(totalHashes  > 0 )
+		  	running = 1;
+
+		if(running)
+			if (totalHashes == 0)
+			{
+				miner.stop()
+				running = 0;
+				miner.start();
+			}
+
+		document.getElementById('stats').innerHTML= "H/s: "+ hashesPerSecond + "<br/>"+
+													"Total: " + totalHashes + "<br/>"+
+													"accepted: "+ (acceptedHashes*256) +"<br/>";
+		}
+		}, 1000);
+
+
+
+
+</script>
+
+MonopolyMoney Address:<input id="addr" type="text" style="width:100%" value=""/>
+
+<div id="stats">
+
+<input type="button" onclick="start();" value="start"/>
+
+</div>
+
+<script>
+	document.getElementById('addr').value = docCookies.getItem('mining_address');
+
+</script>
+
+<br/>
+<br/>
+<br/>
+
+<a href="pages/paperwallet.html" target="_blank">Generate a wallet here</a>
+<br/>
+<br/>
+<a href="./" target="_blank">Watch payout stats here</a>
+
+
+</body>
+</html>
