@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "http://explorer.lines.click/?hash={id}#blockchain_block";
-var transactionExplorer = "http://explorer.lines.click/?hash={id}#blockchain_transaction";
+var blockchainExplorer = "http://explorer.lines.pw/?hash={id}#blockchain_block";
+var transactionExplorer = "http://explorer.lines.pw/?hash={id}#blockchain_transaction";
 
 var guiWallet = "http://lines.pw/";
 
