@@ -1,4 +1,4 @@
-var api = "http://78.47.92.206:8117";
+var api = "/rpc/msr";
 
 var poolHost = "78.47.92.206";
 

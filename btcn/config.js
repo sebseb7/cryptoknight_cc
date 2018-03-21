@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2991";
+var api = "/rpc/btcn";
 
 var poolHost = "78.46.85.142";
 

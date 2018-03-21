@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2449";
+var api = "/rpc/dero";
 
 var poolHost = "78.46.85.142";
 

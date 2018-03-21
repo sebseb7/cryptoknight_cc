@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:8889";
+var api = "/rpc/itns";
 
 var poolHost = "78.46.85.142";
 

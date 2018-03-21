@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:6559";
+var api = "/rpc/qwerty";
 
 var poolHost = "78.46.85.142";
 

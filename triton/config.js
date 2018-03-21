@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2771";
+var api = "/rpc/triton";
 
 var poolHost = "78.46.85.142";
 

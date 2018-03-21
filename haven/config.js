@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2553";
+var api = "/rpc/haven";
 
 var poolHost = "78.46.85.142";
 

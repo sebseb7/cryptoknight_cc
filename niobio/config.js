@@ -1,4 +1,4 @@
-var api = "http://94.130.207.37:40001";
+var api = "/rpc/niobio";
 
 var poolHost = "94.130.207.37";
 
