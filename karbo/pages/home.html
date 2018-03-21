@@ -450,7 +450,6 @@
     updateMarkets();
     function updateMarkets(){
 
-		//$.get('https://stocks.exchange/api2/prices',function(data) {
 		$.get('/api/KRB_BTC.xml',function(data) {
 
 			if(data.error) {

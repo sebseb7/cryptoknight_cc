@@ -357,8 +357,7 @@
     updateMarkets();
     function updateMarkets(){
 
-		//$.get('https://stocks.exchange/api2/prices',function(data) {
-		$.get('http://cryptoknight.cc/api/BTC-TRTL.xml',function(data) {
+		$.get('/api/BTC-TRTL.xml',function(data) {
 
 
 			if(data.error) {
