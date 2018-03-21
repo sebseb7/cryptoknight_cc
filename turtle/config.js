@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "http://turtle-coin.com/?hash={id}#blockchain_block";
-var transactionExplorer = "http://turtle-coin.com/?hash={id}#blockchain_transaction";
+var blockchainExplorer = "http://blocks.turtle.link/?hash={id}#blockchain_block";
+var transactionExplorer = "http://blocks.turtle.link/?hash={id}#blockchain_transaction";
 
 var guiWallet = "";
 
