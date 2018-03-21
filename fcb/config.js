@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:6119";
+var api = "/rpc/fcb";
 
 var poolHost = "78.46.85.142";
 

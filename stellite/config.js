@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2889";
+var api = "/rpc/stellite";
 
 var poolHost = "78.46.85.142";
 

@@ -1,4 +1,4 @@
-var api = "http://94.130.207.37:40004";
+var api = "/rpc/lines";
 
 var poolHost = "94.130.207.37";
 

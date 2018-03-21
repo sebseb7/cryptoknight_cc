@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2699";
+var api = "/rpc/b2b";
 
 var poolHost = "78.46.85.142";
 

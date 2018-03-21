@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:6229";
+var api = "/rpc/turtle";
 
 var poolHost = "78.46.85.142";
 

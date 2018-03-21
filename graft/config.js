@@ -1,4 +1,4 @@
-var api = "http://78.46.85.142:2922";
+var api = "/rpc/graft";
 
 var poolHost = "78.46.85.142";
 

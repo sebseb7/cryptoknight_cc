@@ -1,4 +1,4 @@
-var api = "http://78.47.92.206:8338";
+var api = "/rpc/xun";
 
 var poolHost = "78.47.92.206";
 
