@@ -26,7 +26,7 @@ cd elya
 cat ../patch | patch -p1
 cd ..
 cd lines
-cat ../patch | patch -p1
+#cat ../patch | patch -p1
 cd ..
 cd fcb
 cat ../patch | patch -p1
@@ -73,9 +73,9 @@ cd ..
 cd turtle
 cat ../patch | patch -p1
 cd ..
-#cd v7
+cd v7t
 #cat ../patch | patch -p1
-#cd ..
+cd ..
 cd xun
 cat ../patch | patch -p1
 cd ..

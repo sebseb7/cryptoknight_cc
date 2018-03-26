@@ -38,6 +38,8 @@
 	}
 
 	function renderData(data) {
+		if(!data.totalOwed)
+			data = JSON.parse(data);
 		$('#totalOwed').text(getReadableCoins(data.totalOwed));
 		$('#totalPaid').text(getReadableCoins(data.totalPaid));
 		$('#totalMined').text(getReadableCoins(data.totalRevenue));

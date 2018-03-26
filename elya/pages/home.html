@@ -453,7 +453,7 @@
 			var price = parseFloat(data.ticker.price);
 			price = Math.round(price * 100) / 100;
 			btc_in_usd=price;
-			//updateText('coin_usd',(xun_in_btc*btc_in_usd).toFixed(8));
+			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			calcEstimateProfit();
 			$marketHeader.after('<div class="marketTicker">' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
 			$('.marketRate').show();
