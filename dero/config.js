@@ -1,6 +1,6 @@
 var api = "/rpc/dero";
 
-var poolHost = "78.46.85.142";
+var poolHost = "dero.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

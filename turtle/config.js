@@ -1,6 +1,6 @@
 var api = "/rpc/turtle";
 
-var poolHost = "78.46.85.142";
+var poolHost = "turtle.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

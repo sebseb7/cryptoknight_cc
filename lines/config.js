@@ -1,6 +1,6 @@
 var api = "/rpc/lines";
 
-var poolHost = "94.130.207.37";
+var poolHost = "lines.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

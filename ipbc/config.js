@@ -1,6 +1,6 @@
 var api = "/rpc/ipbc";
 
-var poolHost = "78.46.85.142";
+var poolHost = "ipbc.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

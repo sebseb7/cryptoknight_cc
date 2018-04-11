@@ -1,6 +1,6 @@
 var api = "/rpc/b2b";
 
-var poolHost = "78.46.85.142";
+var poolHost = "b2b.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

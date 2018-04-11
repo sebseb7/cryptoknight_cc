@@ -1,6 +1,6 @@
 var api = "/rpc/btcn";
 
-var poolHost = "78.46.85.142";
+var poolHost = "btcn.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

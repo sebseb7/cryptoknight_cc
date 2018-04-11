@@ -1,6 +1,6 @@
 var api = "/rpc/niobio";
 
-var poolHost = "94.130.207.37";
+var poolHost = "niobio.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

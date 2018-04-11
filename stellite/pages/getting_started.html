@@ -25,11 +25,7 @@
     #mining_apps > tr > td{
         border-top: none;
     }
-    #mining_apps > tr:nth-child(even) > td{
-        border-bottom: 1px solid #e5e5e5;
-        padding-bottom: 20px;
-    }
-    #mining_apps > tr:nth-child(odd) > td{
+    #mining_apps > tr > td{
         padding-top: 20px;
     }
     #mining_apps{
@@ -49,38 +45,46 @@
 
 
 <h3>Connection Details</h3>
+	<br/>
 <div class="stats">
-	<br/>
     <div><i class="fa fa-cloud"></i> Mining Pool Address: <span id="miningPoolHost"></span></div>
-  <!--  <div><i class="fa fa-cloud"></i> Mining Pool Address EU2: <span id="miningPoolHost2">94.130.207.37</span></div>
-    <div><i class="fa fa-cloud"></i> Mining Pool Address ASIA: <span id="miningPoolHost2">111.90.158.215</span></div>-->
-	<br/>
 </div>
+	<br/>
 
 <h4>Mining Ports</h4>
 <div id="miningPorts" class="row">
     <div class="stats">
-        <div><i class="fa fa-tachometer"></i> Port: <span class="miningPort"></span></div>
+        <div><i class="fas fa-tachometer-alt"></i> Port: <span class="miningPort"></span></div>
         <div><i class="fa fa-unlock-alt"></i> Starting Difficulty: <span class="miningPortDiff"></span></div>
         <div><i class="fa fa-question"></i> Description: <span class="miningPortDesc"></span></div>
     </div>
 </div>
 <p class="getting_started_windows">
+	Enter your workername in the password field.
+	<br/>
 	<br/>
 	For optimal mining efficency use static difficutly. You can activate static difficutly by adding ".desiredDifficutly" to your walletid. You can use any of the above ports for static difficutly.
-	<br/>A good static difficutly would be 20 * hashrate. Example for 1250H/s:<br/>
-	<code>eXaMpLeEyXACPVTCQZ2bGjg9k7Y9y8rLAGBRBaAJVDnLLbLGAeGLqvn2k82aXzXnEwXUXh72amhAKoRQ.25000</code>
+	<br/>A good static difficutly would be 40 * hashrate. Example for 1250H/s:<br/>
+	<code>eXaMpLeEyXACPVTCQZ2bGjg9k7Y9y8rLAGBRBaAJVDnLLbLGAeGLqvn2k82aXzXnEwXUXh72amhAKoRQ.50000</code>
 </p>
+	<br/>NOTE: Stellite has forked to CryprtoNightV7, please use a suitable miner.
 
-<hr>
+
+<br>
+<br>
+<br>
 
 <h3>Wallet</h3>
 <p class="getting_started_windows">
-	Download <i class="fa fa-windows"></i> <a class="btn btn-default btn-sm" target="_blank" id="guiwallet_link"><i class="fa fa-download"></i>Gui Wallet</a> here.
-	Or find a <a class="btn btn-default btn-sm" target="_blank" id="paperwallet_link">Paper Wallet</a> here.
+	Download <i class="fab fa-windows"></i> <a class="btn btn-default btn-sm" target="_blank" id="guiwallet_link"><i class="fa fa-download"></i>Gui Wallet</a> here.
+</p>
+<p class="getting_started_windows">
+	To start mining quickly generate a <a target="_blanc" href="https://stellite.cash/paperwallet.html">Paperwallet</a>
 </p>
 
-<hr>
+<br>
+<br>
+<br>
 
 <h3>Mining Apps</h3>
 <div class="yourStats table-responsive">
@@ -94,32 +98,27 @@
         </thead>
         <tbody id="mining_apps">
         <tr>
+            <td class="miningAppTitle">XMrig</td>
+            <td>CPU</td>
+            <td><a target="_blank" href="https://github.com/xmrig/xmrig/releases">Github</a></td>
+        </tr>
+        <tr>
             <td class="miningAppTitle">Stack XMR</td>
             <td>CPU+GPU</td>
             <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak/releases">Github</a></td>
         </tr>
-        <!--<tr>
-            <td colspan="3">
-                <span>Example:</span>
-                <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost"></span>:<span class="examplePort"></span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
-            </td>
-        </tr>-->
         <tr>
             <td class="miningAppTitle">Cast XMR</td>
             <td>AMD GPU</td>
-            <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=2256917.0;all">Forum</a></td>
+            <td><a target="_blank" href="http://www.gandalph3000.com/">Homepage</a></td>
         </tr>
         </tbody>
     </table>
 </div>
 
-
-
-<div class="stats">
-    <div>
-		<a target="_blank" href="http://stats.pingdom.com/s5rqhyay5hmj/4279701"><img src="https://share.pingdom.com/banners/c41600d7" alt="Uptime Report for Stellite Api: Last 30 days" title="Uptime Report for Stellite Api: Last 30 days" width="300" height="165" /></a>
-	</div>
-</div>
+<br>
+<br>
+<br>
 
 <div>
 	<p>
@@ -129,6 +128,7 @@
 
 
 <script>
+	gtag('event', 'conn_'+lastStats.config.symbol);
 
 	$(function() {
 		if(docCookies.getItem('3d')==='off')
@@ -150,9 +150,6 @@
 			}
 		});
 	});
-
-
-gtag('event', 'conn_'+lastStats.config.symbol);
 
     currentPage = {
         destroy: function(){
@@ -182,7 +179,6 @@ gtag('event', 'conn_'+lastStats.config.symbol);
     };
 
     document.getElementById('guiwallet_link').setAttribute('href', guiWallet);
-    document.getElementById('paperwallet_link').setAttribute('href', paperWallet);
     document.getElementById('miningPoolHost').textContent = poolHost;
 
     var lastPortsJson = '';

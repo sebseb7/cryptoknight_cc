@@ -1,6 +1,6 @@
 var api = "/rpc/msr";
 
-var poolHost = "78.47.92.206";
+var poolHost = "masari.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

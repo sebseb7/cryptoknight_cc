@@ -1,6 +1,6 @@
 var api = "/rpc/stellite";
 
-var poolHost = "78.46.85.142";
+var poolHost = "stellite.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

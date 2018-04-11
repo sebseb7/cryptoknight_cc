@@ -1,6 +1,6 @@
 var api = "/rpc/edl";
 
-var poolHost = "94.130.207.37";
+var poolHost = "edl.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

@@ -1,6 +1,6 @@
 var api = "/rpc/fcb";
 
-var poolHost = "78.46.85.142";
+var poolHost = "fcb.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

@@ -1,6 +1,6 @@
 var api = "/rpc/xun";
 
-var poolHost = "78.47.92.206";
+var poolHost = "xun.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

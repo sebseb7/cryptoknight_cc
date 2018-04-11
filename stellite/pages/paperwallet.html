@@ -95,11 +95,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Stellite paper (offline) wallet generator</title>
+    <title>Linescoin paper (offline) wallet generator</title>
 
 
-	<meta name="description" content="Stellite paper (offline) wallet generator" />
-	<meta name="keywords" content="Stellite paper wallet generator" />
+	<meta name="description" content="Linescoin paper (offline) wallet generator" />
+	<meta name="keywords" content="Linescoin paper wallet generator" />
 
 </head>
 
@@ -1974,10 +1974,10 @@ return{_strlen:lb,_ge_mul8:Va,_keccak:db,_ge_scalarmult:Ta,_ge_fromfe_frombytes_
 
 var electroneumConfig = {
     coinUnitPlaces: 2,
-    coinSymbol: 'STL',
-    coinName: 'Stellite',
-    coinUriPrefix: 'stl:',
-    addressPrefix: 9241
+    coinSymbol: 'lines',
+    coinName: 'Lines',
+    coinUriPrefix: 'lines:',
+    addressPrefix: 114
 };
 
 var cnUtilGen = function(initConfig) {
@@ -3225,13 +3225,13 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
 			<div onmousemove="ninja.seeder.seed(event);">
 				<div id="wallets">		
 					<div id="singlearea">
-						<h2>Stellite Paper Wallet Generator - Move your mouse</h2>
+						<h2>Lines Paper Wallet Generator - Move your mouse</h2>
 						<span id="mousemovelimit">0</span>
 					</div>
 				</div>
 				<div id="widgetsContainer">
 					<hr/>
-					Stellite Address (public)
+					Lines Address (public)
 					<pre id="widgetPublicKeytxt"></pre>
 					<span id="widgetPublicKey"></span>
 					<hr/>
@@ -3242,8 +3242,6 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
 					Spendkey (keep private)
 					<pre id="widgetSpendKeytxt"></pre>
 					<span id="widgetSpendKey"></span>
-					<hr/>
-					Mnemonic<br/><br/><span id="widgetMnemonicKey"></span>
 				</div>
 					
 				<div id="seedpoolarea">
@@ -3507,7 +3505,6 @@ var widgets = {
 	spendtxt: document.getElementById("widgetSpendKeytxt"),
 	viewtxt: document.getElementById("widgetViewKeytxt"),
 	addresstxt: document.getElementById("widgetPublicKeytxt"),
-	mnemonic: document.getElementById("widgetMnemonicKey"),
 	entropy: document.getElementById("seedpool")
 };
 
@@ -3538,7 +3535,6 @@ function genwallet(lang)
 
 	seed = cnUtil.sc_reduce32(poor_mans_kdf(widgets.entropy.value));	
 	keys = cnUtil.create_address(seed);
-	mnemonic = mn_encode(seed, current_lang);
 	
 	qr=new QRCode(widgets.address, {correctLevel:QRCode.CorrectLevel.L});
 	qr.makeCode(keys.public_addr);
@@ -3552,7 +3548,6 @@ function genwallet(lang)
 	widgets.spendtxt.innerHTML = keys.spend.sec;
 	widgets.viewtxt.innerHTML = keys.view.sec;
 	widgets.addresstxt.innerHTML = keys.public_addr;
-	widgets.mnemonic.innerHTML = mnemonic;
 }
 </script>
 

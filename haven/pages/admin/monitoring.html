@@ -87,8 +87,8 @@
 			lastStatus: data['monitoring'].wallet.lastStatus || '',
 			lastFail: getCheckTime(data['monitoring'].wallet.lastFail) || 'never',
 			lastFailResponse: data['monitoring'].wallet.lastFailResponse || ' ',
-			available_balance: getReadableCoins(JSON.parse(data['monitoring'].wallet.lastResponse).available_balance || JSON.parse(data['monitoring'].wallet.lastResponse).unlocked_balance) || ' ',
-			locked_amount: getReadableCoins(JSON.parse(data['monitoring'].wallet.lastResponse).locked_amount) || ' ',
+			available_balance: getReadableCoins(JSON.parse(data['monitoring'].wallet.lastResponse).unlocked_balance) || ' ',
+			locked_amount: getReadableCoins(JSON.parse(data['monitoring'].wallet.lastResponse).balance) || ' ',
 			lastResponse: data['monitoring'].wallet.lastResponse || ' '
 		};
 		var properData = {};

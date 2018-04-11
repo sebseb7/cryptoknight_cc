@@ -1,6 +1,6 @@
 var api = "/rpc/karbo";
 
-var poolHost = "78.46.85.142";
+var poolHost = "karbo.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

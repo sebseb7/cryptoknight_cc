@@ -1,6 +1,6 @@
 var api = "/rpc/elya";
 
-var poolHost = "94.130.207.37";
+var poolHost = "elya.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

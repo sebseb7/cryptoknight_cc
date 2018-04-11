@@ -367,7 +367,7 @@
 			
 			coin_in_btc = data.price;
 			updateText('coin_btc',data.price);
-			updateText('coin_usd',(data.price*coin_in_usd).toFixed(8));
+			if(btc_in_usd) updateText('coin_usd',(data.price*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
 			calcEstimateProfit();
 
@@ -396,7 +396,7 @@
                         else price = marketsData[f].ticker.price;
 						
 						btc_in_usd=price;
-						updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+						if(coin_in_btc)updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 						calcEstimateProfit();
                     	$('.marketRate').show();
 
@@ -422,7 +422,7 @@
         },
         update: function(){
 
-			createCharts(lastStats);
+			//createCharts(lastStats2);
             
 			$('#networkLastBlockFound').timeago('update', new Date(lastStats.network.timestamp * 1000).toISOString());
 
@@ -783,7 +783,7 @@
 
     $(function(){
         xhrRenderCharts = $.ajax({
-            url: api + '/stats',
+            url: api + '/charts',
             cache: false,            
             success: createCharts
         });               

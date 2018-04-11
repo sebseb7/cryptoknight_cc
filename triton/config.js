@@ -1,6 +1,6 @@
 var api = "/rpc/triton";
 
-var poolHost = "78.46.85.142";
+var poolHost = "triton.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

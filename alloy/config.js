@@ -1,6 +1,6 @@
 var api = "/rpc/alloy";
 
-var poolHost = "78.46.85.142";
+var poolHost = "alloy.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

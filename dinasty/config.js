@@ -1,6 +1,6 @@
 var api = "/rpc/dinasty";
 
-var poolHost = "78.46.85.142";
+var poolHost = "dinasty.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 
@@ -15,6 +15,6 @@ var paperWallet = "https://dinastyoffreedombackoffice.org/Dinastycoin%5BDCY%5DPa
 
 var themeCss = "themes/nightly-mining-dark-theme.css";
 
-var blockchainExplorer = "http://chainradar.com/DCY/block/{id}";
+var blockchainExplorer = "http://democats.org/blockchain/block/?name=dinastycoin&hash={id}";
 
-var transactionExplorer = "http://chainradar.com/DCY/transaction/{id}";
+var transactionExplorer = "http://democats.org/blockchain/transaction/?name=dinastycoin&hash={id}";

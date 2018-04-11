@@ -25,9 +25,6 @@ cd ..
 cd elya
 cat ../patch | patch -p1
 cd ..
-cd lines
-#cat ../patch | patch -p1
-cd ..
 cd fcb
 cat ../patch | patch -p1
 cd ..
@@ -61,9 +58,6 @@ cd ..
 cd royal
 cat ../patch | patch -p1
 cd ..
-cd stellite
-cat ../patch | patch -p1
-cd ..
 cd triton
 cat ../patch | patch -p1
 cd ..
@@ -72,9 +66,6 @@ cat ../patch | patch -p1
 cd ..
 cd turtle
 cat ../patch | patch -p1
-cd ..
-cd v7t
-#cat ../patch | patch -p1
 cd ..
 cd xun
 cat ../patch | patch -p1

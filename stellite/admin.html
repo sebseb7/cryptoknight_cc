@@ -133,7 +133,7 @@
 	window.onhashchange = function() {
 		routePage();
 	};
-
+			
 	function fetchLiveStats() {
 		$.ajax({
 			url: api + '/live_stats',
@@ -175,7 +175,7 @@
 	function comparer(index) {
 		return function(a, b) {
 			var valA = getCellValue(a, index), valB = getCellValue(b, index);
-			return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : parseInt(valA) - parseInt(valB)
+			return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
 		}
 	}
 

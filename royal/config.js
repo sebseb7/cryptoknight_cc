@@ -1,6 +1,6 @@
 var api = "/rpc/royal";
 
-var poolHost = "78.46.85.142";
+var poolHost = "royal.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

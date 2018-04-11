@@ -1,6 +1,6 @@
 var api = "/rpc/iridium";
 
-var poolHost = "94.130.207.37";
+var poolHost = "iridium.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 

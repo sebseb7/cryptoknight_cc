@@ -1,6 +1,6 @@
 var api = "/rpc/qwerty";
 
-var poolHost = "78.46.85.142";
+var poolHost = "qwerty.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 
