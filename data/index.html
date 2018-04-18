@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<script src="/misc/socket.io.js"></script>
+		<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+		
+		<script>
+
+			function getReadableHashRateString(hashrate){
+				var i = 0;
+				var byteUnits = [' <span class="hr_h">H</span>', ' <span class="hr_kh">KH</span>', ' <span class="hr_mh">MH</span>', ' <span class="hr_gh">GH</span>', ' <span class="hr_th">TH</span>', ' <span class="hr_ph">PH</span>' ];
+				while (hashrate > 1000){
+					hashrate = hashrate / 1000;
+					i++;
+				}
+				if(hashrate) return hashrate.toFixed(2) + byteUnits[i];
+			}
+
+			var docCookies = {
+				getItem: function (sKey) {
+					return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+				},
+				setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+					if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+					var sExpires = "";
+					if (vEnd) {
+						switch (vEnd.constructor) {
+							case Number:
+								sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+								break;
+							case String:
+								sExpires = "; expires=" + vEnd;
+								break;
+							case Date:
+								sExpires = "; expires=" + vEnd.toUTCString();
+								break;
+						}
+					}
+					document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+					return true;
+				},
+				removeItem: function (sKey, sPath, sDomain) {
+					if (!sKey || !this.hasItem(sKey)) { return false; }
+					document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+					return true;
+				},
+				hasItem: function (sKey) {
+					return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+				}
+			};
+
+			setInterval(() => {
+				var seconds = new Date().getTime() / 1000;
+				
+				$('.lnb').each(function( index,elem ) {
+					var val1 = $(elem).data('value');
+					$(elem).text( (seconds-val1).toFixed(0)+'s');
+				});
+				$('.lpb').each(function( index,elem ) {
+					var val1 = $(elem).data('value');
+					$(elem).text( ((seconds-val1)/60).toFixed(1)+'m');
+				});
+			}, 1000);
+			
+			function sortlc(a, b) {
+				if (a.toLowerCase() < b.toLowerCase()) return -1;
+				if (a.toLowerCase() > b.toLowerCase()) return 1;
+				return 0;
+			}
+
+			var socket;
+			var combined = {phr:0,cnt:0};
+			var combined_data = {phr:{},cnt:{},watch:{}};
+			$(function () {
+				//$('#user').val(docCookies.getItem('login')||'');
+				socket = io('/main');
+				socket.on('connect', () => {
+					socket.emit('stream', true);
+				});
+
+				socket.on('f',function(data,connected){
+
+					$('#pools').empty();
+			
+					combined = {phr:0,cnt:0,watch:0};
+					combined_data = {phr:{},cnt:{},watch:{}};
+
+					var keys = Object.keys(data).sort(sortlc);
+					var seconds = new Date().getTime() / 1000;
+					for(var pool of keys){
+						$('#pools').append($(
+										'<tr class="pool" data-name="'+pool+'">'+ 
+											'<td class="name"><img src="'+data[pool].logo+'" height="16px"/> <a href="'+data[pool].url+'">'+(pool)+'</a></td>'+ 
+											'<td class="nhr" data-value="'+data[pool].nhr+'">'+getReadableHashRateString(data[pool].nhr)+'</td>'+
+											'<td class="phr" data-value="'+data[pool].phr+'">'+(data[pool].phr?getReadableHashRateString(data[pool].phr):'0')+'</td>'+
+											'<td class="pct" data-value="'+data[pool].pct+'">'+data[pool].pct+' %</td>'+
+											'<td class="cnt" data-value="'+data[pool].cnt+'">'+data[pool].cnt+'</td>'+
+											'<td class="watch" data-value="0"></td>'+
+											'<td class="lnb" data-value="'+data[pool].lnb+'">'+(seconds - data[pool].lnb).toFixed(0)+'s</td>'+
+											'<td class="lpb" data-value="'+data[pool].lpb+'">'+((seconds - data[pool].lpb)/60).toFixed(1)+'m</td>'+
+											'<td class="eff" data-value="'+data[pool].eff+'">'+data[pool].eff+' %</td>'+
+											'<td class="prof" data-value="'+data[pool].prof+'">'+data[pool].prof+' $</td>'+
+										'</tr>'));
+										combined.phr+=data[pool].phr;
+										combined.cnt+=data[pool].cnt;
+										combined_data.phr[pool]=data[pool].phr;
+										combined_data.cnt[pool]=data[pool].cnt;
+					}
+					$('#pools').append($(
+									'<tr class="pool">'+ 
+										'<td class="connected">Connected: '+connected+'</td>'+ 
+										'<td class="nhr" data-value=""></td>'+
+										'<td class="phr combined" data-value="'+combined.phr+'">'+getReadableHashRateString(combined.phr)+'</td>'+
+										'<td class="pct" data-value=""></td>'+
+										'<td class="cnt combined" data-value="'+combined.cnt+'">'+combined.cnt+'</td>'+
+										'<td class="watch combined" data-value=""></td>'+
+										'<td class="" data-value=""></td>'+
+										'<td class="" data-value=""></td>'+
+										'<td class="" data-value=""></td>'+
+										'<td class="" data-value=""></td>'+
+									'</tr>'));
+					socket.emit('stream_full', true);
+				});
+
+				socket.on('u2',function(data){
+					for(var pool of data){
+						var element = $('#pools').find('[data-name="'+pool[0]+'"]').find('.'+pool[1]);
+						
+						if( element.data('value') < pool[2])
+						{
+							element.addClass("green");
+							setTimeout(function(el){el.removeClass("green")}, 100, element);
+						}
+						else if ( element.data('value') > pool[2])
+						{
+							element.addClass("red");
+							setTimeout(function(el){el.removeClass("red")}, 100, element);
+						}
+						
+						if(pool[1]==='watch')
+						{
+							if(combined_data.watch[pool[0]]) combined.watch-=combined_data.watch[pool[0]];
+							combined.watch+=pool[2];
+							combined_data.watch[pool[0]]=pool[2];
+							$('.watch.combined').html(combined.watch);
+						}
+						
+						element.text(pool[2]);
+						element.data('value',pool[2]);
+					}
+				});
+
+				socket.on('u',function(data){
+					for(var pool of data){
+						var element = $('#pools').find('[data-name="'+pool[0]+'"]').find('.'+pool[1]);
+						if( element.data('value') < pool[2])
+						{
+							element.addClass("green");
+							setTimeout(function(el){el.removeClass("green")}, 100, element);
+						}
+						else ( element.data('value') > pool[2])
+						{
+							element.addClass("red");
+							setTimeout(function(el){el.removeClass("red")}, 100, element);
+						}
+						var seconds = new Date().getTime() / 1000;
+						if(pool[1]==='nhr'){
+							element.html(getReadableHashRateString(pool[2]));
+						}
+						if(pool[1]==='phr')
+						{
+							var value = pool[2];
+							combined.phr-=combined_data.phr[pool[0]];
+							combined.phr+=value;
+							combined_data.phr[pool[0]]=value;
+							element.data('value',value);
+							element.html(getReadableHashRateString(value));
+							$('.phr.combined').html(getReadableHashRateString(combined.phr));
+						}
+						else if(pool[1]==='cnt')
+						{
+							var value = pool[2];
+							combined.cnt-=combined_data.cnt[pool[0]];
+							combined.cnt+=value;
+							combined_data.cnt[pool[0]]=value;
+							element.data('value',value);
+							element.text(value);
+							$('.cnt.combined').html(combined.cnt);
+						}
+						else
+							element.data('value',pool[2]);
+						if(pool[1]==='lnb')
+							element.text((seconds-pool[2]).toFixed(0)+'s');
+						if(pool[1]==='pct')
+							element.text(pool[2]+' %');
+						if(pool[1]==='eff')
+							element.text(pool[2]+' %');
+						if(pool[1]==='prof')
+							element.text(pool[2]+' $');
+						if(pool[1]==='lpb')
+							element.text(((seconds-pool[2])/60).toFixed(1)+'m');
+						
+					}
+				});
+				socket.on('c',function(data){
+						$('.connected').html('Connected: '+data);
+				});
+				
+
+			});
+
+		</script>
+		<style>
+a {
+  color: #03a678;
+}
+a:hover {
+  color: #025b42;
+}
+			body {
+				background-color: black;
+				color: white;
+			}	
+			td {
+				padding: 5px;
+				background-color: #000044;
+				font-family: monospace;
+			}	
+			table {
+				margin: 30px auto 0px auto;
+			}	
+			.green {
+				color: green;
+			}	
+			.red {
+				color: red;
+			}	
+			.prof {
+				text-align: right;
+			}	
+			.phr {
+				text-align: right;
+			}	
+			.nhr {
+				text-align: right;
+			}	
+			.cnt {
+				text-align: right;
+			}	
+			.pct {
+				text-align: right;
+			}	
+			.eff {
+				text-align: right;
+			}	
+			.watch {
+				text-align: right;
+			}	
+			.lnb {
+				text-align: right;
+			}	
+			.lpb {
+				text-align: right;
+			}	
+			.hr_h {
+				color: #ffff88;
+			}	
+			.connected {
+				color: #777777;
+			}	
+			.hr_kh {
+				color: #9999ff;
+			}	
+			.hr_mh {
+				color: #ff9999;
+			}	
+		</style>
+	</head>
+	<body>
+
+		<table>
+		
+			<thead>
+				<tr>
+					<td>Coin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td>&nbsp;&nbsp;Net Hashrate</td>
+					<td>&nbsp;&nbsp;Pool Hashrate</td>
+					<td>&nbsp;&nbsp;Netshare</td>
+					<td>&nbsp;&nbsp;Miners</td>
+					<td>&nbsp;&nbsp;Browser</td>
+					<td>&nbsp;&nbsp;Netblock age</td>
+					<td>&nbsp;&nbsp;Poolblock age</td>
+					<td>&nbsp;&nbsp;Curr. Effort</td>
+					<td>&nbsp;&nbsp;KH/s/day</td>
+				</tr>
+			</thead>
+
+			<tbody id="pools">
+			</tbody>
+		
+		</table>
+
+	</body>
+</html>
+
