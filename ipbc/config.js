@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "https://explorer.ipbc.io/?hash={id}&action_blockchain=blockchain_block";
-var transactionExplorer = "https://explorer.ipbc.io/?hash={id}&action_blockchain=blockchain_transaction";
+var blockchainExplorer = "https://explorer.ipbc.io/?hash={id}#blockchain_block";
+var transactionExplorer = "https://explorer.ipbc.io/?hash={id}#blockchain_transaction";
 
 
 var guiWallet = "https://github.com/ipbc-dev/ipbc-wallet/releases";
