@@ -8,9 +8,9 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "http://intensecoin.com/explorer/#blockchain_block?hash={id}";
+var blockchainExplorer = "http://intensecoin.com:8081/block/{id}";
 
-var transactionExplorer = "http://intensecoin.com/explorer/#blockchain_transaction?hash={id}";
+var transactionExplorer = "http://intensecoin.com:8081/tx/{id}";
 
 var guiWallet = "https://intensecoin.com/#download";
 

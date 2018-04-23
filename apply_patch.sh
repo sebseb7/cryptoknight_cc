@@ -28,9 +28,6 @@ cd ..
 cd fcb
 cat ../patch | patch -p1
 cd ..
-cd graft
-cat ../patch | patch -p1
-cd ..
 cd haven
 cat ../patch | patch -p1
 cd ..
