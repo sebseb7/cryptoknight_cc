@@ -21,6 +21,7 @@
     <span class="bg-primary">Total Payments: <span id="paymentsTotal"></span></span>
     <span class="bg-info">Total Miners Paid: <span id="paymentsTotalPaid"></span></span>
 <br/>    <span class="bg-info">Minimum Instant Payment Threshold: <span id="paymentsMinimum2"></span></span>
+<br/>	<span class="bg-info">Minimum Hourly Payment Threshold: <span id="paymentsMinimum"></span></span>
 </div>
 
 <hr>
@@ -61,6 +62,7 @@
         update: function(){
             updateText('paymentsTotal', lastStats.pool.totalPayments.toString());
             updateText('paymentsTotalPaid', lastStats.pool.totalMinersPaid.toString());
+            updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold, 3));
             updateText('paymentsMinimum2', getReadableCoins(lastStats.config.minPaymentThreshold2, 3));
             renderPayments(lastStats.pool.payments);
         }
