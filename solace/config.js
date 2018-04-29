@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "";
-var transactionExplorer = "";
+var blockchainExplorer = "http://explorer.solace-coin.com/block/{id}";
+var transactionExplorer = "http://explorer.solace-coin.com/tx/{id}";
 
 var guiWallet = "";
 
