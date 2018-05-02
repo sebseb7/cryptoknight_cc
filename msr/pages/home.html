@@ -136,7 +136,7 @@
         <div><i class="fa fa-clock"></i> Block Found: <span id="poolLastBlockFound"></span></div>
         <div><i class="fa fa-users"></i> Connected Miners: <span id="poolMiners"></span></div>
         <div id="donations"><i class="fas fa-gift"></i> Donations: <span id="poolDonations"></span></div>
-        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: 5hkzsKKkUrL7rrXn6F6bK3KjTwiuR5GW6HEz5z1G3FEPUbNsF4GVxk46evHy4R9CtSM9C2tb8zXrtDk97r1xvZfi3hjuAUp <br/>Viewkey: add0047f7ab36bb1d35c3180929d267e5cddcdd873c350b2a43adc45e6e1a10f</span>"><i class="fa fa-question-circle"></i></span></div>
+        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: 5hJ9n69NdxASEnfT6mBpeijBfuZ99yhTn2FaeYuDmDUzGVoqjKyLBLEZ2ar5JCGmSSHSnzpb9kqmQMceBWM5oxeMVVX16WG <br/>Viewkey: 65b10153959d2279e8062300021f715a3c6c8a7bb614b32cd7dd11165c7e9a0e</span>"><i class="fa fa-question-circle"></i></span></div>
         <div><i class="fas fa-stopwatch"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
 		<div><i class="far fa-star"></i> Current Effort: <span id="currenteffort"></span></div>
     </div>
@@ -438,27 +438,6 @@
 	var coin_in_btc = 0;
 	var btc_in_usd = 0;
 		
-		$.get('/api/price.xml',function(data) {
-
-
-			if(data.error) {
-				return;
-			}
-			
-			for (var i=0; i < data.length - 1; i++){
-			
-				if(data[i].market_name.toString() === "MSR_BTC")
-				{
-					coin_in_btc = data[i].sell;
-					updateText('coin_btc',data[i].sell);
-					if(btc_in_usd != 0)
-						updateText('coin_usd',(data[i].sell*btc_in_usd).toFixed(8));
-					$('.marketRate').show();
-					calcEstimateProfit();
-				}
-			}
-		},'json');
-
 
     /* Market data polling */
 
@@ -467,18 +446,17 @@
     updateMarkets();
     function updateMarkets(){
 
-		$.get('https://api.altex.exchange/v1/ticker',function(data) {
+
+		$.get('/api/BTC-MSR.xml',function(data) {
 
 
 			if(data.error) {
 				return;
 			}
-		
-			console.log(data.data['BTC_ITA'].last);
-
-			coin_in_btc = parseFloat(data.data['BTC_ITA'].last);
+			
+			coin_in_btc = parseFloat(data.price);
 			updateText('coin_btc',coin_in_btc.toFixed(8));
-			if(coin_in_btc != 0)
+			if(btc_in_usd != 0)
 				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
 			calcEstimateProfit();
