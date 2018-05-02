@@ -114,13 +114,9 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <!--
-		
-		<div>DERO: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>DERO: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade on <a target="_blank" href="https://stocks.exchange/trade/DERO/BTC">stocks.exchange</a></div>
-		
-		-->
+        <div>TRIT: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div>TRIT: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_TRIT&amp;ref=620">altex.exchange</a></div>
     </div>
 </div>
 
@@ -362,6 +358,23 @@
     updateMarkets();
     function updateMarkets(){
 
+		$.get('https://api.altex.exchange/v1/ticker',function(data) {
+
+
+			if(data.error) {
+				return;
+			}
+		
+			console.log(data.data['BTC_TRIT'].last);
+
+			coin_in_btc = parseFloat(data.data['BTC_TRIT'].last);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(btc_in_usd != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
+
+		},'json');
 
 		var completedFetches = 0;
         var marketsData = [];
@@ -389,7 +402,8 @@
             
 						
 						btc_in_usd=price;
-						//updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			if(coin_in_btc != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 						calcEstimateProfit();
 
                         $marketHeader.after('<div class="marketTicker">' + marketsData[f].ticker.base + ': <span>' + price + ' ' + marketsData[f].ticker.target + '</span></div>');

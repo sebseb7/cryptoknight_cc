@@ -147,6 +147,7 @@
         <div><i class="fab fa-btc"></i> ITA: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
         <div><i class="fas fa-dollar-sign"></i> ITA: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
         <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_ITA&amp;ref=620">altex.exchange</a></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://crex24.com/exchange/ITA-BTC">crex24.com</a></div>
     </div>
 </div>
 
@@ -455,7 +456,7 @@
 
 			coin_in_btc = parseFloat(data.data['BTC_ITA'].last);
 			updateText('coin_btc',coin_in_btc.toFixed(8));
-			if(coin_in_btc != 0)
+			if(btc_in_usd != 0)
 				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
 			calcEstimateProfit();

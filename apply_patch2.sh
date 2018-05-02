@@ -13,6 +13,9 @@ cd ..
 cd solace
 cat ../patch2 | patch -p1
 cd ..
+cd msr
+cat ../patch | patch -p1
+cd ..
 cd haven
 cat ../patch2 | patch -p1
 cd ..
