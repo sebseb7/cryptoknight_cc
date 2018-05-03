@@ -142,6 +142,9 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
+        <div><i class="fab fa-btc"></i> SOL: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> SOL: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_SOLACE&amp;ref=620">altex.exchange</a></div>
     </div>
 </div>
 
@@ -438,6 +441,25 @@
     var xhrMarketGets = {};
     updateMarkets();
     function updateMarkets(){
+		
+		
+		$.get('https://api.altex.exchange/v1/ticker',function(data) {
+
+
+			if(data.error) {
+				return;
+			}
+		
+			console.log(data.data['BTC_SOLACE'].last);
+
+			coin_in_btc = parseFloat(data.data['BTC_SOLACE'].last);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(btc_in_usd != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
+
+		},'json');
 
 		
 		$.get('/api/BTC-USD.xml',function(data) {
