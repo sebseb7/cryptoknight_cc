@@ -11,10 +11,10 @@ var email = "";
 
 var guiWallet = "";
 
-var paperWallet = "";
+var paperWallet = "https://wallet.loki.network/";
 
 var themeCss = "themes/nightly-mining-dark-theme.css";
 
-var blockchainExplorer = "{id}";
+var blockchainExplorer = "https://lokiblocks.com/block/{id}";
 
-var transactionExplorer = "{id}";
+var transactionExplorer = "https://lokiblocks.com/tx/{id}";
