@@ -136,14 +136,16 @@
         <div><i class="fa fa-clock"></i> Block Found: <span id="poolLastBlockFound"></span></div>
         <div><i class="fa fa-users"></i> Connected Miners: <span id="poolMiners"></span></div>
         <div id="donations"><i class="fas fa-gift"></i> Donations: <span id="poolDonations"></span></div>
-        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: LConXRabAFgVZckkGLysgp4SWQPQqVVK5LHS7LnncbajVrBKx13iweb8vdrFZcRN2QEE3piM6cFtZcFZcAZVi8rdDgrEVDT<br/>Viewkey: b2341d4f2e166f1fff3e31a3f90ccb668387d16361a9dcf71152d04e547fc709</span>"><i class="fa fa-question-circle"></i></span></div>
+        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: L8zpcvTvUpGcH2DcG41hMWHhq5y9iiWToAw7suAyGEBGQ4ugNzRvhMuZyLKmGdjvX6Xf4ag6JsRpvHcVQz3J5tuY9ZhmKHZ<br/>Viewkey: d5baf5f1d865ceb9d8c2b95090ac5ebc4c25ce93795c083e9d14c9c3fd889802</span>"><i class="fa fa-question-circle"></i></span></div>
         <div><i class="fas fa-stopwatch"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
 		<div><i class="far fa-star"></i> Current Effort: <span id="currenteffort"></span></div>
     </div>
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div class="marketFooter">Trade Loki at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_LOKI&amp;ref=620">altex.exchange</a></div>
+        <div><i class="fab fa-btc"></i> LOKI: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> LOKI: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_LOKI&amp;ref=620">altex.exchange</a></div>
     </div>
 </div>
 
@@ -440,6 +442,23 @@
     function updateMarkets(){
 
 
+		$.get('https://api.altex.exchange/v1/ticker',function(data) {
+
+
+			if(data.error) {
+				return;
+			}
+		
+			console.log(data.data['BTC_LOKI'].last);
+
+			coin_in_btc = parseFloat(data.data['BTC_LOKI'].last);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(btc_in_usd != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
+
+		},'json');
 		
 		
 		$.get('/api/BTC-USD.xml',function(data) {
