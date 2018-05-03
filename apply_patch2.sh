@@ -19,6 +19,9 @@ cd ..
 cd haven
 cat ../patch2 | patch -p1
 cd ..
+cd loki
+cat ../patch2 | patch -p1
+cd ..
 cd graft
 cat ../patch2 | patch -p1
 cd ..
