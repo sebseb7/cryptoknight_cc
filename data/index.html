@@ -69,6 +69,15 @@
 				return 0;
 			}
 
+			function get_prof(prof,algo)
+			{
+				var factor = parseFloat(docCookies.getItem('hash_rate'+algo));
+				if(factor)
+					return (prof*factor).toFixed(2);
+				else
+					return 0;
+			}
+
 			var socket;
 			var combined = {phr:0,cnt:0};
 			var combined_data = {phr:{},cnt:{},watch:{}};
@@ -100,7 +109,7 @@
 											'<td class="lnb" data-value="'+data[pool].lnb+'">'+(seconds - data[pool].lnb).toFixed(0)+'s</td>'+
 											'<td class="lpb" data-value="'+data[pool].lpb+'">'+((seconds - data[pool].lpb)/60).toFixed(1)+'m</td>'+
 											'<td class="eff" data-value="'+data[pool].eff+'">'+data[pool].eff+' %</td>'+
-											'<td class="prof" data-value="'+data[pool].prof+'">'+data[pool].prof+' $</td>'+
+											'<td class="prof" data-algo="'+data[pool].algo+'" data-value="'+data[pool].prof+'">'+get_prof(data[pool].prof,data[pool].algo)+' $</td>'+
 										'</tr>'));
 										combined.phr+=data[pool].phr;
 										combined.cnt+=data[pool].cnt;
@@ -197,7 +206,7 @@
 						if(pool[1]==='eff')
 							element.text(pool[2]+' %');
 						if(pool[1]==='prof')
-							element.text(pool[2]+' $');
+							element.text(get_prof(pool[2],element.data('algo'))+' $');
 						if(pool[1]==='lpb')
 							element.text(((seconds-pool[2])/60).toFixed(1)+'m');
 						
