@@ -28,3 +28,6 @@ cd ..
 cd stellite
 cat ../patch2 | patch -p1
 cd ..
+cd monerov
+cat ../patch2 | patch -p1
+cd ..
