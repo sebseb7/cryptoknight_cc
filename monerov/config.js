@@ -9,12 +9,10 @@ var irc = "";
 var email = "";
 
 
-var guiWallet = "";
+var guiWallet = "https://monerov.org/";
 
 var paperWallet = "";
 
 var themeCss = "themes/nightly-mining-dark-theme.css";
-
-var blockchainExplorer = "";
-
-var transactionExplorer = "";
+var blockchainExplorer = "https://monerovexplorer.com/block/{id}";
+var transactionExplorer = "https://monerovexplorer.com/tx/{id}";

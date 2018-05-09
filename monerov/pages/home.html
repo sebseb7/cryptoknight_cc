@@ -116,6 +116,10 @@
 </style>
 
 <div id="siteInfo">
+	Public RPC Daemon: 5.199.161.136:9538<br/><br/>
+	<code> ./monerov-wallet-cli --daemon-address 5.199.161.136:9538</code>
+	<br/>
+	<br/>
 </div>
 
 <div class="row">
@@ -142,6 +146,9 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
+        <div><i class="fab fa-btc"></i> XMV: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> XMV: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_XMV&amp;ref=620">altex.exchange</a></div>
     </div>
 </div>
 
@@ -282,7 +289,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-heavy)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-V1)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -438,6 +445,23 @@
     updateMarkets();
     function updateMarkets(){
 
+		$.get('https://api.altex.exchange/v1/ticker',function(data) {
+
+
+			if(data.error) {
+				return;
+			}
+		
+			console.log(data.data['BTC_XMV'].last);
+
+			coin_in_btc = parseFloat(data.data['BTC_XMV'].last);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(btc_in_usd != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
+
+		},'json');
 
 		
 		
@@ -573,7 +597,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_hv',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_v1',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -746,7 +770,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_hv'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_v1'));
 
     if (address){
         $('#yourStatsInput').val(address);
