@@ -58,7 +58,4 @@ cd ..
 cd turtle
 cat ../patch | patch -p1
 cd ..
-cd xun
-cat ../patch | patch -p1
-cd ..
 

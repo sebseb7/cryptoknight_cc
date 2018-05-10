@@ -4,7 +4,7 @@
         border-radius: 5px;
         padding: 1px 9px;
         border: 1px solid #e5e5e5;
-        margin: 2px;
+        margin: 4px 2px;
     }
     .paymentsStatHolder > span > span{
         font-weight: bold;
@@ -20,7 +20,8 @@
 <div class="paymentsStatHolder">
     <span class="bg-primary">Total Payments: <span id="paymentsTotal"></span></span>
     <span class="bg-info">Total Miners Paid: <span id="paymentsTotalPaid"></span></span>
-    <span class="bg-info">Minimum Payment Threshold: <span id="paymentsMinimum"></span></span>
+<br/>    <span class="bg-info">Minimum Instant Payment Threshold: <span id="paymentsMinimum2"></span></span>
+<br/>	<span class="bg-info">Minimum Hourly Payment Threshold: <span id="paymentsMinimum"></span></span>
 </div>
 
 <hr>
@@ -29,12 +30,12 @@
     <table class="table table-hover table-striped">
         <thead>
         <tr>
-            <th><i class="fa fa-clock-o"></i> Time Sent</th>
-            <th><i class="fa fa-paw"></i> Transaction Hash</th>
-            <th><i class="fa fa-money"></i> Amount</th>
+            <th><i class="fas fa-clock"></i> Time Sent</th>
+            <th><i class="fas fa-dna"></i> Transaction Hash</th>
+            <th><i class="fa fa-money-bill-alt"></i> Amount</th>
             <th><i class="fa fa-tag"></i> Fee</th>
             <th><i class="fa fa-sitemap"></i> Mixin</th>
-            <th><i class="fa fa-group"></i> Payees</th>
+            <th><i class="fas fa-users"></i> Payees</th>
         </tr>
         </thead>
         <tbody id="payments_rows">
@@ -62,6 +63,7 @@
             updateText('paymentsTotal', lastStats.pool.totalPayments.toString());
             updateText('paymentsTotalPaid', lastStats.pool.totalMinersPaid.toString());
             updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold, 3));
+            updateText('paymentsMinimum2', getReadableCoins(lastStats.config.minPaymentThreshold2, 3));
             renderPayments(lastStats.pool.payments);
         }
     };
