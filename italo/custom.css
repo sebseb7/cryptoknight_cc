@@ -97,7 +97,25 @@ hr {
 }
 .stats > div:not(#addressError) > i.fa {
   color: #03a678;
-  font-size: 21px;
+  font-size: 18px;
+  width: 30px;
+  text-align: center;
+}
+.stats > div:not(#addressError) > i.fas {
+  color: #03a678;
+  font-size: 18px;
+  width: 30px;
+  text-align: center;
+}
+.stats > div:not(#addressError) > i.far {
+  color: #03a678;
+  font-size: 18px;
+  width: 30px;
+  text-align: center;
+}
+.stats > div:not(#addressError) > i.fab {
+  color: #03a678;
+  font-size: 18px;
   width: 30px;
   text-align: center;
 }
