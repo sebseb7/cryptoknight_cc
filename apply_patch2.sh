@@ -1,3 +1,6 @@
+cd arto
+cat ../patch2 | patch -p1
+cd ..
 cd lines
 cat ../patch2 | patch -p1
 cd ..
