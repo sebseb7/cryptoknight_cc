@@ -1,4 +1,13 @@
+cd aeon
+cat ../patch2 | patch -p1
+cd ..
 cd arto
+cat ../patch2 | patch -p1
+cd ..
+cd etn
+cat ../patch2 | patch -p1
+cd ..
+cd saronite
 cat ../patch2 | patch -p1
 cd ..
 cd lines
@@ -14,6 +23,9 @@ cd sumo
 cat ../patch2 | patch -p1
 cd ..
 cd solace
+cat ../patch2 | patch -p1
+cd ..
+cd niobio
 cat ../patch2 | patch -p1
 cd ..
 cd msr
