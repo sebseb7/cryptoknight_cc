@@ -16,16 +16,10 @@ cd ..
 cd dero
 cat ../patch | patch -p1
 cd ..
-cd dinasty
-cat ../patch | patch -p1
-cd ..
 cd edl
 cat ../patch | patch -p1
 cd ..
 cd elya
-cat ../patch | patch -p1
-cd ..
-cd fcb
 cat ../patch | patch -p1
 cd ..
 cd ipbc
@@ -43,13 +37,7 @@ cd ..
 cd qwerty
 cat ../patch | patch -p1
 cd ..
-cd royal
-cat ../patch | patch -p1
-cd ..
 cd triton
-cat ../patch | patch -p1
-cd ..
-cd truck
 cat ../patch | patch -p1
 cd ..
 cd turtle
