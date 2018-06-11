@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
     <title>Haven Pool - CryptoKnight</title>
-	
+
 	<meta name="Description" content="Lifetime Zero Fee Haven Mining Pool by CryptoKnight">
 
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113285469-1"></script>
@@ -27,13 +27,55 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<link href="//gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="//gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
     <link href="//fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
 
-    
-	<script src="config.js?a"></script>
+    <link rel="stylesheet" href="/misc/swiper/css/swiper.min.css">
+    <script src="/misc/swiper/js/swiper.min.js"></script>
+
+    <script src="config.js?a"></script>
     <script src="custom.js"></script>
 	<script src="/misc/socket.io.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var mySwiper = new Swiper('.swiper-container', {
+                // Optional parameters
+                direction: 'vertical',
+                loop: true,
+
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // And if we need scrollbar
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                },
+            });
+        });
+    </script>
+
+<!--
+
+    http://idangero.us/swiper/get-started/
+
+    http://idangero.us/swiper/demos/030-pagination.html
+    http://idangero.us/swiper/demos/070-pagination-custom.html
+    http://idangero.us/swiper/demos/150-freemode.html
+    http://idangero.us/swiper/demos/240-effect-coverflow.html
+    http://idangero.us/swiper/demos/430-slideable-menu.html
+-->
+
+
+
+
 
     <style>
         #coinName{
@@ -99,12 +141,12 @@
         }
 
     </style>
-    
+
     <link href="custom.css" rel="stylesheet">
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/89/three.js"></script>
 	<script id="vertexShader" type="x-shader/x-vertex">
-		varying vec2 vUv; 
+		varying vec2 vUv;
 		void main() {
 			vUv = uv;
 
@@ -117,7 +159,7 @@
 		uniform vec2 iResolution;
 		uniform float iGlobalTime;
 
-		varying vec2 vUv; 
+		varying vec2 vUv;
 
 		void main(void)
 		{
@@ -141,7 +183,7 @@
 			}
 			float r=sin(uv.x-time)*0.1+0.1;
 			float b=sin(uv.y+time)*0.2+0.2;
-	
+
 			gl_FragColor = vec4(r,0,b,1.0);
 		}
 
@@ -189,7 +231,7 @@
     function getTransactionUrl(id) {
         return transactionExplorer.replace('{symbol}', lastStats.config.symbol.toLowerCase()).replace('{id}', id);
     }
-    
+
     $.fn.update = function(txt){
         var el = this[0];
         if (el.textContent !== txt)
@@ -208,7 +250,7 @@
 
     function updateText(elementId, text){
         var el = document.getElementById(elementId);
-        
+
 		if(!el){
 			console.log(elementId);
 		}
@@ -220,7 +262,7 @@
 			setTimeout(function(){ $('#'+elementId).css('color','');}, 300);
             el.textContent = text;
         }
- 
+
  		return el;
     }
 
@@ -292,7 +334,7 @@
             recipients: parts[4]
         };
     }
-    
+
 	function parseUserBlock(height, serializedBlock){
         var parts = serializedBlock.split(':');
         return {
@@ -386,7 +428,7 @@
                 }
                 if (!inserted)
                     $blocksRows.append(blockElement);
-            
+
 				$('[data-toggle="tooltip"]').tooltip();
             }
 
@@ -412,7 +454,7 @@
 		}
 
         for (var i = 0; i < candidatesResults.length; i += 2){
-		
+
             var candidate = parseCandidate(candidatesResults[i + 1], candidatesResults[i]);
 
             var candidateJson = JSON.stringify(candidate);
@@ -436,7 +478,7 @@
                         break;
                     }
                 }
-                
+
 				if (!inserted)
                     $candidatesRows.append(candidateElement);
             }
@@ -543,7 +585,7 @@
 		var socket = io('/coin_Haven');
 
 		$("head").append("<link rel='stylesheet' href=" + themeCss + ">");
-		
+
         $.get(api + '/stats', function(data){
             lastStats = data;
             updateIndex();
@@ -593,7 +635,7 @@
                     <i class="fab fa-discord"></i> Chat & Support
 				</a></li>
 
-                
+
             </ul>
             <div id="stats_updated"><i class="fa fa-bolt"></i></div>
         </div>
@@ -610,37 +652,113 @@
 </div>
 
 <footer>
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <a href="//cryptoknight.cc/alloy/">Alloy</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/b2b/">B2bcoin</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/bbs/">BBScoin </a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/btcn/">BitcoiNote</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/crep/">Crep</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/dero/">Dero</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/edl/">eDollar</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/elya/">Elya</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/graft/">Graft</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/haven/">Haven</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/itns/">Intense</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/ipbc/">IPBC</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/iridium/">Iridium</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/italo/">Italo</a>
+            </div>
+            <div class="swiper-slide">
+                <a href="//cryptoknight.cc/karbo/">Karbo</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/lines/">Lines</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/loki/">Loki</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/msr/">Masari</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/niobio/">Niobio</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/ombre/">Ombre</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/solace/">Solace</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/stellite/">Stellite</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/sumo/">Sumo</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/triton/">Triton</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/truck/">Truck</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/turtle/">Turtle</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/xun/">Ultranote</a>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i>
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+
+
     <div class="text-muted" style="line-height:10px">
-        <a href="//cryptoknight.cc/alloy/">Alloy</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/b2b/">B2bcoin</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/bbs/">BBScoin </a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/btcn/">BitcoiNote</a> 
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/crep/">Crep</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/dero/">Dero</a> 
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/edl/">eDollar</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/elya/">Elya</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/graft/">Graft</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/haven/">Haven</a> 
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/itns/">Intense</a>
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/ipbc/">IPBC</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/iridium/">Iridium</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/italo/">Italo</a>
+
     </div>
     <div class="text-muted" style="line-height:10px">
-        <a href="//cryptoknight.cc/karbo/">Karbo</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/lines/">Lines</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/loki/">Loki</a>
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/msr/">Masari</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/niobio/">Niobio</a> 
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/ombre/">Ombre</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/solace/">Solace</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/stellite/">Stellite</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/sumo/">Sumo</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/triton/">Triton</a>
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/truck/">Truck</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/turtle/">Turtle</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/xun/">Ultranote</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> 
 		<a target="_blank" class="social" href="https://discord.gg/kaejJWc"><i class="fab fa-discord"></i></a>
 		<a target="_blank" class="social" href="//github.com/sebseb7"><i class="fab fa-github"></i></a>
 		<a target="_blank" class="social" href="//youtube.com/c/sebgreen"><i class="fab fa-youtube"></i></a>
