@@ -30,58 +30,23 @@
     <link href="//fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="/misc/swiper/css/swiper.min.css">
+    <link rel="stylesheet" href="/misc/swiper/css/swiper.custom.css">
     <script src="/misc/swiper/js/swiper.min.js"></script>
 
     <script src="config.js?a"></script>
     <script src="custom.js"></script>
 	<script src="/misc/socket.io.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            var mySwiper = new Swiper('.swiper-container', {
-                // Optional parameters
-                direction: 'vertical',
-                loop: true,
-
-                // If we need pagination
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-
-                // Navigation arrows
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-
-                // And if we need scrollbar
-                scrollbar: {
-                    el: '.swiper-scrollbar',
-                },
-            });
-        });
-    </script>
-
-<!--
-
-    http://idangero.us/swiper/get-started/
-
-    http://idangero.us/swiper/demos/030-pagination.html
-    http://idangero.us/swiper/demos/070-pagination-custom.html
-    http://idangero.us/swiper/demos/150-freemode.html
-    http://idangero.us/swiper/demos/240-effect-coverflow.html
-    http://idangero.us/swiper/demos/430-slideable-menu.html
--->
-
-
-
-
-
     <style>
         #coinName{
             text-transform: capitalize;
         }
+        html,
         body {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
             padding-top: 65px;
             padding-bottom: 80px;
             overflow-y: scroll;
@@ -582,7 +547,110 @@
     }
 
     $(function(){
-		var socket = io('/coin_Haven');
+        // Footer Icons Begin
+        var footerSwiper = new Swiper('.swiper-container', {
+            centeredSlides: false,
+            speed: 200,
+            loop: false,
+            freeMode: true,
+            loopFillGroupWithBlank: true,
+            slidesPerView: 15,
+            spaceBetween: 5,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 7000,
+                disableOnInteraction: false
+            },
+            breakpoints: {
+                1266: {
+                    slidesPerView: 12,
+                    spaceBetween: 20,
+                    freeMode: true,
+                },
+                1199: {
+                    slidesPerView: 10,
+                    spaceBetween: 20,
+                    freeMode: true,
+                },
+                1024: {
+                    slidesPerView: 9,
+                    spaceBetween: 30,
+                    freeMode: true,
+                },
+                767: {
+                    slidesPerView: 7,
+                    spaceBetween: 20,
+                    freeMode: true,
+                },
+                640: {
+                    slidesPerView: 5,
+                    spaceBetween: 10,
+                    freeMode: true,
+                },
+                440: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                    freeMode: false,
+                },
+                360: {
+                    slidesPerView: 2,
+                    slidesPerColumn: 1,
+                    spaceBetween: 10,
+                    freeMode: false,
+                },
+                320: {
+                    slidesPerView: 1,
+                    slidesPerColumn: 1,
+                    spaceBetween: 10,
+                    freeMode: false,
+                }
+            }
+        });
+
+        var socket = io('/coin_Haven');
+
+        var truncateName = function(string, length) {
+            if (string.length > length) {
+                return string.substr(0, length) + '..';
+            } else {
+                return string;
+            }
+        };
+
+        socket.on('list', function(list){
+            if (list.length) {
+
+                var coinAlgo, coinClass, coinName;
+                $.each(list, function(i, coin) {
+                    coinAlgo = (coin.algo !== '' ? truncateName(coin.algo.replace('_', ''), 6) : '-');
+                    coinClass =(coin.class !== '' ? coin.class : '');
+
+                    if (coin.name !== undefined) {
+                        coinName = truncateName(coin.name, 8);
+                        footerSwiper.appendSlide('' +
+                            '<div class="swiper-slide' + (coinClass !== '' ? ' ' + coinClass : '') + '">\n' +
+                            '    <a href="' + coin.url + '">\n' +
+                            '        <div class="flip-container" ontouchstart="this.classList.toggle(\'hover\');">\n' +
+                            '            <div class="flipper coin-logo">\n' +
+                            '                <div class="front" style="background-image: url(' + coin.logo + ');"></div>\n' +
+                            '                <div class="back">\n' +
+                            '                    <div class="back-title">' + coinAlgo + '</div>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '            <span>' + coinName + '</span>\n' +
+                            '        </div>\n' +
+                            '    </a>\n' +
+                            '</div>'
+                        );
+                    }
+                });
+            }
+            //footerSwiper.autoplay.stop();
+        });
+        // Footer Icons End
 
 		$("head").append("<link rel='stylesheet' href=" + themeCss + ">");
 
@@ -610,7 +678,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"><img src="/logos/haven.png" width="32" height="32" style="margin-right:0.0em; margin-top:-0.3em;"/></a> <a class="navbar-brand">CryptoKnight <span id="coinName"></span></a>
+            <a class="navbar-brand"><img src="/logos/haven.png" width="32" height="32" style="margin-right:0.0em; margin-top:-0.3em;"/></a> <a class="navbar-brand second-logo">CryptoKnight <span id="coinName"></span></a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -644,130 +712,24 @@
 </div>
 
 <div class="container">
-
     <div id="page"></div>
-
     <p id="loading" class="text-center"><i class="fas fa-circle-notch fa-spin"></i></p>
-
 </div>
 
 <footer>
-    <!-- Slider main container -->
-    <div class="swiper-container">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">
-                <a href="//cryptoknight.cc/alloy/">Alloy</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/b2b/">B2bcoin</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/bbs/">BBScoin </a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/btcn/">BitcoiNote</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/crep/">Crep</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/dero/">Dero</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/edl/">eDollar</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/elya/">Elya</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/graft/">Graft</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/haven/">Haven</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/itns/">Intense</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/ipbc/">IPBC</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/iridium/">Iridium</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/italo/">Italo</a>
-            </div>
-            <div class="swiper-slide">
-                <a href="//cryptoknight.cc/karbo/">Karbo</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/lines/">Lines</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/loki/">Loki</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/msr/">Masari</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/niobio/">Niobio</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/ombre/">Ombre</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/solace/">Solace</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/stellite/">Stellite</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/sumo/">Sumo</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/triton/">Triton</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/truck/">Truck</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/turtle/">Turtle</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="//cryptoknight.cc/xun/">Ultranote</a>
-            </div>
-            <div class="swiper-slide">
-                <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i>
-            </div>
-        </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-
-        <!-- If we need scrollbar -->
-        <div class="swiper-scrollbar"></div>
-    </div>
-
-
-
-    <div class="text-muted" style="line-height:10px">
-
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="container swiper-container">
+        <div class="swiper-wrapper"></div>
     </div>
     <div class="text-muted" style="line-height:10px">
-		<a target="_blank" class="social" href="https://discord.gg/kaejJWc"><i class="fab fa-discord"></i></a>
-		<a target="_blank" class="social" href="//github.com/sebseb7"><i class="fab fa-github"></i></a>
-		<a target="_blank" class="social" href="//youtube.com/c/sebgreen"><i class="fab fa-youtube"></i></a>
-		<a target="_blank" class="social" href="//twitter.com/sebseb7"><i class="fab fa-twitter"></i></a>
-		<a class="social" href="/data"><i class="far fa-chart-bar"></i></a>
+        <a target="_blank" class="social" href="https://discord.gg/kaejJWc"><i class="fab fa-discord"></i></a>
+        <a target="_blank" class="social" href="//github.com/sebseb7"><i class="fab fa-github"></i></a>
+        <a target="_blank" class="social" href="//youtube.com/c/sebgreen"><i class="fab fa-youtube"></i></a>
+        <a target="_blank" class="social" href="//twitter.com/sebseb7"><i class="fab fa-twitter"></i></a>
+        <a class="social" href="/data"><i class="far fa-chart-bar"></i></a>
     </div>
 </footer>
-
-
 
 <script>
 var container;

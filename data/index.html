@@ -137,7 +137,7 @@
 
 			setInterval(() => {
 				var seconds = new Date().getTime() / 1000;
-				
+
 				$('.lnb').each(function( index,elem ) {
 					var val1 = $(elem).data('value');
 					$(elem).text(nice_time(seconds-val1));
@@ -147,7 +147,7 @@
 					$(elem).text(nice_time((seconds-val1)));
 				});
 			}, 1000);
-			
+
 			function sortlc(a, b) {
 				if (a.toLowerCase() < b.toLowerCase()) return -1;
 				if (a.toLowerCase() > b.toLowerCase()) return 1;
@@ -176,7 +176,7 @@
 				socket.on('f',function(data,connected){
 
 					$('#pools').empty();
-			
+
 					combined = {phr:0,cnt:0,watch:0};
 					combined_data = {phr:{},cnt:{},watch:{}};
 
@@ -221,7 +221,7 @@
 				socket.on('u2',function(data){
 					for(var pool of data){
 						var element = $('#pools').find('[data-name="'+pool[0]+'"]').find('.'+pool[1]);
-						
+
 						if( element.data('value') < pool[2])
 						{
 							element.addClass("green");
@@ -232,7 +232,7 @@
 							element.addClass("red");
 							setTimeout(function(el){el.removeClass("red")}, 100, element);
 						}
-						
+
 						if(pool[1]==='watch')
 						{
 							if(combined_data.watch[pool[0]]) combined.watch-=combined_data.watch[pool[0]];
@@ -240,7 +240,7 @@
 							combined_data.watch[pool[0]]=pool[2];
 							$('.watch.combined').html(combined.watch);
 						}
-						
+
 						element.text(pool[2]);
 						element.data('value',pool[2]);
                         $('.tablesorter').trigger("update");
@@ -316,6 +316,7 @@
 			body {
 				background-color: black;
 				color: white;
+				margin: 0;
 			}
 			th,
 			td {
@@ -324,7 +325,8 @@
 				font-family: monospace;
 			}
 			table {
-				margin: 30px auto 0 auto;
+				/*margin: 30px auto 0 auto;*/
+				width: 100%;
 			}
 			.green {
 				color: green;
@@ -372,6 +374,8 @@
 				color: #ff9999;
 			}
 			table.tablesorter thead tr .header {
+				font-weight: normal;
+				font-size: 0.9em;
 				background-image: url(../misc/tablesorter/img/bg.png);
 				background-repeat: no-repeat;
 				background-position: center left;
@@ -387,11 +391,19 @@
 				background-image: url(../misc/tablesorter/img/desc.png);
 			}
 			table.tablesorter tbody tr td {
+				font-size: 11px;
 				-webkit-transition: background-color 0.2s ease-in-out;
 				transition: background-color 0.2s ease-in-out;
 			}
 			table.tablesorter tbody tr:hover td {
 				background-color: #010163;
+			}
+			table.tablesorter tbody tr td img {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			table.tablesorter tfoot tr {
+				font-size: 11px;
 			}
 		</style>
 	</head>
@@ -399,7 +411,7 @@
 		<table class="tablesorter">
 			<thead>
 				<tr>
-					<th class="coin-name">Coin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					<th class="coin-name">Coin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 					<th>&nbsp;&nbsp;Net Hashrate</th>
 					<th>&nbsp;&nbsp;Pool Hashrate</th>
 					<th>&nbsp;&nbsp;Netshare</th>
