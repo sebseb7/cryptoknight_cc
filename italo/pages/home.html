@@ -117,7 +117,6 @@
 
 
 <div id="siteInfo">
-	Note: Italocoin uses the new V7 PoW
 </div>
 
 <div class="row">
@@ -139,7 +138,7 @@
         <div id="donations"><i class="fas fa-gift"></i> Donations: <span id="poolDonations"></span></div>
         <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: ipPUk9oRjM4X2EpobStHnjDCfgT3piYonMEtEPNDpqVJZD6T2DEPkzigDfLt1VbcMzACjnKD5WEq3XmJapZNZFBb2xe452935 <br/>Viewkey: fc2b858ae45870b1c65b807ef2b4467aa3d66dc34a0cdad81910e46fb682010d</span>"><i class="fa fa-question-circle"></i></span></div>
         <div><i class="fas fa-stopwatch"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
-		<div><i class="far fa-star"></i> Current Effort: <span id="currenteffort"></span></div>
+		<div><i class="fas fa-dice"></i> Current Effort: <span id="currenteffort"></span></div>
     </div>
 
     <div class="col-md-4 stats marketRate">
@@ -147,6 +146,7 @@
         <div><i class="fab fa-btc"></i> ITA: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
         <div><i class="fas fa-dollar-sign"></i> ITA: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
         <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_ITA&amp;ref=620">altex.exchange</a></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://tradeogre.com/exchange/BTC-ITA">tradeogre</a></div>
         <div class="marketFooter">Trade at <a target="_blank" href="https://crex24.com/exchange/ITA-BTC">crex24.com</a></div>
     </div>
 </div>
@@ -288,7 +288,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-V1)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-heavy)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -416,7 +416,7 @@
                 <th><i class="fas fa-clock"></i> Time Sent</th>
                 <th><i class="fas fa-dna"></i> Transaction Hash</th>
                 <th><i class="fa fa-money-bill-alt"></i> Amount</th>
-                <th><i class="fa fa-sitemap"></i> Mixin</th>
+                <th><i class="fa fa-sitemap"></i> Rings</th>
             </tr>
             </thead>
             <tbody id="payments_rows">
@@ -430,7 +430,6 @@
 
 </div>
 
-<a href="https://uptime.statuscake.com/?TestID=KQxduWH73t" target="_blank" title="Website Uptime Monitoring"><img src="https://app.statuscake.com/button/index.php?Track=VkQ059F8iJ&Days=1&Design=2" /></a>
 
 <script>
 
@@ -598,7 +597,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_v1',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_hv',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -771,7 +770,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_v1'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_hv'));
 
     if (address){
         $('#yourStatsInput').val(address);

@@ -136,13 +136,17 @@
         <div><i class="fa fa-clock"></i> Block Found: <span id="poolLastBlockFound"></span></div>
         <div><i class="fa fa-users"></i> Connected Miners: <span id="poolMiners"></span></div>
         <div id="donations"><i class="fas fa-gift"></i> Donations: <span id="poolDonations"></span></div>
-        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: L7169NkAzoYgt83Gt44AsR2Jd4TiNG8T2VBZydJg9v8T2UGpHx9TouAcUawN472w2kBoy6fXACr2e5NpHffKoiseBugbUey <br/>Viewkey: 038e2f81afc732d571df7e266c0559b0e9d18d28f671f9fc0d1e02197f022a08</span>"><i class="fa fa-question-circle"></i></span></div>
+        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: LDRZBAj2uvM72iQNCoKqwt3giGojhqPY6SYZgSBQeYR8EXUdkpA4qRVZLU6Yt8Wp7gEv2aLs68gXtXZwPyy773oi13psY2e <br/>Trackingkey: DFC9AEBE8FC34E240C5E949385107F100CF8A48CBC6A6398B801CFE915090B50DD08EDD2BD5A74C152796A03F3AB3753301C5C0868C163B6C0E54EE1A33E2D000000000000000000000000000000000000000000000000000000000000000000AA11FFDEE7637651ED407FF58744D252B47B63BFF2FFB96612F79334E4D65A0F</span>"><i class="fa fa-question-circle"></i></span></div>
         <div><i class="fas fa-stopwatch"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
 		<div><i class="far fa-star"></i>Current Effort: <span id="currenteffort"></span></div>
     </div>
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
+        <div><i class="fab fa-btc"></i> LNS: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> LNS: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_LNS&amp;ref=620">altex.exchange</a></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://tradeogre.com/exchange/BTC-LNS">tradeogre</a></div>
     </div>
 </div>
 
@@ -425,7 +429,6 @@
 
 </div>
 
-<a href="https://uptime.statuscake.com/?TestID=KQxduWH73t" target="_blank" title="Website Uptime Monitoring"><img src="https://app.statuscake.com/button/index.php?Track=VkQ059F8iJ&Days=1&Design=2" /></a>
 
 <script>
 
@@ -441,6 +444,23 @@
     function updateMarkets(){
 
 
+               $.get('https://api.altex.exchange/v1/ticker',function(data) {
+
+
+                       if(data.error) {
+                               return;
+                       }
+
+                       console.log(data.data['BTC_LNS'].last);
+
+                       coin_in_btc = parseFloat(data.data['BTC_LNS'].last);
+                       updateText('coin_btc',coin_in_btc.toFixed(8));
+                       if(btc_in_usd != 0)
+                               updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+                       $('.marketRate').show();
+                       calcEstimateProfit();
+
+               },'json');
 
 
 		
@@ -460,7 +480,7 @@
 			btc_in_usd=price;
 			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			calcEstimateProfit();
-			$marketHeader.after('<div class="marketTicker"><i class="fab fa-btc"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
 			$('.marketRate').show();
 
 		},'json');

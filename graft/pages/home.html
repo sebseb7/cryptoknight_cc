@@ -116,6 +116,7 @@
 </style>
 
 <div id="siteInfo">
+	NEW: Integrated Addresses Supported - mine directly to Tradeogre or Altex
 </div>
 
 <div class="row">
@@ -142,8 +143,8 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div>GRF: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>GRF: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div><i class="fab fa-btc"></i> GRF: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> GRF: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
         <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_GRFT&amp;ref=620">altex.exchange</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/BTC-GRFT">TradeOgre</a></div>
     </div>
@@ -326,6 +327,7 @@
             <div class="yourStats"><i class="fa fa-money-bill-alt"></i> Total Paid: <span id="yourPaid"></span></div>
             <div class="yourStats"><i class="fas fa-clock"></i> Last Share: <span id="yourLastShare"></span></div>
             <div class="yourStats"><i class="fas fa-tachometer-alt"></i> Hash Rate: <span id="yourHashrateHolder"></span></div>
+            <div class="yourStats"><i class="fas fa-tachometer-alt"></i> PPLNS Rate: <span id="yourHashratePPLNSHolder"></span></div>
             <div class="yourStats"><i class="fas fa-cloud-upload-alt"></i> Total Hashes: <span id="yourHashes"></span></div>
         </div>
         <div class="col-sm-4">            
@@ -428,7 +430,6 @@
 
 </div>
 
-<a href="https://uptime.statuscake.com/?TestID=KQxduWH73t" target="_blank" title="Website Uptime Monitoring"><img src="https://app.statuscake.com/button/index.php?Track=VkQ059F8iJ&Days=1&Design=2" /></a>
 
 <script>
 
@@ -707,6 +708,7 @@
                         updateText('yourLastShare', 'Never');
 
                     updateText('yourHashrateHolder', (data.stats.hashrate || '0 H') + '/sec');
+                    updateText('yourHashratePPLNSHolder', (data.stats.hashrate_pplns || '0 H') + ' H/sec');
                     updateText('yourHashes', (data.stats.hashes || 0).toString());
                     updateText('yourPaid', getReadableCoins(data.stats.paid));
                     updateText('yourPendingBalance', getReadableCoins(data.stats.balance));

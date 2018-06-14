@@ -116,6 +116,7 @@
 </style>
 
 <div id="siteInfo">
+	Sumo will fork "ASIC-friendly" at block 137500. Use Cryptonight-Classic, nicehashable, with 800k difficutly.
 </div>
 
 <div class="row">
@@ -287,7 +288,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-heavy)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -429,7 +430,6 @@
 
 </div>
 
-<a href="https://uptime.statuscake.com/?TestID=KQxduWH73t" target="_blank" title="Website Uptime Monitoring"><img src="https://app.statuscake.com/button/index.php?Track=VkQ059F8iJ&Days=1&Design=2" /></a>
 
 <script>
 
@@ -592,7 +592,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_hv',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -765,7 +765,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_hv'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate'));
 
     if (address){
         $('#yourStatsInput').val(address);

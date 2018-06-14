@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "https://explorer.ird.cash/?hash={id}#blockchain_block";
-var transactionExplorer = "https://explorer.ird.cash/?hash={id}#blockchain_transaction";
+var blockchainExplorer = "https://explorer.ird.cash/?hash={id}#block";
+var transactionExplorer = "https://explorer.ird.cash/?hash={id}#transaction";
 
 var guiWallet = "http://ird.cash/";
 

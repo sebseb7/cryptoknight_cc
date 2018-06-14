@@ -493,12 +493,6 @@
             pulseLiveUpdate();
             lastStats = data;
             updateIndex();
-			var now = new Date() / 1000 | 0;
-			if((now-lastEv)>60)
-			{
-				gtag('event', 'stats_'+lastStats.config.symbol);
-				lastEv=now;
-			}
             currentPage.update();
         }).always(function () {
             fetchLiveStats();

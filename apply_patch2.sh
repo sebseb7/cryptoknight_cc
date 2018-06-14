@@ -1,3 +1,15 @@
+cd aeon
+cat ../patch2 | patch -p1
+cd ..
+cd arto
+cat ../patch2 | patch -p1
+cd ..
+cd etn
+cat ../patch2 | patch -p1
+cd ..
+cd saronite
+cat ../patch2 | patch -p1
+cd ..
 cd lines
 cat ../patch2 | patch -p1
 cd ..
@@ -13,8 +25,11 @@ cd ..
 cd solace
 cat ../patch2 | patch -p1
 cd ..
+cd niobio
+cat ../patch2 | patch -p1
+cd ..
 cd msr
-cat ../patch | patch -p1
+cat ../patch2 | patch -p1
 cd ..
 cd haven
 cat ../patch2 | patch -p1
@@ -26,5 +41,14 @@ cd graft
 cat ../patch2 | patch -p1
 cd ..
 cd stellite
+cat ../patch2 | patch -p1
+cd ..
+cd xun
+cat ../patch2 | patch -p1
+cd ..
+cd monerov
+cat ../patch2 | patch -p1
+cd ..
+cd wownero
 cat ../patch2 | patch -p1
 cd ..
