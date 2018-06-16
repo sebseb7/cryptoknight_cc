@@ -1,3 +1,4 @@
 *.orig
 .idea
 api
+sftp-config.json
