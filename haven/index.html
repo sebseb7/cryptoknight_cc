@@ -525,7 +525,19 @@
             cache: false,
             success: function (data) {
                 $('#loading').hide();
-                $('#page').show().html(data);
+                var pageHolder = $('#page');
+                if (page === 'chat.html') {
+                    pageHolder
+                        .closest('.container')
+                        .removeClass('container')
+                        .addClass('container-fluid')
+                        .show()
+                        .html(data)
+                    ;
+                } else {
+                    pageHolder.show().html(data);
+                }
+
                 currentPage.update();
                 if (loadedCallback) loadedCallback();
             }
