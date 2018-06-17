@@ -116,7 +116,15 @@
 </style>
 
 <div id="siteInfo">
-	NEW: Integrated Addresses (hvi) Supported
+	<br/>
+	<span class="bg-info" style="padding:10px">
+		Compatible Miners: 
+		<a href="http://www.gandalph3000.com/">CastXMR 1.2.0+</a>&nbsp;&nbsp;&nbsp;
+		<a href="https://bitcointalk.org/index.php?topic=3167363.0">SRB Miner 1.6.0+</a>&nbsp;&nbsp;&nbsp;
+		<a href="https://github.com/fireice-uk/xmr-stak/releases">StackXMR 2.4.5</a>
+	
+	</span>
+	<br/><br/>
 </div>
 
 <div class="row">
@@ -127,6 +135,7 @@
         <div><i class="fa fa-unlock-alt"></i> Difficulty: <span id="networkDifficulty"></span></div>
         <div><i class="fa fa-bars"></i> Blockchain Height: <span id="blockchainHeight"></span></div>
         <div><i class="fas fa-trophy"></i> Last Reward: <span id="networkLastReward"></span></div>
+        <div><i class="fa fa-tag"></i> Governance Fee: <span id="networkLastCoinbase"></span></div>
         <div><i class="fas fa-dna"></i> Last Hash: <a id="lastHash" target="_blank"></a></div>
     </div>
 
@@ -505,6 +514,7 @@
             updateText('networkDifficulty', lastStats.network.difficulty.toString());
             updateText('blockchainHeight', lastStats.network.height.toString());
             updateText('networkLastReward', getReadableCoins(lastStats.network.reward, 4));
+            updateText('networkLastCoinbase', getReadableCoins(lastStats.network.coinbase, 4));
             updateText('lastHash', lastStats.network.hash.substr(0, 13) + '...').setAttribute('href', getBlockchainUrl(lastStats.network.hash));
 
             updateText('poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');
@@ -627,7 +637,7 @@
     function getUserBlockCells(block){
         return '<td>' + block.height + '</td>' +
 				'<td>' + formatDate(block.time) + '</td>' +
-                '<td>' + getReadableCoins(block.reward,4,true) + ' <span data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Block Reward:'+getReadableCoins(block.fullReward,4,true)+' <br/>Transfer Fees:'+getReadableCoins(block.transferFee,4,true)+' <br/>Pool Fee: '+getReadableCoins(block.poolFee,4,true)+' <br/>Donation Fees: '+getReadableCoins(block.donationFee,4,true)+'"><i class="fa fa-question-circle"></i></span></td>' +
+                '<td>' + getReadableCoins(block.reward,4,true) + ' <span data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Block Reward:'+getReadableCoins(block.fullReward,4,true)+' <br/>Transfer Fees:'+getReadableCoins(block.transferFee,4,true)+' <br/>Pool Fee: '+getReadableCoins(block.poolFee,4,true)+' <br/>Governance Fee: '+getReadableCoins(block.donationFee,4,true)+'"><i class="fa fa-question-circle"></i></span></td>' +
                 '<td>' + block.totalShares + '</td>' +
                 '<td>' + block.workerShares + '</td>' +
                 '<td>' + getReadableCoins(block.amount,4,true) + '</td>';
