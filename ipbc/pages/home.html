@@ -368,7 +368,7 @@
 			coin_in_btc = data.result.Last;
 			updateText('coin_btc',coin_in_btc.toFixed(8));
 			if(btc_in_usd)
-				updateText('coin_usd',(data.last*btc_in_usd).toFixed(8));
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
 			calcEstimateProfit();
 

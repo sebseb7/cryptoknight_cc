@@ -120,6 +120,7 @@
 	<br/>
 	<span class="bg-info" style="padding:10px">
 		Compatible Miners: 
+		<a href="https://github.com/Bendr0id/xmrigCC/releases">xmrigCC 1.6.4+</a>&nbsp;&nbsp;&nbsp;
 		<a href="https://bitcointalk.org/index.php?topic=3167363.0">SRB Miner 1.6.0+</a>&nbsp;&nbsp;&nbsp;
 		<a href="https://github.com/fireice-uk/xmr-stak/releases">StackXMR 2.4.5</a>&nbsp;&nbsp;&nbsp;
 		<a href="https://github.com/xmrig/xmrig/releases">XMrig 2.6.3</a>
@@ -298,7 +299,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-V1)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-Fast)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -606,7 +607,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_v1',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_fast',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -779,7 +780,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_v1'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_fast'));
 
     if (address){
         $('#yourStatsInput').val(address);
