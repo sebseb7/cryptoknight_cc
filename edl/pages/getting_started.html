@@ -25,12 +25,9 @@
     #mining_apps > tr > td{
         border-top: none;
     }
-    #mining_apps > tr:nth-child(even) > td{
-        border-bottom: 1px solid #e5e5e5;
-        padding-bottom: 20px;
-    }
-    #mining_apps > tr:nth-child(odd) > td{
-        padding-top: 20px;
+    #mining_apps > tr:not(:last-child) > td{
+        border-bottom: 1px solid #336A80;
+        padding-bottom: 10px;
     }
     #mining_apps{
         margin-top: 10px;
@@ -92,20 +89,29 @@
         </thead>
         <tbody id="mining_apps">
         <tr>
+            <td class="miningAppTitle">xmrigCC</td>
+            <td>CPU</td>
+            <td><a target="_blank" href="https://github.com/Bendr0id/xmrigCC/releases">Github</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">CastXMR</td>
+            <td>AMD</td>
+            <td><a target="_blank" href="http://www.gandalph3000.com/">Github</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">SRB Miner</td>
+            <td>CPU+GPU</td>
+            <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=3167363.0">Bitcointalk</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">XMrig</td>
+            <td>CPU</td>
+            <td><a target="_blank" href="https://github.com/xmrig/xmrig/releases">Github</a></td>
+        </tr>
+        <tr>
             <td class="miningAppTitle">Stack XMR</td>
             <td>CPU+GPU</td>
             <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak/releases">Github</a></td>
-        </tr>
-        <!--<tr>
-            <td colspan="3">
-                <span>Example:</span>
-                <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost"></span>:<span class="examplePort"></span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
-            </td>
-        </tr>-->
-        <tr>
-            <td class="miningAppTitle">Cast XMR</td>
-            <td>AMD GPU</td>
-            <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=2256917.0;all">Forum</a></td>
         </tr>
         </tbody>
     </table>
