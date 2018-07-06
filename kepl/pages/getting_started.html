@@ -1,0 +1,185 @@
+<style>
+    hr{
+        border-top-color: #d9d9d9;
+        margin-top: 40px !important;
+        margin-bottom: 40px !important;
+    }
+    #miningPorts > .stats{
+        width: auto !important;
+        margin-right: 70px;
+        margin-left: 15px;
+        display: inline-block;
+    }
+    #miningPorts > .stats:last-child{
+        margin-right: 0;
+    }
+    .getting_started_windows{
+        line-height: 40px;
+    }
+    #getting_started_list > li{
+        margin-bottom: 20px;
+    }
+    #mining_apps > tr:first-child > td{
+        padding-top: 35px;
+    }
+    #mining_apps > tr > td{
+        border-top: none;
+    }
+    #mining_apps > tr:not(:last-child) > td{
+        border-bottom: 1px solid #336A80;
+        padding-bottom: 10px;
+    }
+    .miningAppTitle{
+        font-weight: bold;
+    }
+    .exampleAddress{
+        font-style: italic;
+    }
+    #cpuminer_code{
+        display: inline-block;
+        white-space: normal;
+    }
+</style>
+
+
+<h3>Connection Details</h3>
+	<br/>
+<div class="stats">
+    <div><i class="fa fa-cloud"></i> Mining Pool Address: <span id="miningPoolHost"></span></div>
+    <div><i class="fa fa-paw"></i> PoW Algorithm: <span id="pow">CryptoNight Variant 1</span></div>
+</div>
+	<br/>
+
+<h4>Mining Ports</h4>
+<div id="miningPorts" class="row">
+    <div class="stats">
+        <div><i class="fa fa-tachometer"></i> Port: <span class="miningPort"></span></div>
+        <div><i class="fa fa-unlock-alt"></i> Starting Difficulty: <span class="miningPortDiff"></span></div>
+        <div><i class="fa fa-question"></i> Description: <span class="miningPortDesc"></span></div>
+    </div>
+</div>
+<p class="getting_started_windows">
+	<br/>
+	For optimal mining efficency use static difficutly. You can activate static difficutly by adding ".desiredDifficutly" to your walletid. You can use any of the above ports for static difficutly.
+	<br/>A good static difficutly would be 40 * hashrate. Example for 1250H/s:<br/>
+	<code>eXaMpLeEyXACPVTCQZ2bGjg9k7Y9y8rLAGBRBaAJVDnLLbLGAeGLqvn2k82aXzXnEwXUXh72amhAKoRQ.50000</code>
+</p>
+
+<hr>
+
+<h3>Wallet</h3>
+<p class="getting_started_windows">
+	Download <i class="fa fa-windows"></i> <a class="btn btn-default btn-sm" target="_blank" id="guiwallet_link"><i class="fa fa-download"></i>Gui Wallet</a> here.
+	Or find a <a class="btn btn-default btn-sm" target="_blank" id="paperwallet_link">Paper Wallet</a> here.
+</p>
+
+<hr>
+
+<h3>Mining Apps</h3>
+<div class="yourStats table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><i class="fa fa-book"></i> App Name</th>
+            <th><i class="fa fa-car"></i> Architecture</th>
+            <th><i class="fa fa-download"></i> Downloads</th>
+        </tr>
+        </thead>
+        <tbody id="mining_apps">
+        <tr>
+            <td class="miningAppTitle">xmrigCC</td>
+            <td>CPU</td>
+            <td><a target="_blank" href="https://github.com/Bendr0id/xmrigCC/releases">Github</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">CastXMR</td>
+            <td>AMD</td>
+            <td><a target="_blank" href="http://www.gandalph3000.com/">Github</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">SRB Miner</td>
+            <td>CPU+GPU</td>
+            <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=3167363.0">Bitcointalk</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">XMrig</td>
+            <td>CPU</td>
+            <td><a target="_blank" href="https://github.com/xmrig/xmrig/releases">Github</a></td>
+        </tr>
+        <tr>
+            <td class="miningAppTitle">Stack XMR</td>
+            <td>CPU+GPU</td>
+            <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak/releases">Github</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+	<p>
+		Shader Background &nbsp;&nbsp;<input id="shader" type="checkbox" checked data-toggle="toggle">
+	</p>
+</div>
+
+
+<script>
+	gtag('event', 'conn_'+lastStats.config.symbol);
+
+	$(function() {
+		if(docCookies.getItem('3d')==='off')
+			$('#shader').bootstrapToggle('off');
+		else
+			$('#shader').bootstrapToggle('on');
+
+		$('#shader').change(function() {
+		
+			if($(this).prop('checked'))
+			{
+				docCookies.setItem('3d','on',Infinity,'/');
+				start_3d();
+			}
+			else
+			{
+				docCookies.setItem('3d','off',Infinity,'/');
+				deinit3d();
+			}
+		});
+	});
+
+    currentPage = {
+        destroy: function(){
+
+        },
+        update: function(){
+
+            var portsJson = JSON.stringify(lastStats.config.ports);
+            if (lastPortsJson !== portsJson) {
+                lastPortsJson = portsJson;
+                var $miningPortChildren = [];
+                for (var i = 0; i < lastStats.config.ports.length; i++) {
+                    var portData = lastStats.config.ports[i];
+                    var $portChild = $(miningPortTemplate);
+                    $portChild.find('.miningPort').text(portData.port);
+                    $portChild.find('.miningPortDiff').text(portData.difficulty);
+                    $portChild.find('.miningPortDesc').text(portData.desc);
+                    $miningPortChildren.push($portChild);
+                }
+                $miningPorts.empty().append($miningPortChildren);
+            }
+
+            updateTextClasses('exampleHost', poolHost);
+            updateTextClasses('examplePort', lastStats.config.ports[0].port.toString());
+
+        }
+    };
+
+    document.getElementById('guiwallet_link').setAttribute('href', guiWallet);
+    document.getElementById('paperwallet_link').setAttribute('href', paperWallet);
+    document.getElementById('miningPoolHost').textContent = poolHost;
+
+    var lastPortsJson = '';
+    var $miningPorts = $('#miningPorts');
+    var miningPortTemplate = $miningPorts.html();
+    $miningPorts.empty();
+
+</script>

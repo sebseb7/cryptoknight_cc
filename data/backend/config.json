@@ -3,198 +3,238 @@
 	"pools": [
 		{
 			"name":"Ultranote",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/xun",
 			"url":"https://cryptoknight.cc/xun",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/ultranote.png"
 		},{
 			"name":"Aeon",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/aeon",
 			"url":"https://cryptoknight.cc/aeon",
 			"algo":"_l1",
 			"logo":"https://cryptoknight.cc/logos/aeon.png"
 		},{
+			"name":"Arqma",
+			"class":"",
+			"api":"https://cryptoknight.cc/rpc/arq",
+			"url":"https://cryptoknight.cc/arq",
+			"algo":"_l1",
+			"logo":"https://cryptoknight.cc/logos/arqma.png"
+		},{
 			"name":"Masari",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/msr",
 			"url":"https://cryptoknight.cc/msr",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/masari.png"
 		},{
 			"name":"Arto",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/arto",
 			"url":"https://cryptoknight.cc/arto",
 			"algo":"_ar",
 			"logo":"https://cryptoknight.cc/logos/arto.png"
 		},{
 			"name":"Karbo",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/karbo",
 			"url":"https://cryptoknight.cc/karbo",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/karbo.png"
 		},{
 			"name":"Solace",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/solace",
 			"url":"https://cryptoknight.cc/solace",
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/solace.png"
 		},{
 			"name":"Sumo",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/sumo",
 			"url":"https://cryptoknight.cc/sumo",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/sumo.png"
 		},{
 			"name":"Saronite",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/saronite",
 			"url":"https://cryptoknight.cc/saronite",
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/saronite.png"
 		},{
 			"name":"B2BCoin",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/b2b",
 			"url":"https://cryptoknight.cc/b2b",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/b2b.png"
 		},{
 			"name":"Turtle",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/turtle",
 			"url":"https://cryptoknight.cc/turtle",
 			"algo":"_l1",
 			"logo":"https://cryptoknight.cc/logos/turtle.png"
 		},{
 			"name":"Electroneum",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/etn",
 			"url":"https://cryptoknight.cc/etn",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/etn.png"
 		},{
 			"name":"NioBio",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/niobio",
 			"url":"https://cryptoknight.cc/niobio",
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/niobio.png"
 		},{
 			"name":"Stellite",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/stellite",
 			"url":"https://cryptoknight.cc/stellite",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/stellite.png"
 		},{
 			"name":"Loki",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/loki",
 			"url":"https://cryptoknight.cc/loki",
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/loki.png"
 		},{
 			"name":"Qwerty",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/qwerty",
 			"url":"https://cryptoknight.cc/qwerty",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/qwerty.png"
 		},{
 			"name":"BitcoinNote",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/btcn",
 			"url":"https://cryptoknight.cc/btcn",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/btcn.png"
 		},{
 			"name":"Wownero",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/wownero",
 			"url":"https://cryptoknight.cc/wownero",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/wownero.png"
 		},{
 			"name":"Alloy",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/alloy",
 			"url":"https://cryptoknight.cc/alloy",
 			"algo":"_alloy",
 			"logo":"https://cryptoknight.cc/logos/alloy.png"
 		},{
 			"name":"Monerov",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/monerov",
 			"url":"https://cryptoknight.cc/monerov",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/monerov.png"
 		},{
 			"name":"Graft",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/graft",
 			"url":"https://cryptoknight.cc/graft",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/graft_small.png"
 		},{
 			"name":"Truck",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/truck",
 			"url":"https://cryptoknight.cc/truck",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/truck.png"
 		},{
 			"name":"Crep",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/crep",
 			"url":"https://cryptoknight.cc/crep",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/crep.png"
 		},{
 			"name":"Bittube",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/ipbc",
 			"url":"https://cryptoknight.cc/ipbc",
 			"algo":"_li",
 			"logo":"https://cryptoknight.cc/logos/ipbc.png"
 		},{
 			"name":"Intense",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/itns",
 			"url":"https://cryptoknight.cc/itns",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/intense.png"
 		},{
 			"name":"Triton",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/triton",
 			"url":"https://cryptoknight.cc/triton",
 			"algo":"_l1",
 			"logo":"https://cryptoknight.cc/logos/triton.png"
 		},{
 			"name":"Haven",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/haven",
 			"url":"https://cryptoknight.cc/haven",
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/haven.png"
 		},{
 			"name":"BBS",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/bbs",
 			"url":"https://cryptoknight.cc/bbs",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/bbs.png"
 		},{
 			"name":"Ombre",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/ombre",
 			"url":"https://cryptoknight.cc/ombre",
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/ombre.png"
 		},{
 			"name":"Elya",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/elya",
 			"url":"https://cryptoknight.cc/elya",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/elya.png"
 		},{
 			"name":"eDollar",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/edl",
 			"url":"https://cryptoknight.cc/edl",
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/edollar.png"
 		},{
 			"name":"Lines",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/lines",
 			"url":"https://cryptoknight.cc/lines",
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/lines.svg"
 		},{
 			"name":"Iridium",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/iridium",
 			"url":"https://cryptoknight.cc/iridium",
 			"algo":"_l1",
 			"logo":"https://cryptoknight.cc/logos/iridium.png"
 		},{
 			"name":"Italo",
+			"class":"",
 			"api":"https://cryptoknight.cc/rpc/italo",
 			"url":"https://cryptoknight.cc/italo",
 			"algo":"_hv",

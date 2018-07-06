@@ -102,6 +102,9 @@ function getPoolData(pool){
 	});
 }
 
+
+
+
 for (var pool of config.pools) 
 {
 /*	pool['metric_eff'] = probe.metric({
@@ -132,6 +135,7 @@ for (var pool of config.pools)
 				if( coins_conn[pool_name] != coins_full[pool_name].watch) updates_full.push([pool_name,'watch',coins_conn[pool_name]]);
 				coins_full[pool_name].watch=coins_conn[pool_name];
 			});
+			socket.emit('list',config.pools);
 		});
 	})(pool.name);
 }

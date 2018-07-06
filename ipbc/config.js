@@ -1,6 +1,6 @@
-var api = "/rpc/ipbc";
+var api = "/rpc/tube4";
 
-var poolHost = "ipbc.ingest.cryptoknight.cc";
+var poolHost = "tube.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 
@@ -8,14 +8,11 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "https://explorer.ipbc.io/?hash={id}#blockchain_block";
-var transactionExplorer = "https://explorer.ipbc.io/?hash={id}#blockchain_transaction";
+var blockchainExplorer = "https://explorer.bit.tube/block/{id}";
+var transactionExplorer = "https://explorer.bit.tube/tx/{id}";
 
+var guiWallet = "https://github.com/ipbc-dev/bittube-wallet-gui/releases";
 
-var guiWallet = "https://github.com/ipbc-dev/ipbc-wallet/releases";
-
-var paperWallet = "https://ipbc.io/walletgenerator";
+var paperWallet = "https://bit.tube/wallet";
 
 var themeCss = "themes/nightly-mining-dark-theme.css";
-
-

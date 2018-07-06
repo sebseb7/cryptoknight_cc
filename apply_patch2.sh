@@ -4,6 +4,9 @@ cd ..
 cd arto
 cat ../patch2 | patch -p1
 cd ..
+cd arq
+cat ../patch2 | patch -p1
+cd ..
 cd etn
 cat ../patch2 | patch -p1
 cd ..
