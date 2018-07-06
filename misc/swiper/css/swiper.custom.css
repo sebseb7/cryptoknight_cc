@@ -1,0 +1,229 @@
+.swiper-container {
+    height: 100%;
+    max-height: 55px;
+    margin-top: 5px;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background-color: transparent;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.swiper-slide a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.swiper-slide a .coin-logo {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    max-width: 16px;
+    max-height: 16px;
+    border: none;
+    transition: box-shadow .17s ease-in-out;
+}
+.swiper-slide a:hover .coin-logo,
+.swiper-slide a:focus .coin-logo {
+    box-shadow: 0 0 10px -2px #1a2831;
+}
+
+.swiper-slide a span {
+    font-size: 13px;
+    transition: color .17s ease-in-out, text-shadow .17s ease-in-out;
+}
+.swiper-slide a:focus span,
+.swiper-slide a:hover span {
+    color: #fafafa;
+    text-shadow: 0 0 1px #000;
+}
+
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+    left: 0;
+}
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+    left: auto;
+    right: 0;
+}
+.swiper-button-prev,
+.swiper-button-next {
+    top: 0;
+    cursor: pointer;
+    outline: none;
+    background-image: none;
+}
+.swiper-button-prev:after,
+.swiper-button-next:before {
+    display: block;
+    width: 27px;
+    color: #6ed5ee;
+    font-size: 30px;
+    margin-top: -9px;
+    -webkit-transition: color .2s ease;
+    -moz-transition: color .2s ease;
+    -o-transition: color .2s ease;
+    transition: color .2s ease;
+}
+.swiper-button-prev:after {
+    content: "‹";
+}
+.swiper-button-next:before {
+    content: "›";
+}
+.swiper-button-prev:focus:after,
+.swiper-button-prev:hover:after,
+.swiper-button-next:focus:before,
+.swiper-button-next:hover:before {
+    color: #00C1FF;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: -4px;
+}
+
+/* flip coin begin */
+
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+    -ms-transform: perspective(1000px);
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+}
+.flip-container:hover .back,
+.flip-container.hover .back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+.flip-container:hover .front,
+.flip-container.hover .front {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+.flipper {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.front,
+.back {
+    width: 16px;
+    height: 16px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotateY(0deg);
+    -moz-transition: 0.6s;
+    -moz-transform-style: preserve-3d;
+    -moz-transform: rotateY(0deg);
+    -o-transition: 0.6s;
+    -o-transform-style: preserve-3d;
+    -o-transform: rotateY(0deg);
+    -ms-transition: 0.6s;
+    -ms-transform-style: preserve-3d;
+    -ms-transform: rotateY(0deg);
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    position: absolute;
+    top: -8px;
+    left: 0;
+}
+.front {
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 2;
+}
+.back {
+    background-color: #0f242b;
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+.back-title {
+    color: #6ed5ee;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8px;
+}
+/* flip coin end */
+
+footer > div {
+    margin: 5px auto !important;
+}
+footer > div > .social {
+    transition: color .17s ease-in-out;
+}
+footer > div > .social:focus,
+footer > div > .social:hover {
+    color: #fafafa;
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+    .navbar-brand.second-logo {
+        display: none !important;
+    }
+}
+
+@media (max-width: 310px) {
+    .navbar-brand.second-logo {
+        display: none !important;
+    }
+}
+@media (max-width: 440px) {
+    .swiper-slide a span {
+        font-size: 18px;
+        vertical-align: middle;
+        line-height: 24px;
+    }
+    footer > div {
+        margin: 15px auto !important;
+    }
+    .swiper-button-prev:after,
+    .swiper-button-next:before {
+        margin-top: -10px;
+    }
+}

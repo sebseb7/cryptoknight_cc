@@ -4,7 +4,7 @@
 		<title></title>
 		<script src="/misc/socket.io.js"></script>
 		<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-		
+
 		<script>
 
 			function getReadableHashRateString(hashrate){
@@ -53,7 +53,7 @@
 
 			setInterval(() => {
 				var seconds = new Date().getTime() / 1000;
-				
+
 				$('.lnb').each(function( index,elem ) {
 					var val1 = $(elem).data('value');
 					$(elem).text( (seconds-val1).toFixed(0)+'s');
@@ -63,7 +63,7 @@
 					$(elem).text( ((seconds-val1)/60).toFixed(1)+'m');
 				});
 			}, 1000);
-			
+
 			function sortlc(a, b) {
 				if (a.toLowerCase() < b.toLowerCase()) return -1;
 				if (a.toLowerCase() > b.toLowerCase()) return 1;
@@ -76,15 +76,15 @@
 			$(function () {
 				//$('#user').val(docCookies.getItem('login')||'');
 				socket = io('/main');
-				
+
 				socket.on('connect', () => {
-					socket.emit('stream', true);
-				});
+                    socket.emit('stream', true);
+                });
 
 				socket.on('f',function(data,connected){
 
 					$('#pools').empty();
-			
+
 					combined = {phr:0,cnt:0};
 					combined_data = {phr:{},cnt:{}};
 
@@ -92,8 +92,8 @@
 					var seconds = new Date().getTime() / 1000;
 					for(var pool of keys){
 						$('#pools').append($(
-										'<tr class="pool" data-name="'+pool+'">'+ 
-											'<td class="name" style="padding: 1px;"><img src="'+data[pool].logo+'" height="21px"/>&nbsp;<a href="'+data[pool].url+'">'+(data[pool].name)+'</a></td>'+ 
+										'<tr class="pool" data-name="'+pool+'">'+
+											'<td class="name" style="padding: 1px;"><img src="'+data[pool].logo+'" />&nbsp;<a href="'+data[pool].url+'">'+(data[pool].name)+'</a></td>'+
 											'<td class="nhr" data-value="'+data[pool].nhr+'">'+getReadableHashRateString(data[pool].nhr)+'</td>'+
 											'<td class="phr" data-value="'+data[pool].phr+'">'+(data[pool].phr?getReadableHashRateString(data[pool].phr):'0')+'</td>'+
 											'<td class="pct" data-value="'+data[pool].pct+'">'+data[pool].pct+' %</td>'+
@@ -109,8 +109,8 @@
 										combined_data.cnt[pool]=data[pool].cnt;
 					}
 					$('#pools').append($(
-									'<tr class="pool">'+ 
-										'<td class="connected">Connected: '+connected+'</td>'+ 
+									'<tr class="pool">'+
+										'<td class="connected">Connected: '+connected+'</td>'+
 										'<td class="nhr" data-value=""></td>'+
 										'<td class="phr combined" data-value="'+combined.phr+'">'+getReadableHashRateString(combined.phr)+'</td>'+
 										'<td class="pct" data-value=""></td>'+
@@ -171,112 +171,177 @@
 							element.text(pool[2]+' $');
 						if(pool[1]==='lpb')
 							element.text(((seconds-pool[2])/60).toFixed(1)+'m');
-						
+
 					}
 				});
 				socket.on('c',function(data){
 						$('.connected').html('Connected: '+data);
 				});
-				
+
 
 			});
 
 		</script>
 		<style>
-a {
-  color: #03a678;
-}
-a:hover {
-  color: #025b42;
-}
+			html,
+			body {
+				height: 100%;
+			}
+			body {
+				min-height: 100%;
+			}
+			::-webkit-scrollbar {
+				width: 4px;
+			}
+			::-webkit-scrollbar-track {
+				background: #025b42;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #06be8a;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #fff;
+			}
+			a {
+				color: #03a678;
+			}
+			a:hover {
+				color: #025b42;
+			}
 			body {
 				background-color: black;
 				color: white;
-			}	
+				margin: 0;
+			}
 			td {
 				padding: 5px;
 				background-color: #000044;
 				font-family: monospace;
 				font-size:0.9em;
-			}	
+			}
 			table.outer {
-				margin: 30px auto 0px auto;
-			}	
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
 			.green {
 				color: green;
-			}	
+			}
 			.red {
 				color: red;
-			}	
+			}
 			.prof {
 				text-align: right;
-			}	
+			}
 			.phr {
 				text-align: right;
-			}	
+			}
 			.nhr {
 				text-align: right;
-			}	
+			}
 			.cnt {
 				text-align: right;
-			}	
+			}
 			.pct {
 				text-align: right;
-			}	
+			}
 			.eff {
 				text-align: right;
-			}	
+			}
 			.lnb {
 				text-align: right;
-			}	
+			}
 			.lpb {
 				text-align: right;
-			}	
+			}
 			.hr_h {
 				color: #ffff88;
-			}	
+			}
 			.connected {
 				color: #777777;
-			}	
+			}
 			.hr_kh {
 				color: #9999ff;
-			}	
+			}
 			.hr_mh {
 				color: #ff9999;
-			}	
+			}
+			.pools-holder {
+				position: relative;
+				width: 70%;
+			}
+			.pools-holder table {
+				width: 100%;
+			}
+			.pools-holder .pool .name img {
+				display: inline-block;
+				vertical-align: middle;
+				width: 100%;
+				max-width: 16px;
+			}
+			.pools-holder .pool .name a {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.chat-holder {
+				position: relative;
+				width: 30%;
+			}
+			.pools-holder iframe,
+			.chat-holder iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+			}
+			@media (max-width: 992px) {
+				.pools-holder {
+					width: 100%;
+					height: 55%;
+					display: block;
+					overflow-y: scroll;
+				}
+				.chat-holder {
+					width: 100%;
+					height: 45%;
+					display: block;
+				}
+			}
 		</style>
 	</head>
 	<body>
-	
-		<table class="outer"><tr><td>
+		<table class="outer">
+			<tr>
+				<td class="pools-holder">
+					<!--<iframe src="/data/" frameborder="0"></iframe>-->
+					<table>
 
-		<table>
-		
-			<thead>
-				<tr>
-					<td>Coin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td>&nbsp;&nbsp;Net&nbsp;Hashrate</td>
-					<td>&nbsp;&nbsp;Pool&nbsp;Hashrate</td>
-					<td>&nbsp;&nbsp;Netshare</td>
-					<td>&nbsp;&nbsp;Miners</td>
-					<td>&nbsp;&nbsp;Netblock&nbsp;age</td>
-					<td>&nbsp;&nbsp;Poolblock&nbsp;age</td>
-					<td>&nbsp;&nbsp;Curr.&nbsp;Effort</td>
-					<td>&nbsp;&nbsp;KH/s/day</td>
-				</tr>
-			</thead>
+						<thead>
+						<tr>
+							<td>Coin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>&nbsp;&nbsp;Net&nbsp;Hashrate</td>
+							<td>&nbsp;&nbsp;Pool&nbsp;Hashrate</td>
+							<td>&nbsp;&nbsp;Netshare</td>
+							<td>&nbsp;&nbsp;Miners</td>
+							<td>&nbsp;&nbsp;Netblock&nbsp;age</td>
+							<td>&nbsp;&nbsp;Poolblock&nbsp;age</td>
+							<td>&nbsp;&nbsp;Curr.&nbsp;Effort</td>
+							<td>&nbsp;&nbsp;KH/s/day</td>
+						</tr>
+						</thead>
 
-			<tbody id="pools">
-			</tbody>
-		
+						<tbody id="pools">
+						</tbody>
+
+					</table>
+	            </td>
+				<td class="chat-holder">
+					<iframe src="https://titanembeds.com/embed/400495224511791104?defaultchannel=420103146975657994&theme=DiscordDark" height="800" width="600" frameborder="0"></iframe>
+				</td>
+			</tr>
 		</table>
-	
-		</td><td>
-	
-			<iframe src="https://titanembeds.com/embed/400495224511791104?defaultchannel=420103146975657994&theme=DiscordDark" height="800" width="600" frameborder="0"></iframe>
-
-		</td></tr></table>
-
 	</body>
 </html>
 

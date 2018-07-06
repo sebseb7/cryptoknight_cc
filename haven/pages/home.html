@@ -29,6 +29,44 @@
         z-index: inherit;
         font-family: 'Inconsolata', monospace;
     }
+    @media (max-width: 992px) and (min-width: 620px) {
+        #calcHashHolder,
+        #calcHashRate {
+            width: 100% !important;
+        }
+    }
+    @media (max-width: 619px) {
+        #calcHashHolder,
+        #calcHashRate {
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        #calcHashHolder .input-group {
+            display: block;
+            margin-bottom: 5px;
+        }
+        #calcHashHolder .input-group input {
+            display: block;
+            width: 100% !important;
+            text-align: center;
+            border-radius: 3px 3px 0 0;
+        }
+        #calcHashHolder .input-group .input-group-btn,
+        #calcHashHolder .input-group .input-group-btn button {
+            display: block;
+            width: 100%;
+        }
+        #calcHashHolder .input-group .input-group-addon {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            min-width: auto;
+        }
+        #calcHashHolder .input-group .input-group-addon:last-child {
+            border-radius: 0 0 3px 3px;
+        }
+    }
     #calcHashAmount{
         font-family: 'Inconsolata', monospace;
     }
@@ -186,7 +224,7 @@
         <div id="chartHashrate" data-chart="hashrate">
             <div class="chart"></div>
             <!-- <p class="text-center" id="cur_hashrate">-</p> -->
-        </div>        
+        </div>
     </div>
 </div>
 <div class="row chartsPoolStat">
@@ -215,13 +253,13 @@
             <div class="chart"></div>
         </div>
     </div>
-    <div class="col-sm-20 chartWrap">        
+    <div class="col-sm-20 chartWrap">
         <h4>Workers 5d</h4>
         <div id="chartWorkers" data-chart="workers">
             <div class="chart"></div>
             <!-- <p class="text-center" id="cur_workers">-</p> -->
-        </div> 
-    </div>    
+        </div>
+    </div>
 
     <script>
 		gtag('event', 'home_'+lastStats.config.symbol);
@@ -235,7 +273,7 @@
             minSpotColor: null,
             maxSpotColor: null,
             highlightLineColor: '#236d26',
-            spotRadius: 3,        
+            spotRadius: 3,
             chartRangeMin: 0,
             drawNormalOnTop: false,
             tooltipFormat: '<b>{{y}}</b>, {{offset:names}}'
@@ -329,24 +367,24 @@
             <div class="yourStats"><i class="fas fa-tachometer-alt"></i> Hash Rate: <span id="yourHashrateHolder"></span></div>
             <div class="yourStats"><i class="fas fa-cloud-upload-alt"></i> Total Hashes: <span id="yourHashes"></span></div>
         </div>
-        <div class="col-sm-4">            
+        <div class="col-sm-4">
             <div class="userChart" data-chart="user_hashrate">
                 <h4>Hash Rate 6h</h4>
                 <div class="chart">
-                    
-                </div>                
+
+                </div>
             </div>
-        </div> 
+        </div>
         <div class="col-sm-4">
             <div class="userChart" data-chart="user_payments">
                 <h4>Payments</h4>
                 <div class="chart">
-                    
-                </div> 
+
+                </div>
             </div>
-        </div>       
+        </div>
     </div>
-    
+
 
     <br class="yourStats">
 
@@ -450,7 +488,7 @@
 			if(data.error) {
 				return;
 			}
-			
+
 			coin_in_btc = data.price;
 			updateText('coin_btc',data.price);
 			if(btc_in_usd)updateText('coin_usd',(data.price*btc_in_usd).toFixed(8));
@@ -458,18 +496,18 @@
 			calcEstimateProfit();
 
 		},'json');
-		
-		
+
+
 		$.get('/api/BTC-USD.xml',function(data) {
 
 
 			if(data.error) {
 				return;
 			}
-			
+
 			var $marketHeader = $('#marketHeader');
 			$('.marketTicker').remove();
-			
+
 			var price = parseFloat(data.ticker.price);
 			price = Math.round(price * 100) / 100;
 			btc_in_usd=price;
@@ -479,7 +517,7 @@
 			$('.marketRate').show();
 
 		},'json');
-		
+
 
     }
 
@@ -496,7 +534,7 @@
             if (xhrGetPayments) xhrGetPayments.abort();
         },
         update: function(){
-            
+
 			createCharts(lastStats);
 
             $('#networkLastBlockFound').timeago('update', new Date(lastStats.network.timestamp * 1000).toISOString());
@@ -640,7 +678,7 @@
                 '<td>' + candidate.workerShares + ' ('+(candidate.workerShares/candidate.totalShares*100).toFixed(2)+'%)</td>';
     }
     function getWorkerCells(worker,rate){
-        
+
 		return '<td>' + worker + '</td>' +
 				'<td>' + rate[0] + '</td>'+
 				'<td>' + jQuery.timeago(rate[1]*1000) + '</td>'+
@@ -682,7 +720,7 @@
                 },
                 dataType: 'json',
                 cache: 'false',
-                success: function(data){                    
+                success: function(data){
 
                     $('#lookUp > span:last-child').hide();
                     $('#lookUp > span:first-child').show();
@@ -716,24 +754,24 @@
                     renderUserBlocks(data.blocks);
 
                     $('.yourStats').show();
-					
+
 					xhrRenderUserCharts = $.ajax({
-						url: api + '/stats_address?address=' + address + '&longpoll=false',            
+						url: api + '/stats_address?address=' + address + '&longpoll=false',
 						cache: false,
-						dataType: 'json',            
+						dataType: 'json',
 						success: function(data) {
-							createUserCharts(data);                                
+							createUserCharts(data);
 							if(data.candidates)renderCandidates(data.candidates);
 							if(data.workers)renderWorkers(data.workers);
 						}
 					});
-                    
-                    
+
+
 
                     docCookies.setItem('mining_address', address, Infinity);
 
                     fetchAddressStats(true);
-                    
+
                 },
                 error: function(e){
                     if (e.statusText === 'abort') return;
@@ -743,13 +781,13 @@
                     addressTimeout = setTimeout(function(){
                         fetchAddressStats(false);
                     }, 2000);
-                    
+
                 }
             });
         }
         fetchAddressStats(false);
     });
-    
+
     var urlWalletAddress = location.search.split('wallet=')[1] || 0;
 
     var address = urlWalletAddress || docCookies.getItem('mining_address');
@@ -765,7 +803,7 @@
 		    }
 	    }
     }
-	
+
 	$('#calcHashRate').val(docCookies.getItem('hash_rate_hv'));
 
     if (address){
@@ -825,13 +863,13 @@
                 graphData.names.push(new Date(xy[0]*1000).toLocaleString());
                 graphData.values.push(fixValueToCoins ? getReadableCoins(xy[1], 4, true) : xy[1]);
             }
-        }        
-       
-        
+        }
+
+
         return graphData;
     }
 
-    function createCharts(data) {         
+    function createCharts(data) {
         if (data.hasOwnProperty("charts")) {
     	    var graphData = {
     		    profit: getGraphData(data.charts.profit),
@@ -845,7 +883,7 @@
     		    priceUSD: getGraphData(data.charts.priceUSD),
     		    workers: getGraphData(data.charts.workers)
     	    };
-            
+
     	    for(var graphType in graphData) {
     		    if(graphData[graphType].values.length > 1) {
                     var settings = jQuery.extend({}, currencyGraphStat);
@@ -858,25 +896,25 @@
         }
     }
 
-    function loadStatistics () {        
+    function loadStatistics () {
         $.get(api + '/stats', function (stats) {
             if (stats) {
                 showStats(stats)
             }
-        });      
+        });
     }
 
     function showStats (stats) {
         $('#cur_diff').text(stats.network.difficulty);
         $('#cur_hashrate').text(getReadableHashRateString(stats.pool.hashrate) + '/s');
-        $('#cur_workers').text(stats.pool.miners);        
+        $('#cur_workers').text(stats.pool.miners);
 
         // Some values aren't available in stats.
         // Get the values from charts data.
-        
+
         if (stats.hasOwnProperty('charts')) {
             var priceData = stats.charts.price;
-            $('#cur_price').text(priceData ? priceData[priceData.length-1][1] : '---'); 
+            $('#cur_price').text(priceData ? priceData[priceData.length-1][1] : '---');
         }
         if (stats.hasOwnProperty('charts')) {
             var profitValue;
@@ -894,21 +932,21 @@
             else {
                 profitValue = '---';
             }
-            $('#cur_profit').html(profitValue);           
+            $('#cur_profit').html(profitValue);
        }
     }
 
 
 
-    
+
     var xhrRenderCharts;
 
     $(function(){
         xhrRenderCharts = $.ajax({
             url: api + '/stats',
-            cache: false,            
+            cache: false,
             success: createCharts
-        });               
+        });
     });
 
 
