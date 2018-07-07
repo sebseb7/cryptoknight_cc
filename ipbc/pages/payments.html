@@ -20,8 +20,9 @@
 <div class="paymentsStatHolder">
     <span class="bg-primary">Total Payments: <span id="paymentsTotal"></span></span>
     <span class="bg-info">Total Miners Paid: <span id="paymentsTotalPaid"></span></span>
-<br/>    <span class="bg-info">Minimum Instant Payment Threshold: <span id="paymentsMinimum2"></span></span>
-<br/>	<span class="bg-info">Minimum Hourly Payment Threshold: <span id="paymentsMinimum"></span></span>
+<br/>    <span class="bg-info">Minimum Hourly Payment Threshold: <span id="paymentsMinimum2"></span></span>
+<br/>	<span class="bg-info">Minimum Daily Payment Threshold: <span id="paymentsMinimum"></span></span>
+<br/>    <span class="bg-info">Minimum 3-Hourly Payment Threshold (integrated addresses): <span id="paymentsMinimum3"></span></span>
 </div>
 
 <hr>
@@ -64,6 +65,7 @@
             updateText('paymentsTotalPaid', lastStats.pool.totalMinersPaid.toString());
             updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold, 3));
             updateText('paymentsMinimum2', getReadableCoins(lastStats.config.minPaymentThreshold2, 3));
+            updateText('paymentsMinimum3', getReadableCoins(lastStats.config.minPaymentThreshold3, 3));
             renderPayments(lastStats.pool.payments);
         }
     };

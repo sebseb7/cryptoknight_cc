@@ -16,10 +16,14 @@ do
 	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" https://tradeogre.com/api/v1/ticker/BTC-OMB -O /usr/local/nginx/html/api/BTC-OMB.xml
 	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" https://tradeogre.com/api/v1/ticker/BTC-XUN -O /usr/local/nginx/html/api/BTC-XUN.xml
 	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" https://tradeogre.com/api/v1/ticker/BTC-ETN -O /usr/local/nginx/html/api/BTC-ETN.xml
+	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" https://tradeogre.com/api/v1/ticker/BTC-XTL -O /usr/local/nginx/html/api/BTC-XTL.xml
+	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" https://tradeogre.com/api/v1/ticker/BTC-SUMO -O /usr/local/nginx/html/api/BTC-SUMO.xml
 	
 	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-AEON' -O /usr/local/nginx/html/api/BTC-AEON.xml
 	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-TUBE' -O /usr/local/nginx/html/api/BTC-TUBE.xml
 
+	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" 'https://api.cryptonator.com/api/ticker/btc-usd' -O /usr/local/nginx/html/api/BTC-USD.xml
+	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" 'https://api.cryptonator.com/api/ticker/xmr-btc' -O /usr/local/nginx/html/api/XMR-BTC.xml
 	sleep 100
 done
 

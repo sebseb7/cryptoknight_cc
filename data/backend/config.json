@@ -27,7 +27,7 @@
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/msr",
 			"url":"https://cryptoknight.cc/msr",
-			"algo":"_v1",
+			"algo":"_fast",
 			"logo":"https://cryptoknight.cc/logos/masari.png"
 		},{
 			"name":"Arto",
@@ -65,13 +65,6 @@
 			"algo":"_hv",
 			"logo":"https://cryptoknight.cc/logos/saronite.png"
 		},{
-			"name":"B2BCoin",
-			"class":"",
-			"api":"https://cryptoknight.cc/rpc/b2b",
-			"url":"https://cryptoknight.cc/b2b",
-			"algo":"",
-			"logo":"https://cryptoknight.cc/logos/b2b.png"
-		},{
 			"name":"Turtle",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/turtle",
@@ -83,7 +76,7 @@
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/etn",
 			"url":"https://cryptoknight.cc/etn",
-			"algo":"_v1",
+			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/etn.png"
 		},{
 			"name":"NioBio",
@@ -114,13 +107,6 @@
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/qwerty.png"
 		},{
-			"name":"BitcoinNote",
-			"class":"",
-			"api":"https://cryptoknight.cc/rpc/btcn",
-			"url":"https://cryptoknight.cc/btcn",
-			"algo":"",
-			"logo":"https://cryptoknight.cc/logos/btcn.png"
-		},{
 			"name":"Wownero",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/wownero",
@@ -142,6 +128,13 @@
 			"algo":"_v1",
 			"logo":"https://cryptoknight.cc/logos/monerov.png"
 		},{
+			"name":"Monero",
+			"class":"",
+			"api":"https://cryptoknight.cc/rpc/xmr",
+			"url":"https://cryptoknight.cc/monero",
+			"algo":"_v1",
+			"logo":"https://cryptoknight.cc/logos/monero.png"
+		},{
 			"name":"Graft",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/graft",
@@ -156,18 +149,11 @@
 			"algo":"",
 			"logo":"https://cryptoknight.cc/logos/truck.png"
 		},{
-			"name":"Crep",
-			"class":"",
-			"api":"https://cryptoknight.cc/rpc/crep",
-			"url":"https://cryptoknight.cc/crep",
-			"algo":"",
-			"logo":"https://cryptoknight.cc/logos/crep.png"
-		},{
 			"name":"Bittube",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/ipbc",
 			"url":"https://cryptoknight.cc/ipbc",
-			"algo":"_li",
+			"algo":"_ht",
 			"logo":"https://cryptoknight.cc/logos/ipbc.png"
 		},{
 			"name":"Intense",

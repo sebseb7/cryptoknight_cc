@@ -98,7 +98,7 @@ function getPoolData(pool){
 			coins[pool.name].lpb=(api.pool.lastBlockFound/1000).toFixed(0);
 			
 		}
-		setTimeout(getPoolData, 400+(400*Math.random()),pool);
+		setTimeout(getPoolData, 2400+(400*Math.random()),pool);
 	});
 }
 
