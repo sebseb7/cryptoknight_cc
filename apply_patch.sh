@@ -22,9 +22,6 @@ cd ..
 cd elya
 cat ../patch | patch -p1
 cd ..
-cd ipbc
-cat ../patch | patch -p1
-cd ..
 cd itns
 cat ../patch | patch -p1
 cd ..

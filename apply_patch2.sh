@@ -7,6 +7,9 @@ cd ..
 cd arq
 cat ../patch2 | patch -p1
 cd ..
+cd monero
+cat ../patch2 | patch -p1
+cd ..
 cd etn
 cat ../patch2 | patch -p1
 cd ..
@@ -51,6 +54,9 @@ cat ../patch2 | patch -p1
 cd ..
 cd monerov
 cat ../patch2 | patch -p1
+cd ..
+cd ipbc
+cat ../patch | patch -p1
 cd ..
 cd wownero
 cat ../patch2 | patch -p1
