@@ -489,8 +489,8 @@
 				return;
 			}
 
-			coin_in_btc = data.price;
-			updateText('coin_btc',data.price);
+			coin_in_btc = parseFloat(data.price);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
 			if(btc_in_usd)updateText('coin_usd',(data.price*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
 			calcEstimateProfit();

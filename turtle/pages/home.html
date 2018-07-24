@@ -112,11 +112,12 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
+        <div>LTC: <span id="ltc_usd"></span> <span style="color: #01C2AB">USD</span></div>
         <div>TRTL: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div>TRTL: <span id="coin_ltc"></span> <span style="color: #01C2AB">LTC</span></div>
         <div>TRTL: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade below 1 sat at <a target="_blank" href="https://altex.exchange/markets&amp;pair=XMR_TRTL&amp;ref=620">altex.exchange</a> (XMR-TRTL)</div>
-        <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/BTC-TRTL">tradeogre</a></div>
-        <div class="marketFooter">Trade on <a target="_blank" href="https://tradesatoshi.com/Exchange/?market=TRTL_BTC">tradesatoshi</a></div>
+        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=XMR_TRTL&amp;ref=620">altex.exchange</a> (XMR)</div>
+        <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/LTC-TRTL">tradeogre</a> (LTC)</div>
     </div>
 </div>
 
@@ -346,8 +347,9 @@
 
 <script>
 
-	var coin_in_btc = 0;
-	var coin_in_usd = 0;
+	var coin_in_ltc = 0;
+	var ltc_in_btc = 0;
+	var btc_in_usd = 0;
 
 
     /* Market data polling */
@@ -357,53 +359,54 @@
     updateMarkets();
     function updateMarkets(){
 
-		$.get('/api/BTC-TRTL.xml',function(data) {
+		$.get('/api/LTC-TRTL.xml',function(data) {
 
 
 			if(data.error) {
 				return;
 			}
 			
-			coin_in_btc = data.price;
-			updateText('coin_btc',data.price);
-			updateText('coin_usd',(data.price*coin_in_usd).toFixed(8));
+			coin_in_ltc = parseFloat(data.ticker.price);
+			updateText('coin_ltc',coin_in_ltc.toFixed(8));
+			if(btc_in_usd) if(ltc_in_btc) updateText('coin_usd',(coin_in_ltc*ltc_in_btc*btc_in_usd).toFixed(8));
+			if(btc_in_usd) if(ltc_in_btc) calcEstimateProfit();
+			if(ltc_in_btc) updateText('coin_btc',(coin_in_ltc/ltc_in_btc).toFixed(8));
 			$('.marketRate').show();
-			calcEstimateProfit();
+
+		},'json');
+		$.get('/api/BTC-USD.xml',function(data) {
+
+			if(data.error) {
+				return;
+			}
+			
+			var $marketHeader = $('#marketHeader');
+			$('.marketTicker').remove();
+			
+			btc_in_usd = parseFloat(data.ticker.price);
+			
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + btc_in_usd.toFixed(2) + ' ' + 'USD' + '</span></div>');
+			
+			$('.marketRate').show();
+			
+			$.get('/api/BTC-LTC.xml',function(data) {
+
+				if(data.error) {
+					return;
+				}
+				
+				ltc_in_btc=parseFloat(data.ticker.price);
+				
+				updateText('ltc_usd',(btc_in_usd*ltc_in_btc).toFixed(2));
+
+				if(coin_in_ltc) updateText('coin_usd',(coin_in_ltc*ltc_in_btc*btc_in_usd).toFixed(8));
+				if(coin_in_ltc) updateText('coin_btc',(coin_in_ltc*ltc_in_btc).toFixed(10));
+				if(coin_in_ltc) calcEstimateProfit();
+
+			},'json');
 
 		},'json');
 
-		var completedFetches = 0;
-        var marketsData = [];
-        for (var i = 0; i < cryptonatorWidget.length; i++){
-            (function(i){
-            	cryptonatorWidget[i] = cryptonatorWidget[i].replace('{symbol}', lastStats.config.symbol.toLowerCase());
-                xhrMarketGets[cryptonatorWidget[i]] = $.get('/api/' + cryptonatorWidget[i]+'.xml', function(data){
-                    if(data.error) {
-                        return;
-                    }
-
-                    marketsData[i] = data;
-                    completedFetches++;
-                    if (completedFetches !== cryptonatorWidget.length) return;
-
-                    var $marketHeader = $('#marketHeader');
-                    $('.marketTicker').remove();
-                    for (var f = marketsData.length - 1; f >= 0 ; f--){
-                        var price = parseFloat(marketsData[f].ticker.price);
-
-                        if (price > 1) price = Math.round(price * 100) / 100;
-                        else price = marketsData[f].ticker.price;
-						
-						btc_in_usd=price;
-						updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
-						calcEstimateProfit();
-                    	$('.marketRate').show();
-
-                        $marketHeader.after('<div class="marketTicker">' + marketsData[f].ticker.base + ': <span>' + price + ' ' + marketsData[f].ticker.target + '</span></div>');
-                    }
-                }, 'json');
-            })(i);
-        }
     }
 
 
@@ -525,8 +528,8 @@
             var profit = (hashRate * 86400 / lastStats.network.difficulty) * lastStats.network.reward;
             if (profit) {
                 updateText('calcHashAmount', getReadableCoins(profit, 2, true));
-                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*coin_in_btc).toFixed(4));
-                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*coin_in_btc*btc_in_usd).toFixed(2));
+                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*coin_in_ltc*ltc_in_btc).toFixed(4));
+                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*coin_in_ltc*ltc_in_btc*btc_in_usd).toFixed(2));
                 return;
             }
         }
