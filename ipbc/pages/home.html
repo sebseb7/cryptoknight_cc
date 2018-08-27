@@ -127,7 +127,7 @@
         <div><i class="fa fa-unlock-alt"></i> Difficulty: <span id="networkDifficulty"></span></div>
         <div><i class="fa fa-bars"></i> Blockchain Height: <span id="blockchainHeight"></span></div>
         <div><i class="fas fa-trophy"></i> Last Reward: <span id="networkLastReward"></span></div>
-        <div><i class="fa fa-tag"></i> Coinbase Fee: <span id="networkLastCoinbase"></span></div>
+        <div><i class="fa fa-tag"></i> Airtime Fee: <span id="networkLastCoinbase"></span></div>
         <div><i class="fas fa-dna"></i> Last Hash: <a id="lastHash" target="_blank"></a></div>
     </div>
 
@@ -144,9 +144,9 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div>TUBE: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>TUBE: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_TUBE&amp;ref=620">altex.exchange</a></div>
+        <div><i class="fab fa-btc"></i>TUBE: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i>TUBE: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+		<div class="marketFooter">Trade at <a href="https://www.bittrex.com/Market/Index?MarketName=BTC-TUBE">bittrex</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://www.livecoin.net/en/trade/index?currencyPair=TUBE%2FBTC">livecoin.net</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://crex24.com/exchange/TUBE-BTC">CREX24</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/BTC-TUBE">tradeogre</a></div>    
@@ -632,7 +632,7 @@
     function getUserBlockCells(block){
         return '<td>' + block.height + '</td>' +
 				'<td>' + formatDate(block.time) + '</td>' +
-                '<td>' + getReadableCoins(block.reward,4,true) + ' <span data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Block Reward:'+getReadableCoins(block.fullReward,4,true)+' <br/>Transfer Fees:'+getReadableCoins(block.transferFee,4,true)+' <br/>Pool Fee: '+getReadableCoins(block.poolFee,4,true)+' <br/>Coinbase Fee: '+getReadableCoins(block.donationFee,4,true)+'"><i class="fa fa-question-circle"></i></span></td>' +
+                '<td>' + getReadableCoins(block.reward,4,true) + ' <span data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Block Reward:'+getReadableCoins(block.fullReward,4,true)+' <br/>Transfer Fees:'+getReadableCoins(block.transferFee,4,true)+' <br/>Pool Fee: '+getReadableCoins(block.poolFee,4,true)+' <br/>Airtime Fee: '+getReadableCoins(block.donationFee,4,true)+'"><i class="fa fa-question-circle"></i></span></td>' +
                 '<td>' + block.totalShares + '</td>' +
                 '<td>' + block.workerShares + '</td>' +
                 '<td>' + getReadableCoins(block.amount,4,true) + '</td>';

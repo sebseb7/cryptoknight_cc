@@ -321,10 +321,12 @@
         <div class="col-sm-4 stats">
             <div id="addressError"></div>
             <!-- <div class="yourStats"><i class="fa fa-key"></i> Address: <span id="yourAddressDisplay"></span></div> -->
+			<div class="yourStats"><i class="fa fa-money-bill-alt"></i> Appx. from curr. Round <span id="roundApprx"></span></div>
             <div class="yourStats"><i class="fas fa-university"></i> Pending Balance: <span id="yourPendingBalance"></span></div>
             <div class="yourStats"><i class="fa fa-money-bill-alt"></i> Total Paid: <span id="yourPaid"></span></div>
             <div class="yourStats"><i class="fas fa-clock"></i> Last Share: <span id="yourLastShare"></span></div>
             <div class="yourStats"><i class="fas fa-tachometer-alt"></i> Hash Rate: <span id="yourHashrateHolder"></span></div>
+			<div class="yourStats"><i class="fas fa-cloud-upload-alt"></i> Round Hashes: <span id="roundHashes"></span> </div>
             <div class="yourStats"><i class="fas fa-cloud-upload-alt"></i> Total Hashes: <span id="yourHashes"></span></div>
         </div>
         <div class="col-sm-4">            
@@ -711,6 +713,13 @@
                     updateText('yourHashes', (data.stats.hashes || 0).toString());
                     updateText('yourPaid', getReadableCoins(data.stats.paid));
                     updateText('yourPendingBalance', getReadableCoins(data.stats.balance));
+
+					var eff = (lastStats.pool.roundHashes / lastStats.network.difficulty);
+					if(eff > 1) eff = 1;
+					
+					updateText('roundHashes', data.stats.round);
+					updateText('roundApprx', getReadableCoins(eff * (data.stats.round / lastStats.pool.roundHashes) * lastStats.network.reward,8));
+
 
                     renderPayments(data.payments);
                     renderUserBlocks(data.blocks);

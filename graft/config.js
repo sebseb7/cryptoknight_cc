@@ -9,7 +9,7 @@ var irc = "";
 var email = "";
 
 
-var guiWallet = "";
+var guiWallet = "https://www.graft.network/graft-applications/";
 
 var paperWallet = "";
 
