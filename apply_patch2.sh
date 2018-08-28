@@ -28,6 +28,9 @@ cd ..
 cd sumo
 cat ../patch2 | patch -p1
 cd ..
+cd ryo
+cat ../patch2 | patch -p1
+cd ..
 cd solace
 cat ../patch2 | patch -p1
 cd ..
