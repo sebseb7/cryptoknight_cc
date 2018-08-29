@@ -61,6 +61,9 @@ cd ..
 cd ipbcrocks
 cat ../patch2 | patch -p1
 cd ..
+cd turtle
+cat ../patch2 | patch -p1
+cd ..
 cd wownero
 cat ../patch2 | patch -p1
 cd ..
