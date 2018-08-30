@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "{id}";
-var transactionExplorer = "{id}";
+var blockchainExplorer = "https://explorer.ryo-currency.com/block/{id}";
+var transactionExplorer = "https://explorer.ryo-currency.com/tx/{id}";
 
 var guiWallet = "";
 
