@@ -65,8 +65,7 @@ http {
 	gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
 	server {
-	    listen   80;
-	    listen   [::]:80;
+	    listen   139.99.52.32:80;
 
 	    server_name asia.cryptoknight.cc;
 
@@ -75,7 +74,7 @@ http {
     
 
     server {
-        listen       443 ssl http2;
+        listen       139.99.52.32:443 ssl http2;
         server_name  asia.cryptoknight.cc;
 
 
