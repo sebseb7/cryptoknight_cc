@@ -115,9 +115,7 @@
 
 </style>
 
-
 <div id="siteInfo">
-	Note: Niobio forked to cryptonight-heavy and pool ports have changed 
 </div>
 
 <div class="row">
@@ -128,7 +126,7 @@
         <div><i class="fa fa-unlock-alt"></i> Difficulty: <span id="networkDifficulty"></span></div>
         <div><i class="fa fa-bars"></i> Blockchain Height: <span id="blockchainHeight"></span></div>
         <div><i class="fas fa-trophy"></i> Last Reward: <span id="networkLastReward"></span></div>
-		<div class="marketFooter">Note: This coin has a build-in developer fee of 10% of each block reward.<br/> The pool receives 90% of the reward.</span></div>
+        <div><i class="fa fa-tag"></i> Coinbase Fee: <span id="networkLastCoinbase"></span></div>
         <div><i class="fas fa-dna"></i> Last Hash: <a id="lastHash" target="_blank"></a></div>
     </div>
 
@@ -138,9 +136,9 @@
         <div><i class="fa fa-clock"></i> Block Found: <span id="poolLastBlockFound"></span></div>
         <div><i class="fa fa-users"></i> Connected Miners: <span id="poolMiners"></span></div>
         <div id="donations"><i class="fas fa-gift"></i> Donations: <span id="poolDonations"></span></div>
-        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> </div>
+        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: N81dp9TyknsgUTQczZsqJHMg9XRh9DujQWaiZCiM7eVg6vks2wBMLa7K4EwF2KHHvp39bHT8YhjVM918RNH2je5zVgjzPT3<br/>Viewkey: e68dbf80eaed058806c73d7b1d0e72a2e72d25d52e25fa92bd75a84adff1d00f</span>"><i class="fa fa-question-circle"></i></span></div>
         <div><i class="fas fa-stopwatch"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
-		<div><i class="far fa-star"></i>Current Effort: <span id="currenteffort"></span></div>
+		<div><i class="far fa-star"></i> Current Effort: <span id="currenteffort"></span></div>
     </div>
 
     <div class="col-md-4 stats marketRate">
@@ -290,7 +288,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-Heavy)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-heavy)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -432,7 +430,6 @@
 
 </div>
 
-
 <script>
 
 	var coin_in_btc = 0;
@@ -484,7 +481,6 @@
 			$('.marketRate').show();
 
 		},'json');
-		
 
     }
 
@@ -510,6 +506,7 @@
             updateText('networkDifficulty', lastStats.network.difficulty.toString());
             updateText('blockchainHeight', lastStats.network.height.toString());
             updateText('networkLastReward', getReadableCoins(lastStats.network.reward, 4));
+            updateText('networkLastCoinbase', getReadableCoins(lastStats.network.coinbase, 4));
             updateText('lastHash', lastStats.network.hash.substr(0, 13) + '...').setAttribute('href', getBlockchainUrl(lastStats.network.hash));
 
             updateText('poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');
@@ -632,7 +629,7 @@
     function getUserBlockCells(block){
         return '<td>' + block.height + '</td>' +
 				'<td>' + formatDate(block.time) + '</td>' +
-                '<td>' + getReadableCoins(block.reward,4,true) + ' <span data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Block Reward:'+getReadableCoins(block.fullReward,4,true)+' <br/>Transfer Fees:'+getReadableCoins(block.transferFee,4,true)+' <br/>Pool Fee: '+getReadableCoins(block.poolFee,4,true)+' <br/>Donation Fees: '+getReadableCoins(block.donationFee,4,true)+'"><i class="fa fa-question-circle"></i></span></td>' +
+                '<td>' + getReadableCoins(block.reward,4,true) + ' <span data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Block Reward:'+getReadableCoins(block.fullReward,4,true)+' <br/>Transfer Fees:'+getReadableCoins(block.transferFee,4,true)+' <br/>Pool Fee: '+getReadableCoins(block.poolFee,4,true)+' <br/>Coinbase Fee: '+getReadableCoins(block.donationFee,4,true)+'"><i class="fa fa-question-circle"></i></span></td>' +
                 '<td>' + block.totalShares + '</td>' +
                 '<td>' + block.workerShares + '</td>' +
                 '<td>' + getReadableCoins(block.amount,4,true) + '</td>';

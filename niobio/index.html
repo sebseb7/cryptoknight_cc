@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
 
 
     <meta charset="UTF-8">
@@ -64,12 +64,8 @@
         .stats > div{
             padding: 5px 0;
         }
-        .stats > div > .fa {
-  			color: #01C2AB;
-            width: 25px;
-        }
         .stats > div > .svg-inline--fa {
-  			color: #20BFFF;
+  			color: #1f94b1;
             width: 25px;
         }
         .stats > div > span:first-of-type{
@@ -145,12 +141,14 @@
 			}
 			float r=sin(uv.x-time)*0.1+0.1;
 			float b=sin(uv.y+time)*0.2+0.2;
-			float g=0.2;
+			float g=cos(uv.x+time)*0.1+0.1;
 	
 			gl_FragColor = vec4(r,g,b,1.0);
 		}
 
+
 	</script>
+
 
 </head>
 <body>
@@ -608,51 +606,50 @@
 </div>
 
 <footer>
-    <div class="text-muted" style="line-height:10px">
+    <div class="text-muted">
         <a href="/aeon/">Aeon</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/alloy/">Alloy</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/arq/">Arqma</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/arto/">Arto</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/b2b/">B2bcoin</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/bbs/">BBScoin </a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/btcn/">BitcoiNote</a> 
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ipbc/">BitTube</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/crep/">Crep</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/edl/">eDollar</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/etn/">ETN</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/elya/">Elya</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/graft/">Graft</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/haven/">Haven</a> 
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/itns/">Intense</a>
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ipbcrocks/">IPBC</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/iridium/">Iridium</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/italo/">Italo</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/karbo/">Karbo</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/kepl/">Kepl</a>
-    </div>
-    <div class="text-muted" style="line-height:10px">
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/alloy/">Alloy</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/arq/">Arqma</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/arto/">Arto</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/b2b/">B2bcoin</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/bbs/">BBScoin </a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/btcn/">BitcoiNote</a> 
+  		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/ipbc/">BitTube</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/crep/">Crep</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/edl/">eDollar</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/etn/">ETN</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/elya/">Elya</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/graft/">Graft</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/haven/">Haven</a> 
+  		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/itns/">Intense</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/ipbcrocks/">IPBC</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/iridium/">Iridium</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/italo/">Italo</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/karbo/">Karbo</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/kepl/">Kepl</a>
+        <br/>
         <a href="/lines/">Lines</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/loki/">Loki</a>
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/msr/">Masari</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/monero/">Monero</a>
-  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/monerov/">MoneroV</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/niobio/">Niobio</a> 
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ombre/">Ombre</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/qwerty/">Qwerty</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ryo/">Ryo</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/saronite/">Saronite</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/solace/">Solace</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/stellite/">Stellite</a>
-		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/sumo/">Sumo</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/triton/">Triton</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/turtle/">Turtle</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/wownero/">Wownero</a>
-        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> 
-		<a target="_blank" class="social" href="https://discord.gg/kaejJWc"><i class="fab fa-discord"></i></a>
-		<a target="_blank" class="social" href="//github.com/sebseb7"><i class="fab fa-github"></i></a>
-		<a target="_blank" class="social" href="//youtube.com/c/sebgreen"><i class="fab fa-youtube"></i></a>
-		<a target="_blank" class="social" href="//twitter.com/sebseb7"><i class="fab fa-twitter"></i></a>
-		<a class="social" href="/data"><i class="far fa-chart-bar"></i></a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/loki/">Loki</a>
+  		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/msr/">Masari</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/monero/">Monero</a>
+  		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/monerov/">MoneroV</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/niobio/">Niobio</a> 
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/ombre/">Ombre</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/qwerty/">Qwerty</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/ryo/">Ryo</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/saronite/">Saronite</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/solace/">Solace</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/stellite/">Stellite</a>
+		<i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/sumo/">Sumo</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/triton/">Triton</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/turtle/">Turtle</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> <a href="/wownero/">Wownero</a>
+        <i class="fa fa-circle" style="color:black;font-size:50%;padding:6px;"></i> 
+		<a target="_blank" class="social" href="https://discord.gg/kaejJWc"><i class="fa fa-comments"></i></a>
+		<a target="_blank" class="social" href="//github.com/sebseb7"><i class="fa fa-github"></i></a>
+		<a target="_blank" class="social" href="//youtube.com/c/sebgreen"><i class="fa fa-youtube-play"></i></a>
+		<a target="_blank" class="social" href="//twitter.com/sebseb7"><i class="fa fa-twitter"></i></a>
+		<a  class="social" href="/data"><i class="fa fa-line-chart"></i></a>
     </div>
 </footer>
 

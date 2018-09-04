@@ -1,18 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
 @import url(//fonts.googleapis.com/css?family=Roboto:400,300,500);
 /* Insert your pool's unique css here */
-
-@keyframes textColorChange {
-    0% {color: #55ff99;}
-    50% {color: #5599ff;}
-    100% {color: #55ff99;}
-}
-
-.pulsar {
-    animation: textColorChange 2s infinite;
-}
-
-
 .marketRate {
   display: none;
 }
@@ -96,7 +84,25 @@ hr {
   padding: 5px 0;
 }
 .stats > div:not(#addressError) > i.fa {
-  color: #03a678;
+  color: #20BFFF;
+  font-size: 21px;
+  width: 30px;
+  text-align: center;
+}
+.stats > div:not(#addressError) > i.fas {
+  color: #20BFFF;
+  font-size: 21px;
+  width: 30px;
+  text-align: center;
+}
+.stats > div:not(#addressError) > i.fab {
+  color: #20BFFF;
+  font-size: 21px;
+  width: 30px;
+  text-align: center;
+}
+.stats > div:not(#addressError) > i.far {
+  color: #20BFFF;
   font-size: 21px;
   width: 30px;
   text-align: center;
