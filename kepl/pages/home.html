@@ -256,7 +256,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (CryptoNight-V1)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (CryptoNight-fast)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -372,39 +372,26 @@
 			calcEstimateProfit();
 
 		},'json');
+		$.get('/api/BTC-USD.xml',function(data) {
 
-		var completedFetches = 0;
-        var marketsData = [];
-        for (var i = 0; i < cryptonatorWidget.length; i++){
-            (function(i){
-            	cryptonatorWidget[i] = cryptonatorWidget[i].replace('{symbol}', lastStats.config.symbol.toLowerCase());
-                xhrMarketGets[cryptonatorWidget[i]] = $.get('/api/' + cryptonatorWidget[i]+'.xml', function(data){
-                    if(data.error) {
-                        return;
-                    }
 
-                    marketsData[i] = data;
-                    completedFetches++;
-                    if (completedFetches !== cryptonatorWidget.length) return;
+			if(data.error) {
+				return;
+			}
+			
+			var $marketHeader = $('#marketHeader');
+			$('.marketTicker').remove();
+			
+			var price = parseFloat(data.ticker.price);
+			price = Math.round(price * 100) / 100;
+			btc_in_usd=price;
+			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			calcEstimateProfit();
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+			$('.marketRate').show();
 
-                    var $marketHeader = $('#marketHeader');
-                    $('.marketTicker').remove();
-                    for (var f = marketsData.length - 1; f >= 0 ; f--){
-                        var price = parseFloat(marketsData[f].ticker.price);
+		},'json');
 
-                        if (price > 1) price = Math.round(price * 100) / 100;
-                        else price = marketsData[f].ticker.price;
-						
-						btc_in_usd=price;
-						updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
-						calcEstimateProfit();
-                    	$('.marketRate').show();
-
-                        $marketHeader.after('<div class="marketTicker">' + marketsData[f].ticker.base + ': <span>' + price + ' ' + marketsData[f].ticker.target + '</span></div>');
-                    }
-                }, 'json');
-            })(i);
-        }
     }
 
 
@@ -516,7 +503,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_v1',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_fast',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -659,7 +646,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_v1'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_fast'));
 
     if (address){
         $('#yourStatsInput').val(address);

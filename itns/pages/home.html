@@ -113,8 +113,8 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div>ITNS: <span id="itns_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>ITNS: <span id="itns_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div>ITNS: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div>ITNS: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://stocks.exchange/trade/ITNS/BTC">stocks.exchange</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/BTC-ITNS">tradeogre</a></div>
     </div>
@@ -345,7 +345,7 @@
 
 <script>
 
-	var itns_in_btc = 0;
+	var coin_in_btc = 0;
 	var btc_in_usd = 0;
 
 
@@ -357,62 +357,41 @@
     function updateMarkets(){
 
 
+		$.get('/api/BTC-LTHN.xml',function(data) {
 
+			if(data.error) {
+				return;
+			}
+		
+			coin_in_btc = parseFloat(data.price);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(coin_in_btc != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
 
-		$.get('/api/itns.xml',function(data) {
+		},'json');
 
+		$.get('/api/BTC-USD.xml',function(data) {
 
 			if(data.error) {
 				return;
 			}
 			
-		//	for (var i=0; i < data.length - 1; i++){
-				
-		
-		//		if(data[i].symbol.toString() === "ITNS")
-		//		{
-					//alert(JSON.stringify(data));
-					itns_in_btc = data[0].price_btc;
-					updateText('itns_btc',data[0].price_btc);
-					updateText('itns_usd',(((data[0]).price_btc)*btc_in_usd).toFixed(8));
-					$('.marketRate').show();
-					calcEstimateProfit();
-		//		}
-		//	}
+			var $marketHeader = $('#marketHeader');
+			$('.marketTicker').remove();
+			
+			var price = parseFloat(data.ticker.price);
+			price = Math.round(price * 100) / 100;
+			btc_in_usd=price;
+			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			calcEstimateProfit();
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+			$('.marketRate').show();
+
 		},'json');
-		
 
-		var completedFetches = 0;
-        var marketsData = [];
-        for (var i = 0; i < cryptonatorWidget.length; i++){
-            (function(i){
-            	cryptonatorWidget[i] = cryptonatorWidget[i].replace('{symbol}', lastStats.config.symbol.toLowerCase());
-                xhrMarketGets[cryptonatorWidget[i]] = $.get('/api/' + cryptonatorWidget[i]+'.xml', function(data){
-                    if(data.error) {
-                        return;
-                    }
 
-                    marketsData[i] = data;
-                    completedFetches++;
-                    if (completedFetches !== cryptonatorWidget.length) return;
-
-                    var $marketHeader = $('#marketHeader');
-                    $('.marketTicker').remove();
-                    for (var f = marketsData.length - 1; f >= 0 ; f--){
-                        var price = parseFloat(marketsData[f].ticker.price);
-
-                        if (price > 1) price = Math.round(price * 100) / 100;
-                        else price = marketsData[f].ticker.price;
-						
-						btc_in_usd=price;
-						updateText('itns_usd',(itns_in_btc*btc_in_usd).toFixed(8));
-						calcEstimateProfit();
-
-                        $marketHeader.after('<div class="marketTicker">' + marketsData[f].ticker.base + ': <span>' + price + ' ' + marketsData[f].ticker.target + '</span></div>');
-                    }
-                }, 'json');
-            })(i);
-        }
     }
 
 

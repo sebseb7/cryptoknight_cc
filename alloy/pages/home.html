@@ -116,7 +116,6 @@
         <h3 id="marketHeader">Market</h3>
         <div>XAO: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
         <div>XAO: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade at <a target="_blank" href="https://altex.exchange/markets&amp;pair=BTC_XAO&amp;ref=620">altex.exchange</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/BTC-XAO">tradeogre</a></div>
     </div>
 </div>
@@ -373,39 +372,27 @@
 			calcEstimateProfit();
 
 		},'json');
+	
+		$.get('/api/BTC-USD.xml',function(data) {
 
-		var completedFetches = 0;
-        var marketsData = [];
-        for (var i = 0; i < cryptonatorWidget.length; i++){
-            (function(i){
-            	cryptonatorWidget[i] = cryptonatorWidget[i].replace('{symbol}', lastStats.config.symbol.toLowerCase());
-                xhrMarketGets[cryptonatorWidget[i]] = $.get('/api/' + cryptonatorWidget[i]+'.xml', function(data){
-                    if(data.error) {
-                        return;
-                    }
+			if(data.error) {
+				console.log(data);
+				return;
+			}
+			
+			var $marketHeader = $('#marketHeader');
+			$('.marketTicker').remove();
+			
+			var price = parseFloat(data.ticker.price);
+			price = Math.round(price * 100) / 100;
+			btc_in_usd=price;
+			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			calcEstimateProfit();
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+			$('.marketRate').show();
 
-                    marketsData[i] = data;
-                    completedFetches++;
-                    if (completedFetches !== cryptonatorWidget.length) return;
+		},'json');
 
-                    var $marketHeader = $('#marketHeader');
-                    $('.marketTicker').remove();
-                    for (var f = marketsData.length - 1; f >= 0 ; f--){
-                        var price = parseFloat(marketsData[f].ticker.price);
-
-                        if (price > 1) price = Math.round(price * 100) / 100;
-                        else price = marketsData[f].ticker.price;
-						
-						btc_in_usd=price;
-						if(coin_in_btc)updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
-						calcEstimateProfit();
-                    	$('.marketRate').show();
-
-                        $marketHeader.after('<div class="marketTicker">' + marketsData[f].ticker.base + ': <span>' + price + ' ' + marketsData[f].ticker.target + '</span></div>');
-                    }
-                }, 'json');
-            })(i);
-        }
     }
 
 

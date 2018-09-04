@@ -2,229 +2,250 @@
 	"httpport":1353,
 	"pools": [
 		{
-			"name":"Ultranote",
-			"class":"",
-			"api":"https://cryptoknight.cc/rpc/xun",
-			"url":"/xun",
-			"algo":"",
-			"logo":"/logos/ultranote.png"
-		},{
 			"name":"Aeon",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/aeon",
-			"url":"/aeon",
+			"url":"https://cryptoknight.cc/aeon",
 			"algo":"_l1",
-			"logo":"/logos/aeon.png"
+			"logo":"https://cryptoknight.cc/logos/aeon.png"
 		},{
 			"name":"Arqma",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/arq",
-			"url":"/arq",
+			"url":"https://cryptoknight.cc/arq",
 			"algo":"_l1",
-			"logo":"/logos/arqma.png"
+			"logo":"https://cryptoknight.cc/logos/arqma.png"
 		},{
 			"name":"Masari",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/msr",
-			"url":"/msr",
+			"url":"https://cryptoknight.cc/msr",
 			"algo":"_fast",
-			"logo":"/logos/masari.png"
+			"logo":"https://cryptoknight.cc/logos/masari.png"
 		},{
 			"name":"Arto",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/arto",
-			"url":"/arto",
+			"url":"https://cryptoknight.cc/arto",
 			"algo":"_ar",
-			"logo":"/logos/arto.png"
+			"logo":"https://cryptoknight.cc/logos/arto.png"
+		},{
+			"name":"Crep",
+			"class":"",
+			"api":"https://cryptoknight.cc/rpc/crep",
+			"url":"https://cryptoknight.cc/crep",
+			"algo":"",
+			"logo":"https://cryptoknight.cc/logos/crep.png"
 		},{
 			"name":"Karbo",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/karbo",
-			"url":"/karbo",
+			"url":"https://cryptoknight.cc/karbo",
 			"algo":"",
-			"logo":"/logos/karbo.png"
+			"logo":"https://cryptoknight.cc/logos/karbo.png"
 		},{
 			"name":"Solace",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/solace",
-			"url":"/solace",
+			"url":"https://cryptoknight.cc/solace",
 			"algo":"_hv",
-			"logo":"/logos/solace.png"
+			"logo":"https://cryptoknight.cc/logos/solace.png"
+		},{
+			"name":"Ryo",
+			"class":"",
+			"api":"https://cryptoknight.cc/rpc/ryo",
+			"url":"https://cryptoknight.cc/ryo",
+			"algo":"_hv",
+			"logo":"https://cryptoknight.cc/logos/ryo.png"
 		},{
 			"name":"Sumo",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/sumo",
-			"url":"/sumo",
+			"url":"https://cryptoknight.cc/sumo",
 			"algo":"",
-			"logo":"/logos/sumo.png"
+			"logo":"https://cryptoknight.cc/logos/sumo.png"
 		},{
 			"name":"Saronite",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/saronite",
-			"url":"/saronite",
+			"url":"https://cryptoknight.cc/saronite",
 			"algo":"_hv",
-			"logo":"/logos/saronite.png"
+			"logo":"https://cryptoknight.cc/logos/saronite.png"
 		},{
 			"name":"Turtle",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/turtle",
-			"url":"/turtle",
+			"url":"https://cryptoknight.cc/turtle",
 			"algo":"_l1",
-			"logo":"/logos/turtle.png"
+			"logo":"https://cryptoknight.cc/logos/turtle.png"
 		},{
 			"name":"Electroneum",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/etn",
-			"url":"/etn",
+			"url":"https://cryptoknight.cc/etn",
 			"algo":"",
-			"logo":"/logos/etn.png"
+			"logo":"https://cryptoknight.cc/logos/etn.png"
 		},{
 			"name":"NioBio",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/niobio",
-			"url":"/niobio",
+			"url":"https://cryptoknight.cc/niobio",
 			"algo":"_hv",
-			"logo":"/logos/niobio.png"
+			"logo":"https://cryptoknight.cc/logos/niobio.png"
 		},{
 			"name":"Stellite",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/stellite",
-			"url":"/stellite",
+			"url":"https://cryptoknight.cc/stellite",
 			"algo":"_v1",
-			"logo":"/logos/stellite.png"
+			"logo":"https://cryptoknight.cc/logos/stellite.png"
 		},{
 			"name":"Loki",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/loki",
-			"url":"/loki",
+			"url":"https://cryptoknight.cc/loki",
 			"algo":"_hv",
-			"logo":"/logos/loki.png"
+			"logo":"https://cryptoknight.cc/logos/loki.png"
 		},{
 			"name":"Qwerty",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/qwerty",
-			"url":"/qwerty",
+			"url":"https://cryptoknight.cc/qwerty",
 			"algo":"",
-			"logo":"/logos/qwerty.png"
+			"logo":"https://cryptoknight.cc/logos/qwerty.png"
 		},{
 			"name":"Wownero",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/wownero",
-			"url":"/wownero",
+			"url":"https://cryptoknight.cc/wownero",
 			"algo":"_v1",
-			"logo":"/logos/wownero.png"
+			"logo":"https://cryptoknight.cc/logos/wownero.png"
 		},{
 			"name":"Alloy",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/alloy",
-			"url":"/alloy",
+			"url":"https://cryptoknight.cc/alloy",
 			"algo":"_alloy",
-			"logo":"/logos/alloy.png"
+			"logo":"https://cryptoknight.cc/logos/alloy.png"
 		},{
 			"name":"Monerov",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/monerov",
-			"url":"/monerov",
+			"url":"https://cryptoknight.cc/monerov",
 			"algo":"_v1",
-			"logo":"/logos/monerov.png"
+			"logo":"https://cryptoknight.cc/logos/monerov.png"
 		},{
 			"name":"Monero",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/xmr",
-			"url":"/monero",
+			"url":"https://cryptoknight.cc/monero",
 			"algo":"_v1",
-			"logo":"/logos/monero.png"
+			"logo":"https://cryptoknight.cc/logos/monero.png"
 		},{
 			"name":"Graft",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/graft",
-			"url":"/graft",
+			"url":"https://cryptoknight.cc/graft",
 			"algo":"_v1",
-			"logo":"/logos/graft_small.png"
+			"logo":"https://cryptoknight.cc/logos/graft_small.png"
 		},{
 			"name":"Truck",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/truck",
-			"url":"/truck",
+			"url":"https://cryptoknight.cc/truck",
 			"algo":"",
-			"logo":"/logos/truck.png"
+			"logo":"https://cryptoknight.cc/logos/truck.png"
 		},{
 			"name":"Bittube",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/ipbc",
-			"url":"/ipbc",
+			"url":"https://cryptoknight.cc/ipbc",
 			"algo":"_ht",
-			"logo":"/logos/ipbc.png"
+			"logo":"https://cryptoknight.cc/logos/ipbc.png"
+		},{
+			"name":"IPBC",
+			"class":"",
+			"api":"https://cryptoknight.cc/rpc/ipbr",
+			"url":"https://cryptoknight.cc/ipbcrocks",
+			"algo":"_ht",
+			"logo":"https://cryptoknight.cc/logos/ipbcrocks.png"
 		},{
 			"name":"Intense",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/itns",
-			"url":"/itns",
+			"url":"https://cryptoknight.cc/itns",
 			"algo":"_v1",
-			"logo":"/logos/intense.png"
+			"logo":"https://cryptoknight.cc/logos/intense.png"
 		},{
 			"name":"Triton",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/triton",
-			"url":"/triton",
+			"url":"https://cryptoknight.cc/triton",
 			"algo":"_l1",
-			"logo":"/logos/triton.png"
+			"logo":"https://cryptoknight.cc/logos/triton.png"
+		},{
+			"name":"Kepl",
+			"class":"",
+			"api":"https://cryptoknight.cc/rpc/kepl",
+			"url":"https://cryptoknight.cc/kepl",
+			"algo":"_fast",
+			"logo":"https://cryptoknight.cc/logos/kepl.png"
 		},{
 			"name":"Haven",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/haven",
-			"url":"/haven",
+			"url":"https://cryptoknight.cc/haven",
 			"algo":"_hv",
-			"logo":"/logos/haven.png"
+			"logo":"https://cryptoknight.cc/logos/haven.png"
 		},{
 			"name":"BBS",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/bbs",
-			"url":"/bbs",
+			"url":"https://cryptoknight.cc/bbs",
 			"algo":"_v1",
-			"logo":"/logos/bbs.png"
+			"logo":"https://cryptoknight.cc/logos/bbs.png"
 		},{
 			"name":"Ombre",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/ombre",
-			"url":"/ombre",
+			"url":"https://cryptoknight.cc/ombre",
 			"algo":"_hv",
-			"logo":"/logos/ombre.png"
+			"logo":"https://cryptoknight.cc/logos/ombre.png"
 		},{
 			"name":"Elya",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/elya",
-			"url":"/elya",
+			"url":"https://cryptoknight.cc/elya",
 			"algo":"_v1",
-			"logo":"/logos/elya.png"
+			"logo":"https://cryptoknight.cc/logos/elya.png"
 		},{
 			"name":"eDollar",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/edl",
-			"url":"/edl",
+			"url":"https://cryptoknight.cc/edl",
 			"algo":"",
-			"logo":"/logos/edollar.png"
+			"logo":"https://cryptoknight.cc/logos/edollar.png"
 		},{
 			"name":"Lines",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/lines",
-			"url":"/lines",
+			"url":"https://cryptoknight.cc/lines",
 			"algo":"_v1",
-			"logo":"/logos/lines.svg"
+			"logo":"https://cryptoknight.cc/logos/lines.svg"
 		},{
 			"name":"Iridium",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/iridium",
-			"url":"/iridium",
+			"url":"https://cryptoknight.cc/iridium",
 			"algo":"_l1",
-			"logo":"/logos/iridium.png"
+			"logo":"https://cryptoknight.cc/logos/iridium.png"
 		},{
 			"name":"Italo",
 			"class":"",
 			"api":"https://cryptoknight.cc/rpc/italo",
-			"url":"/italo",
+			"url":"https://cryptoknight.cc/italo",
 			"algo":"_hv",
-			"logo":"/logos/italo.png"
+			"logo":"https://cryptoknight.cc/logos/italo.png"
 		}
 	]
 }

@@ -37,9 +37,6 @@ cd ..
 cd triton
 cat ../patch | patch -p1
 cd ..
-cd turtle
-cat ../patch | patch -p1
-cd ..
 cd kepl
 cat ../patch | patch -p1
 cd ..

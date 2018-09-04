@@ -113,8 +113,8 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div>KRB: <span id="krb_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>KRB: <span id="krb_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div>KRB: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div>KRB: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://www.cryptopia.co.nz/Exchange?market=KRB_BTC">Cryptopia</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://tradeogre.com/exchange/BTC-KRB">tradeogre</a></div>
     </div>
@@ -438,7 +438,7 @@
         return hashrate.toFixed(2) + byteUnits[i];
     }
 
-	var krb_in_btc = 0;
+	var coin_in_btc = 0;
 	var btc_in_usd = 0;
 
 
@@ -449,51 +449,43 @@
     updateMarkets();
     function updateMarkets(){
 
-		$.get('/api/KRB_BTC.xml',function(data) {
+		$.get('/api/BTC-KRB.xml',function(data) {
+
 
 			if(data.error) {
 				return;
 			}
 		
-			krb_in_btc = data.Data.LastPrice;
-			updateText('krb_btc',data.Data.LastPrice.toFixed(8));
-			updateText('krb_usd',(data.Data.LastPrice*btc_in_usd).toFixed(8));
+			coin_in_btc = parseFloat(data.price);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(coin_in_btc != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
 			calcEstimateProfit();
-		
+
+				console.log(data);
+		$.get('/api/BTC-USD.xml',function(data) {
+
+				console.log(data);
+			if(data.error) {
+				return;
+			}
+			
+			var $marketHeader = $('#marketHeader');
+			$('.marketTicker').remove();
+			
+			var price = parseFloat(data.ticker.price);
+			price = Math.round(price * 100) / 100;
+			btc_in_usd=price;
+			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			calcEstimateProfit();
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+			$('.marketRate').show();
+
+		},'json');
 		},'json');
 
-		var completedFetches = 0;
-        var marketsData = [];
-        for (var i = 0; i < cryptonatorWidget.length; i++){
-            (function(i){
-            	cryptonatorWidget[i] = cryptonatorWidget[i].replace('{symbol}', lastStats.config.symbol.toLowerCase());
-                xhrMarketGets[cryptonatorWidget[i]] = $.get('/api/' + cryptonatorWidget[i]+'.xml', function(data){
-                    if(data.error) {
-                        return;
-                    }
-                    $('.marketRate').show();
 
-                    marketsData[i] = data;
-                    completedFetches++;
-                    if (completedFetches !== cryptonatorWidget.length) return;
-
-                    var $marketHeader = $('#marketHeader');
-                    $('.marketTicker').remove();
-                    for (var f = marketsData.length - 1; f >= 0 ; f--){
-                        var price = parseFloat(marketsData[f].ticker.price);
-
-                        if (price > 1) price = Math.round(price * 100) / 100;
-                        else price = marketsData[f].ticker.price;
-						
-						btc_in_usd=price;
-						updateText('krb_usd',(krb_in_btc*btc_in_usd).toFixed(8));
-						calcEstimateProfit();
-
-                        $marketHeader.after('<div class="marketTicker">' + marketsData[f].ticker.base + ': <span>' + price + ' ' + marketsData[f].ticker.target + '</span></div>');
-                    }
-                }, 'json');
-            })(i);
-        }
     }
 
 

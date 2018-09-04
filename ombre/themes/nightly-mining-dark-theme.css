@@ -10,7 +10,7 @@ a:hover {
 }
 body {  
   color: #ffffff;
-  background-color: #433343;
+  background-color: #25334F;
 }
 .form-control {
   background-color: #131313;
@@ -60,7 +60,16 @@ hr {
   color: #E6E6E6; 
 }
 .stats > div:not(#addressError) > i.fa {
-  color: #1f94b1; 
+  color: #20BFFF; 
+}
+.stats > div:not(#addressError) > i.fas {
+  color: #20BFFF; 
+}
+.stats > div:not(#addressError) > i.fab {
+  color: #20BFFF; 
+}
+.stats > div:not(#addressError) > i.far {
+  color: #20BFFF; 
 }
 .stats > div:not(#addressError) > span:not(.input-group-btn):first-of-type {
   color: #01C2AB;

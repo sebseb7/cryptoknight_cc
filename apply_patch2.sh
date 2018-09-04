@@ -28,6 +28,9 @@ cd ..
 cd sumo
 cat ../patch2 | patch -p1
 cd ..
+cd ryo
+cat ../patch2 | patch -p1
+cd ..
 cd solace
 cat ../patch2 | patch -p1
 cd ..
@@ -49,14 +52,17 @@ cd ..
 cd stellite
 cat ../patch2 | patch -p1
 cd ..
-cd xun
-cat ../patch2 | patch -p1
-cd ..
 cd monerov
 cat ../patch2 | patch -p1
 cd ..
 cd ipbc
-cat ../patch | patch -p1
+cat ../patch2 | patch -p1
+cd ..
+cd ipbcrocks
+cat ../patch2 | patch -p1
+cd ..
+cd turtle
+cat ../patch2 | patch -p1
 cd ..
 cd wownero
 cat ../patch2 | patch -p1

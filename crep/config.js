@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "https://blocks.crepcoin.org/hash/{id}";
-var transactionExplorer = "https://blocks.crepcoin.org/tx/{id}";
+var blockchainExplorer = "http://blocks.crepcoin.org/?hash={id}#blockchain_block";
+var transactionExplorer = "http://blocks.crepcoin.org/?hash={id}#blockchain_transaction";
 
 var guiWallet = "";
 

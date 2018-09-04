@@ -9,7 +9,7 @@ var irc = "";
 var email = "";
 
 var blockchainExplorer = "https://explorer.coolbits.io/elya/guess/{id}";
-var transactionExplorer = "https://explorer.coolbits.io/elya/guess/{id}";
+var transactionExplorer = "https://explorer.coolbits.io/elya/tx_hash/{id}";
 
 var guiWallet = "https://github.com/elyacoin/elyacoinwallet/releases";
 

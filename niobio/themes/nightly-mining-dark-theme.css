@@ -1,5 +1,5 @@
 .table>thead>tr>td.danger, .table>tbody>tr>td.danger, .table>tfoot>tr>td.danger, .table>thead>tr>th.danger, .table>tbody>tr>th.danger, .table>tfoot>tr>th.danger, .table>thead>tr.danger>td, .table>tbody>tr.danger>td, .table>tfoot>tr.danger>td, .table>thead>tr.danger>th, .table>tbody>tr.danger>th, .table>tfoot>tr.danger>th {
-    background-color: #521e1e;
+    background-color: #8f697d;
 }
 
 a {
@@ -10,7 +10,7 @@ a:hover {
 }
 body {  
   color: #ffffff;
-  background-color: #133426;
+  background-color: #25334F;
 }
 .form-control {
   background-color: #131313;
@@ -60,7 +60,16 @@ hr {
   color: #E6E6E6; 
 }
 .stats > div:not(#addressError) > i.fa {
-  color: #1f94b1; 
+  color: #20BFFF; 
+}
+.stats > div:not(#addressError) > i.fas {
+  color: #20BFFF; 
+}
+.stats > div:not(#addressError) > i.fab {
+  color: #20BFFF; 
+}
+.stats > div:not(#addressError) > i.far {
+  color: #20BFFF; 
 }
 .stats > div:not(#addressError) > span:not(.input-group-btn):first-of-type {
   color: #01C2AB;

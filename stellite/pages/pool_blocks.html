@@ -21,6 +21,9 @@
     .luckBad{
         color: darkred;
     }
+    .globe{
+        color: #6ED5EE;
+    }
 </style>
 
 <div class="blocksStatHolder">
@@ -35,11 +38,12 @@
         <thead>
         <tr>
             <th><i class="fa fa-bars"></i> Height</th>
+            <th><i class="fas fa-globe"></i></th>
             <th title="How many more blocks network must mine before this block is matured"><i class="fa fa-link"></i> Maturity</th>
             <th><i class="fa fa-unlock-alt"></i> Difficulty</th>
             <th><i class="fas fa-dna"></i> Block Hash</th>
             <th><i class="fas fa-clock"></i> Time Found</th>
-            <th><i class="far fa-star"></i> Shares/Diff</th>
+            <th><i class="far fa-star"></i> Effort</th>
         </tr>
         </thead>
         <tbody id="blocks_rows">
@@ -93,7 +97,8 @@
             difficulty: parseInt(parts[2]),
             shares: parseInt(parts[3]),
             orphaned: parts[4],
-            reward: parts[5]
+            reward: parts[5],
+            location: parts[6]
         };
 
         var toGo = lastStats.config.depth - (lastStats.network.height - block.height);
@@ -130,6 +135,17 @@
 				      return '<span class="luckBad">' + percent + '%</span>';
 			    }
 	    }
+	    function formatLocation(location) {
+			    if(location == 0) {
+				      return '<span class="fas fa-globe-africa globe"></span>';
+			    }
+			    else if(location == 1) {
+				      return '<span class="fas fa-globe-asia globe"></span>';
+			    }
+			    else  {
+				      return '';
+			    }
+	    }
 
 	    function formatBlockLink(hash){
             return '<a target="_blank" href="' + getBlockchainUrl(hash) + '">' + hash + '</a>';
@@ -150,6 +166,7 @@
 
         var columns =
             '<td>' + block.height + '</td>' +
+            '<td>' + formatLocation(block.location) + '</td>' +
             '<td>' + block.maturity + '</td>' +
             '<td>' + block.difficulty + '</td>' +
             '<td>' + formatBlockLink(block.hash) + '</td>' +
