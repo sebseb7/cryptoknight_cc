@@ -113,9 +113,9 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div>B2B: <span id="b2b_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>B2B: <span id="b2b_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade on <a target="_blank" href="https://stocks.exchange/trade/B2B/BTC">stocks.exchange</a></div>
+        <div>B2B: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div>B2B: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade on <a target="_blank" href="https://app.stocks.exchange/en/basic-trade/pair/BTC/B2B/1M">stocks.exchange</a></div>
     </div>
 </div>
 
@@ -367,8 +367,8 @@
 				if(data[i].market_name.toString() === "B2B_BTC")
 				{
 					coin_in_btc = data[i].sell;
-					updateText('b2b_btc',data[i].sell);
-					updateText('b2b_usd',(data[i].sell*btc_in_usd).toFixed(8));
+					updateText('coin_btc',data[i].sell);
+					if (btc_in_usd) updateText('coin_usd',(data[i].sell*btc_in_usd).toFixed(8));
                     $('.marketRate').show();
 					calcEstimateProfit();
 				}
@@ -378,6 +378,7 @@
 		$.get('/api/BTC-USD.xml',function(data) {
 
 			if(data.error) {
+				console.log(data);
 				return;
 			}
 			
@@ -515,8 +516,8 @@
             var profit = (hashRate * 86400 / lastStats.network.difficulty) * lastStats.network.reward;
             if (profit) {
                 updateText('calcHashAmount', getReadableCoins(profit, 2, true));
-                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*b2b_in_btc).toFixed(4));
-                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*b2b_in_btc*btc_in_usd).toFixed(2));
+                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*coin_in_btc).toFixed(4));
+                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*coin_in_btc*btc_in_usd).toFixed(2));
                 return;
             }
         }
