@@ -28,9 +28,6 @@ cd ..
 cd karbo
 cat ../patch | patch -p1
 cd ..
-cd ombre
-cat ../patch | patch -p1
-cd ..
 cd qwerty
 cat ../patch | patch -p1
 cd ..
