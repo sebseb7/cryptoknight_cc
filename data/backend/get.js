@@ -13,7 +13,7 @@ function BTC() {
 		{
 			var json = {"ticker":{"price":value.toFixed(2)}};
 
-			fs.writeFile("BTC-USD.xml", JSON.stringify(json), function(err) {}); 
+			fs.writeFile("../../api/BTC-USD.xml", JSON.stringify(json), function(err) {}); 
 		}
 	});
 }
@@ -30,7 +30,7 @@ function TRL() {
 		{
 			var json = {"ticker":{"price":value.toFixed(8)}};
 
-			fs.writeFile("LTC-TRTL.xml", JSON.stringify(json), function(err) {}); 
+			fs.writeFile("../../api/LTC-TRTL.xml", JSON.stringify(json), function(err) {}); 
 		}
 	});
 }
@@ -46,7 +46,7 @@ function SOLACE() {
 		{
 			var json = {"ticker":{"price":value.toFixed(8)}};
 
-			fs.writeFile("LTC-SOLACE.xml", JSON.stringify(json), function(err) {}); 
+			fs.writeFile("../../api/LTC-SOLACE.xml", JSON.stringify(json), function(err) {}); 
 		}
 	});
 }
@@ -62,7 +62,7 @@ function RYO() {
 		{
 			var json = {"ticker":{"price":value.toFixed(8)}};
 
-			fs.writeFile("BTC-RYO.xml", JSON.stringify(json), function(err) {}); 
+			fs.writeFile("../../api/BTC-RYO.xml", JSON.stringify(json), function(err) {}); 
 		}
 	});
 }
@@ -78,20 +78,21 @@ function LTC() {
 		{
 			var json = {"ticker":{"price":value.toFixed(8)}};
 
-			fs.writeFile("BTC-LTC.xml", JSON.stringify(json), function(err) {}); 
+			fs.writeFile("../../api/BTC-LTC.xml", JSON.stringify(json), function(err) {}); 
 		}
 	});
 }
 
-
-
-setInterval(()=>{
-
+function update(){
 	BTC();
 	TRL();
 	SOLACE();
 	LTC();
 	RYO();
+}
 
+setInterval(()=>{
+	update();
 }, 60*1000);
+update();
 

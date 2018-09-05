@@ -463,26 +463,28 @@
 			$('.marketRate').show();
 			calcEstimateProfit();
 
-				console.log(data);
-		$.get('/api/BTC-USD.xml',function(data) {
-
-				console.log(data);
-			if(data.error) {
-				return;
-			}
+			console.log(data);
 			
-			var $marketHeader = $('#marketHeader');
-			$('.marketTicker').remove();
-			
-			var price = parseFloat(data.ticker.price);
-			price = Math.round(price * 100) / 100;
-			btc_in_usd=price;
-			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
-			calcEstimateProfit();
-			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
-			$('.marketRate').show();
+			$.get('/api/BTC-USD.xml',function(data) {
 
-		},'json');
+					console.log(data);
+				if(data.error) {
+					return;
+				}
+				
+				var $marketHeader = $('#marketHeader');
+				$('.marketTicker').remove();
+				
+				var price = parseFloat(data.ticker.price);
+				price = Math.round(price * 100) / 100;
+				btc_in_usd=price;
+				if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+				calcEstimateProfit();
+				$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+				$('.marketRate').show();
+
+			},'json');
+
 		},'json');
 
 
@@ -514,8 +516,8 @@
             var profit = (hashRate * 86400 / lastStats.network.difficulty) * lastStats.network.reward;
             if (profit) {
                 updateText('calcHashAmount', getReadableCoins(profit, 2, true));
-                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*krb_in_btc).toFixed(4));
-                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*krb_in_btc*btc_in_usd).toFixed(2));
+                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*coin_in_btc).toFixed(4));
+                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*coin_in_btc*btc_in_usd).toFixed(2));
                 return;
             }
         }

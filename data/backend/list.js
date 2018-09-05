@@ -51,7 +51,7 @@ var coins_conn = {};
 	
 function getPoolData(pool){
 	
-	request(pool.api+'/stats', function (error, response, body) {
+	request('https://cryptoknight.cc'+pool.api+'/stats', function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			var api;
 
