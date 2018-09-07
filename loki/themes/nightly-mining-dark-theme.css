@@ -62,6 +62,15 @@ hr {
 .stats > div:not(#addressError) > i.fa {
   color: #1f94b1; 
 }
+.stats > div:not(#addressError) > i.fas {
+  color: #1f94b1; 
+}
+.stats > div:not(#addressError) > i.far {
+  color: #1f94b1; 
+}
+.stats > div:not(#addressError) > i.fab {
+  color: #1f94b1; 
+}
 .stats > div:not(#addressError) > span:not(.input-group-btn):first-of-type {
   color: #01C2AB;
 }
