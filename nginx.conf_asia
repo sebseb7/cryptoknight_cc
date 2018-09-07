@@ -80,7 +80,8 @@ http {
 
 		resolver 8.8.8.8 ipv6=off;
 
-
+		# renew: certbot certonly -d asia.cryptoknight.cc --webroot --webroot-path /usr/local/nginx/html/
+		
         ssl_certificate      /etc/letsencrypt/live/asia.cryptoknight.cc/fullchain.pem;
         ssl_certificate_key  /etc/letsencrypt/live/asia.cryptoknight.cc/privkey.pem;
 
@@ -285,6 +286,15 @@ http {
             proxy_cache_valid  200 302  20s;
             proxy_cache_valid  502 404      1m;
         }
+        location ~ ^/rpc/ipbr/?(.*) {
+            proxy_pass http://149.202.216.50:2773/$1$is_args$args;
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			proxy_set_header Upgrade $http_upgrade;
+            proxy_buffering off;
+            proxy_read_timeout 160;
+			proxy_next_upstream error;
+        }
         location ~ ^/rpc/ipbc/?(.*) {
             proxy_pass http://195.201.186.172:2773/$1$is_args$args;
 			proxy_http_version 1.1;
@@ -376,7 +386,7 @@ http {
 			proxy_next_upstream error;
         }
         location ~ ^/rpc/solace/?(.*) {
-            proxy_pass http://5.199.161.136:4000/$1$is_args$args;
+            proxy_pass http://149.202.216.50:4000/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
 			proxy_set_header Upgrade $http_upgrade;
@@ -440,6 +450,26 @@ http {
 			proxy_next_upstream error;
         }
         location ~ ^/rpc/loki/?(.*) {
+            proxy_pass http://127.0.0.1:2890/$1$is_args$args;
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_redirect off;
+            proxy_buffering off;
+            proxy_read_timeout 160;
+			proxy_next_upstream error;
+        }
+        location ~ ^/rpc/ryo/?(.*) {
+            proxy_pass http://149.202.216.50:9029/$1$is_args$args;
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_redirect off;
+            proxy_buffering off;
+            proxy_read_timeout 160;
+			proxy_next_upstream error;
+        }
+        location ~ ^/rpc/l1ki/?(.*) {
             proxy_pass http://195.201.82.83:2890/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
@@ -486,18 +516,6 @@ http {
 			proxy_next_upstream error;
         }
 
-        location /api/BTC-USD.xml {
-            proxy_pass https://www.cryptonator.com/api/ticker/BTC-USD;
-            proxy_cache my-cache;
-            proxy_cache_valid  200 302  5m;
-            proxy_cache_valid  502 404      1m;
-        }
-        location /api/bitcoin.xml {
-            proxy_pass https://api.coinmarketcap.com/v1/ticker/bitcoin/;
-            proxy_cache my-cache;
-            proxy_cache_valid  200 302  5m;
-            proxy_cache_valid  502 404      1m;
-        }
 
         #error_page  404              /404.html;
 
