@@ -10,9 +10,6 @@ cd ..
 cd btcn
 cat ../patch | patch -p1
 cd ..
-cd crep
-cat ../patch | patch -p1
-cd ..
 cd dero
 cat ../patch | patch -p1
 cd ..

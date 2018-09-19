@@ -37,13 +37,6 @@
 			"algo":"_ar",
 			"logo":"/logos/arto.png"
 		},{
-			"name":"Crep",
-			"class":"",
-			"api":"/rpc/crep",
-			"url":"/crep",
-			"algo":"",
-			"logo":"/logos/crep.png"
-		},{
 			"name":"Karbo",
 			"class":"",
 			"api":"/rpc/karbo",

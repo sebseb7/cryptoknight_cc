@@ -24,7 +24,7 @@ const request = require('request');
 //	res.sendFile(path.resolve(__dirname+'/index.html'));
 //});
 
-const logger = new (winston.Logger)({
+const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console({timestamp:(new Date()).toLocaleTimeString(),colorize:true,level:'info'}),
 		new winston.transports.File({name:'a',json:false,filename:'logfile.txt',timestamp:(new Date()).toLocaleTimeString(),level:'debug'}),
