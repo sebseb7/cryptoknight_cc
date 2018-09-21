@@ -143,7 +143,7 @@ http {
     	}
 
         location ~ ^/rpc/alloy/?(.*) {
-            proxy_pass http://78.46.85.142:2799/$1$is_args$args;
+            proxy_pass http://195.201.202.36:5302/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
 			proxy_set_header Upgrade $http_upgrade;
@@ -152,7 +152,7 @@ http {
 			proxy_next_upstream error;
         }
         location ~ ^/rpc/b2b/?(.*) {
-            proxy_pass http://78.46.85.142:2699/$1$is_args$args;
+            proxy_pass http://195.201.202.36:5305/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
 			proxy_set_header Upgrade $http_upgrade;
@@ -171,15 +171,6 @@ http {
         }
         location ~ ^/rpc/btcn/?(.*) {
             proxy_pass http://78.46.85.142:2991/$1$is_args$args;
-			proxy_http_version 1.1;
-			proxy_set_header Connection "";
-			proxy_set_header Upgrade $http_upgrade;
-            proxy_buffering off;
-            proxy_read_timeout 160;
-			proxy_next_upstream error;
-        }
-        location ~ ^/rpc/crep/?(.*) {
-            proxy_pass http://78.46.85.142:6338/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
 			proxy_set_header Upgrade $http_upgrade;
@@ -232,15 +223,6 @@ http {
             proxy_read_timeout 160;
 			proxy_next_upstream error;
         }
-        location ~ ^/rpc/4aven/?(.*) {
-            proxy_pass http://195.201.186.172:2553/$1$is_args$args;
-			proxy_http_version 1.1;
-			proxy_set_header Connection "";
-			proxy_set_header Upgrade $http_upgrade;
-            proxy_buffering off;
-            proxy_read_timeout 160;
-			proxy_next_upstream error;
-        }
         location ~ ^/rpc/monerov/?(.*) {
             proxy_pass http://195.201.186.172:9889/$1$is_args$args;
 			proxy_http_version 1.1;
@@ -276,15 +258,6 @@ http {
             proxy_buffering off;
             proxy_read_timeout 160;
 			proxy_next_upstream error;
-        }
-        location /rpcipbcstats {
-            proxy_pass http://78.46.85.142:6113/stats;
-			proxy_http_version 1.1;
-			proxy_set_header Connection "";
-			proxy_set_header Upgrade $http_upgrade;
-            proxy_cache my-cache;
-            proxy_cache_valid  200 302  20s;
-            proxy_cache_valid  502 404      1m;
         }
         location ~ ^/rpc/ipbr/?(.*) {
             proxy_pass http://149.202.216.50:2773/$1$is_args$args;
@@ -351,15 +324,6 @@ http {
         }
         location ~ ^/rpc/arto/?(.*) {
             proxy_pass http://94.130.207.37:40009/$1$is_args$args;
-			proxy_http_version 1.1;
-			proxy_set_header Connection "";
-			proxy_set_header Upgrade $http_upgrade;
-            proxy_buffering off;
-            proxy_read_timeout 160;
-			proxy_next_upstream error;
-        }
-        location ~ ^/rpc/saronite/?(.*) {
-            proxy_pass http://94.130.207.37:40010/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
 			proxy_set_header Upgrade $http_upgrade;
@@ -469,16 +433,6 @@ http {
             proxy_read_timeout 160;
 			proxy_next_upstream error;
         }
-        location ~ ^/rpc/l1ki/?(.*) {
-            proxy_pass http://195.201.82.83:2890/$1$is_args$args;
-			proxy_http_version 1.1;
-			proxy_set_header Connection "";
-			proxy_set_header Upgrade $http_upgrade;
-			proxy_redirect off;
-            proxy_buffering off;
-            proxy_read_timeout 160;
-			proxy_next_upstream error;
-        }
         location ~ ^/rpc/triton/?(.*) {
             proxy_pass http://78.46.85.142:2771/$1$is_args$args;
 			proxy_http_version 1.1;
@@ -499,15 +453,6 @@ http {
         }
         location ~ ^/rpc/kepl/?(.*) {
             proxy_pass http://78.46.85.142:5229/$1$is_args$args;
-			proxy_http_version 1.1;
-			proxy_set_header Connection "";
-			proxy_set_header Upgrade $http_upgrade;
-            proxy_buffering off;
-            proxy_read_timeout 160;
-			proxy_next_upstream error;
-        }
-        location ~ ^/rpc/xun/?(.*) {
-            proxy_pass http://94.130.207.37:8338/$1$is_args$args;
 			proxy_http_version 1.1;
 			proxy_set_header Connection "";
 			proxy_set_header Upgrade $http_upgrade;
