@@ -363,7 +363,7 @@
 				return;
 			}
 		
-			coin_in_btc = parseFloat(data.price);
+			coin_in_btc = parseFloat(data.ticker.price);
 			updateText('coin_btc',coin_in_btc.toFixed(8));
 			if(coin_in_btc != 0)
 				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
@@ -513,8 +513,8 @@
             var profit = (hashRate * 86400 / lastStats.network.difficulty) * lastStats.network.reward;
             if (profit) {
                 updateText('calcHashAmount', getReadableCoins(profit, 2, true));
-                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*itns_in_btc).toFixed(4));
-                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*itns_in_btc*btc_in_usd).toFixed(2));
+                updateText('calcHashAmount2', (getReadableCoins(profit, 3, true)*coin_in_btc).toFixed(4));
+                updateText('calcHashAmount3', (getReadableCoins(profit, 3, true)*coin_in_btc*btc_in_usd).toFixed(2));
                 return;
             }
         }

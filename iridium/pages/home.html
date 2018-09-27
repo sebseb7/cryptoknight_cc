@@ -452,7 +452,7 @@
 				return;
 			}
 			
-			coin_in_btc = parseFloat(data.price);
+			coin_in_btc = parseFloat(data.ticker.price);
 			updateText('coin_btc',coin_in_btc.toFixed(8));
 			if(coin_in_btc != 0)
 				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));

@@ -444,18 +444,16 @@
     updateMarkets();
     function updateMarkets(){
 
-		$.get('https://api.altex.exchange/v1/ticker',function(data) {
+		$.get('/api/BTC-XMV.xml',function(data) {
 
 
 			if(data.error) {
 				return;
 			}
 		
-			console.log(data.data['BTC_XMV'].last);
-
-			coin_in_btc = parseFloat(data.data['BTC_XMV'].last);
+			coin_in_btc = parseFloat(data.ticker.price);
 			updateText('coin_btc',coin_in_btc.toFixed(8));
-			if(btc_in_usd != 0)
+			if(coin_in_btc != 0)
 				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
 			calcEstimateProfit();

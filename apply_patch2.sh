@@ -58,9 +58,6 @@ cd ..
 cd ipbcrocks
 cat ../patch2 | patch -p1
 cd ..
-cd turtle
-cat ../patch2 | patch -p1
-cd ..
 cd ombre
 cat ../patch2 | patch -p1
 cd ..

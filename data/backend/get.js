@@ -18,9 +18,9 @@ function BTC() {
 	});
 }
 
-function TRL() {
+Function BBS() {
 
-	request('https://tradeogre.com/api/v1/ticker/LTC-TRTL', (error, response, body) => {
+	request('https://tradeogre.com/api/v1/ticker/LTC-BBS', (error, response, body) => {
 
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
@@ -30,7 +30,7 @@ function TRL() {
 		{
 			var json = {"ticker":{"price":value.toFixed(8)}};
 
-			fs.writeFile("../../api/LTC-TRTL.xml", JSON.stringify(json), function(err) {}); 
+			fs.writeFile("../../api/LTC-BBS.xml", JSON.stringify(json), function(err) {}); 
 		}
 	});
 }
@@ -82,13 +82,91 @@ function LTC() {
 		}
 	});
 }
+function XMV() {
+
+	request('https://tradeogre.com/api/v1/ticker/BTC-XMV', (error, response, body) => {
+
+		const data = JSON.parse(body);
+		value = parseFloat(data.price);
+
+
+		if(value)
+		{
+			var json = {"ticker":{"price":value.toFixed(8)}};
+
+			fs.writeFile("../../api/BTC-XMV.xml", JSON.stringify(json), function(err) {}); 
+		}
+	});
+}
+function LTHN() {
+
+	request('https://tradeogre.com/api/v1/ticker/BTC-LTHN', (error, response, body) => {
+
+		const data = JSON.parse(body);
+		value = parseFloat(data.price);
+
+
+		if(value)
+		{
+			var json = {"ticker":{"price":value.toFixed(8)}};
+
+			fs.writeFile("../../api/BTC-LTHN.xml", JSON.stringify(json), function(err) {}); 
+		}
+	});
+}
+function IRD() {
+
+	request('https://tradeogre.com/api/v1/ticker/BTC-IRD', (error, response, body) => {
+
+		const data = JSON.parse(body);
+		value = parseFloat(data.price);
+
+
+		if(value)
+		{
+			var json = {"ticker":{"price":value.toFixed(8)}};
+
+			fs.writeFile("../../api/BTC-IRD.xml", JSON.stringify(json), function(err) {}); 
+		}
+	});
+}
+function BTCN() {
+
+	request('https://app.stocks.exchange/api2/ticker', (error, response, body) => {
+
+		const data = JSON.parse(body);
+
+		for (var i in data) {
+
+			var item = data[i];
+
+			if(item.market_name !== "BTCN_BTC") continue;
+
+			
+
+			value = parseFloat(item.last);
+
+
+			if(value)
+			{
+				var json = {"ticker":{"price":value.toFixed(8)}};
+	
+				fs.writeFile("../../api/BTC-BTCN.xml", JSON.stringify(json), function(err) {}); 
+			}
+		}
+	});
+}
 
 function update(){
 	BTC();
-	TRL();
+	LTHN();
+	BTCN();
+	IRD();
+	BBS();
 	SOLACE();
 	LTC();
 	RYO();
+	XMV();
 }
 
 setInterval(()=>{

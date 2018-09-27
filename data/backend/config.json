@@ -23,6 +23,13 @@
 			"algo":"",
 			"logo":"/logos/b2b.png"
 		},{
+			"name":"BitcoinNote",
+			"class":"",
+			"api":"/rpc/btcn",
+			"url":"/btcn",
+			"algo":"_l1",
+			"logo":"/logos/btcn.png"
+		},{
 			"name":"Masari",
 			"class":"",
 			"api":"/rpc/msr",
@@ -64,13 +71,6 @@
 			"url":"/sumo",
 			"algo":"",
 			"logo":"/logos/sumo.png"
-		},{
-			"name":"Turtle",
-			"class":"",
-			"api":"/rpc/turtle",
-			"url":"/turtle",
-			"algo":"_l1",
-			"logo":"/logos/turtle.png"
 		},{
 			"name":"Electroneum",
 			"class":"",
@@ -176,13 +176,6 @@
 			"url":"/triton",
 			"algo":"_l1",
 			"logo":"/logos/triton.png"
-		},{
-			"name":"Kepl",
-			"class":"",
-			"api":"/rpc/kepl",
-			"url":"/kepl",
-			"algo":"_fast",
-			"logo":"/logos/kepl.png"
 		},{
 			"name":"Haven",
 			"class":"",

@@ -115,7 +115,7 @@
 		
 		<div>BTCN: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
         <div>BTCN: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade on <a target="_blank" href="https://stocks.exchange/trade/BTCN/BTC">stocks.exchange</a></div>
+        <div class="marketFooter">Trade on <a target="_blank" href="https://stocks.exchange/en/basic-trade/pair/BTC/BTCN/1D">stocks.exchange</a></div>
 		
     </div>
 </div>
@@ -257,7 +257,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:300px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonote)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (CryptoLight-V1)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -357,27 +357,19 @@
     updateMarkets();
     function updateMarkets(){
 
-		$.get('/api/price.xml',function(data) {
-
-
+		$.get('/api/BTC-BTCN.xml',function(data) {
 			if(data.error) {
 				return;
 			}
-			
-			for (var i=0; i < data.length - 1; i++){
-			
-				if(data[i].market_name.toString() === "BTCN_BTC")
-				{
-					coin_in_btc = data[i].buy;
-					updateText('coin_btc',data[i].buy);
-					if(btc_in_usd > 0) updateText('coin_usd',(data[i].buy*btc_in_usd).toFixed(8));
-					$('.marketRate').show();
-					calcEstimateProfit();
-				}
-				
-			}
-		},'json');
 		
+			coin_in_btc = parseFloat(data.ticker.price);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(btc_in_usd) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			calcEstimateProfit();
+		
+		},'json');
+	
+
 		$.get('/api/BTC-USD.xml',function(data) {
 
 			if(data.error) {
@@ -508,7 +500,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_l1',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -655,7 +647,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_l1'));
 
     if (address){
         $('#yourStatsInput').val(address);
