@@ -30,6 +30,20 @@
 			"algo":"_l1",
 			"logo":"/logos/btcn.png"
 		},{
+			"name":"CitiCash",
+			"class":"",
+			"api":"/rpc/citi",
+			"url":"/citi",
+			"algo":"_v1",
+			"logo":"/logos/citi.png"
+		},{
+			"name":"SafeX",
+			"class":"",
+			"api":"/rpc/safex",
+			"url":"/safex",
+			"algo":"_v1",
+			"logo":"/logos/safex.png"
+		},{
 			"name":"Masari",
 			"class":"",
 			"api":"/rpc/msr",

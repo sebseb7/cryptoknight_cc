@@ -18,7 +18,7 @@ function BTC() {
 	});
 }
 
-Function BBS() {
+function BBS() {
 
 	request('https://tradeogre.com/api/v1/ticker/LTC-BBS', (error, response, body) => {
 
@@ -130,6 +130,22 @@ function IRD() {
 		}
 	});
 }
+function B2B() {
+
+	request('https://maplechange.com:443//api/v2/tickers/b2bbtc.json', (error, response, body) => {
+
+		const data = JSON.parse(body);
+		value = parseFloat(data.ticker.last);
+
+
+		if(value)
+		{
+			var json = {"ticker":{"price":value.toFixed(8)}};
+
+			fs.writeFile("../../api/BTC-B2B.xml", JSON.stringify(json), function(err) {}); 
+		}
+	});
+}
 function BTCN() {
 
 	request('https://app.stocks.exchange/api2/ticker', (error, response, body) => {
@@ -160,6 +176,7 @@ function BTCN() {
 function update(){
 	BTC();
 	LTHN();
+	B2B();
 	BTCN();
 	IRD();
 	BBS();

@@ -115,6 +115,7 @@
         <h3 id="marketHeader">Market</h3>
         <div>B2B: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
         <div>B2B: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade on <a target="_blank" href="https://maplechange.com/markets/b2bbtc?markets=btc&column=name&order=asc&unit=volume&pinned=true">maplechange</a></div>
         <div class="marketFooter">Trade on <a target="_blank" href="https://app.stocks.exchange/en/basic-trade/pair/BTC/B2B/1M">stocks.exchange</a></div>
     </div>
 </div>
@@ -355,25 +356,23 @@
     updateMarkets();
     function updateMarkets(){
 
-		$.get('/api/price.xml',function(data) {
+		
+		$.get('/api/BTC-B2B.xml',function(data) {
 
 
 			if(data.error) {
 				return;
 			}
 			
-			for (var i=0; i < data.length - 1; i++){
-			
-				if(data[i].market_name.toString() === "B2B_BTC")
-				{
-					coin_in_btc = data[i].sell;
-					updateText('coin_btc',data[i].sell);
-					if (btc_in_usd) updateText('coin_usd',(data[i].sell*btc_in_usd).toFixed(8));
-                    $('.marketRate').show();
-					calcEstimateProfit();
-				}
-			}
+			coin_in_btc = parseFloat(data.ticker.price);
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(coin_in_btc != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
+
 		},'json');
+
 		
 		$.get('/api/BTC-USD.xml',function(data) {
 

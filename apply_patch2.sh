@@ -64,3 +64,9 @@ cd ..
 cd wownero
 cat ../patch2 | patch -p1
 cd ..
+cd safex
+cat ../patch2 | patch -p1
+cd ..
+cd citi
+cat ../patch2 | patch -p1
+cd ..
