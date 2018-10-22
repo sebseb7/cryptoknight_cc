@@ -10,9 +10,6 @@ cd ..
 cd btcn
 cat ../patch | patch -p1
 cd ..
-cd dero
-cat ../patch | patch -p1
-cd ..
 cd edl
 cat ../patch | patch -p1
 cd ..
@@ -26,9 +23,6 @@ cd karbo
 cat ../patch | patch -p1
 cd ..
 cd qwerty
-cat ../patch | patch -p1
-cd ..
-cd triton
 cat ../patch | patch -p1
 cd ..
 

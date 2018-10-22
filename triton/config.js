@@ -15,6 +15,6 @@ var paperWallet = ""
 
 var themeCss = "themes/nightly-mining-dark-theme.css";
 
-var blockchainExplorer = "http://explorer.tritonproject.org/?hash={id}#blockchain_block";
+var blockchainExplorer = "http://explorer.xtri.network/block/{id}";
 
-var transactionExplorer = "http://explorer.tritonproject.org/?hash={id}#blockchain_transaction";
+var transactionExplorer = "http://explorer.xtri.network/tx/{id}";

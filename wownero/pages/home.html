@@ -116,7 +116,7 @@
 </style>
 
 <div id="siteInfo">
-	NEW: Integrated Addresses (So) Supported
+	Wownero will switch to variant 2 PoW at block 53666
 	<br/>
 </div>
 
@@ -287,7 +287,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-V1)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-V2)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -590,7 +590,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_v1',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_v2',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -763,7 +763,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_v1'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_v2'));
 
     if (address){
         $('#yourStatsInput').val(address);

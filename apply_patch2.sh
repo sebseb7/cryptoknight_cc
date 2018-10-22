@@ -70,3 +70,9 @@ cd ..
 cd citi
 cat ../patch2 | patch -p1
 cd ..
+cd triton
+cat ../patch2 | patch -p1
+cd ..
+cd saronite
+cat ../patch2 | patch -p1
+cd ..

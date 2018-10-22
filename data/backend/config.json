@@ -114,6 +114,13 @@
 			"algo":"_hv",
 			"logo":"/logos/loki.png"
 		},{
+			"name":"Saronite",
+			"class":"",
+			"api":"/rpc/saronite",
+			"url":"/saronite",
+			"algo":"_hv",
+			"logo":"/logos/saronite.png"
+		},{
 			"name":"Qwerty",
 			"class":"",
 			"api":"/rpc/qwerty",
@@ -125,7 +132,7 @@
 			"class":"",
 			"api":"/rpc/wownero",
 			"url":"/wownero",
-			"algo":"_v1",
+			"algo":"_v2",
 			"logo":"/logos/wownero.png"
 		},{
 			"name":"Alloy",
@@ -139,7 +146,7 @@
 			"class":"",
 			"api":"/rpc/monerov",
 			"url":"/monerov",
-			"algo":"_v1",
+			"algo":"_v2",
 			"logo":"/logos/monerov.png"
 		},{
 			"name":"Monero",

@@ -8,8 +8,8 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "https://xmrchain.net/block/{id}";
-var transactionExplorer = "https://xmrchain.net/tx/{id}";
+var blockchainExplorer = "https://xmrexplorer.one/block/{id}";
+var transactionExplorer = "https://xmrexplorer.one/tx/{id}";
 
 var guiWallet = "https://getmonero.org/";
 
