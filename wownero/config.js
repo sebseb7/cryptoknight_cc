@@ -14,5 +14,5 @@ var guiWallet = "https://github.com/wownero/wownero-gui/releases";
 var paperWallet = "";
 
 var themeCss = "themes/nightly-mining-dark-theme.css";
-var blockchainExplorer = "http://explore.wownero.com/block/{id}";
-var transactionExplorer = "http://explore.wownero.com/tx/{id}";
+var blockchainExplorer = "http://explorer.wowne.ro/block/{id}";
+var transactionExplorer = "http://explorer.wowne.ro/tx/{id}";

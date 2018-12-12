@@ -82,6 +82,17 @@
         text-align: left;
     }
 
+	#workers_rows > tr > td{
+        vertical-align: middle;
+        font-family: 'Inconsolata', monospace;
+        font-size: 0.95em;
+		padding-left:40px;
+        text-align: left;
+    }
+    #workers_rows > tr > td:nth-child(2){
+        text-align: left;
+    }
+
 	#candidates_rows > tr > td{
         vertical-align: middle;
         font-family: 'Inconsolata', monospace;
@@ -106,37 +117,34 @@
 
 
 <div id="siteInfo">
-	Note: Fork scheduled for block 138000
-    <!-- Description or information about this pool -->
 </div>
 
 <div class="row">
     <div class="col-md-4 stats">
         <h3>Network</h3>
-        <div><i class="fa fa-tachometer"></i> Hash Rate: <span id="networkHashrate"></span></div>
-        <div><i class="fa fa-clock-o"></i> Block Found: <span id="networkLastBlockFound"></span></div>
+        <div><i class="fas fa-tachometer-alt"></i> Hash Rate: <span id="networkHashrate"></span></div>
+        <div><i class="fa fa-clock"></i> Block Found: <span id="networkLastBlockFound"></span></div>
         <div><i class="fa fa-unlock-alt"></i> Difficulty: <span id="networkDifficulty"></span></div>
         <div><i class="fa fa-bars"></i> Blockchain Height: <span id="blockchainHeight"></span></div>
-        <div><i class="fa fa-money"></i> Last Reward: <span id="networkLastReward"></span></div>
-        <div><i class="fa fa-paw"></i> Last Hash: <a id="lastHash" target="_blank"></a></div>
+        <div><i class="fas fa-trophy"></i> Last Reward: <span id="networkLastReward"></span></div>
+        <div><i class="fas fa-dna"></i> Last Hash: <a id="lastHash" target="_blank"></a></div>
     </div>
 
     <div class="col-md-4 stats">
         <h3>Our Pool</h3>
-        <div><i class="fa fa-tachometer"></i> Hash Rate: <span id="poolHashrate"></span></div>
-        <div><i class="fa fa-clock-o"></i> Block Found: <span id="poolLastBlockFound"></span></div>
+        <div><i class="fas fa-tachometer-alt"></i> Hash Rate: <span id="poolHashrate"></span></div>
+        <div><i class="fa fa-clock"></i> Block Found: <span id="poolLastBlockFound"></span></div>
         <div><i class="fa fa-users"></i> Connected Miners: <span id="poolMiners"></span></div>
-        <div id="donations"><i class="fa fa-gift"></i> Donations: <span id="poolDonations"></span></div>
-        <div><i class="fa fa-money"></i> Total Pool Fee: <span id="poolFee"></span> <span data-trigger="click" data-toggle="tooltip" data-placement="top" data-html="true" data-title="<span style='word-wrap:break-word;'>Pool Wallet: eL2Ha4EyXACPVTCQZ2bGjg9k7Y9y8rLAGBRB6FgUwpvPdsbcghCrFVaAJVDnLLbLGAeGLqvn2k82aXzXnEwXUXh72amhAKoRQ <br/>Viewkey: c83816d396dc0e3833bbf046fb32492f5147929ecc24d3e21c3385f24edf7006</span>"><i class="fa fa-question-circle"></i></span></div>
-        <div><i class="fa fa-history"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
-		<div><i class="fa fa-star-half-o"></i>Current Effort: <span id="currenteffort"></span></div>
+        <div id="donations"><i class="fas fa-gift"></i> Donations: <span id="poolDonations"></span></div>
+        <div><i class="fa fa-tag"></i> Total Pool Fee: <span id="poolFee"></span> </div>
+        <div><i class="fas fa-stopwatch"></i> Block Found Every: <span id="blockSolvedTime"></span> (est.)</div>
+		<div><i class="far fa-star"></i> Current Effort: <span id="currenteffort"></span></div>
     </div>
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div>ELYA: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div>ELYA: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
-        <div class="marketFooter">Trade on <a target="_blank" href="https://stocks.exchange/trade/ELYA/BTC">stocks.exchange</a></div>
+        <div><i class="fab fa-btc"></i> ELYA: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> ELYA: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
     </div>
 </div>
 
@@ -313,11 +321,11 @@
         <div class="col-sm-4 stats">
             <div id="addressError"></div>
             <!-- <div class="yourStats"><i class="fa fa-key"></i> Address: <span id="yourAddressDisplay"></span></div> -->
-            <div class="yourStats"><i class="fa fa-bank"></i> Pending Balance: <span id="yourPendingBalance"></span></div>
-            <div class="yourStats"><i class="fa fa-money"></i> Total Paid: <span id="yourPaid"></span></div>
-            <div class="yourStats"><i class="fa fa-clock-o"></i> Last Share: <span id="yourLastShare"></span></div>
-            <div class="yourStats"><i class="fa fa-tachometer"></i> Hash Rate: <span id="yourHashrateHolder"></span></div>
-            <div class="yourStats"><i class="fa fa-cloud-upload"></i> Total Hashes: <span id="yourHashes"></span></div>
+            <div class="yourStats"><i class="fas fa-university"></i> Pending Balance: <span id="yourPendingBalance"></span></div>
+            <div class="yourStats"><i class="fa fa-money-bill-alt"></i> Total Paid: <span id="yourPaid"></span></div>
+            <div class="yourStats"><i class="fas fa-clock"></i> Last Share: <span id="yourLastShare"></span></div>
+            <div class="yourStats"><i class="fas fa-tachometer-alt"></i> Hash Rate: <span id="yourHashrateHolder"></span></div>
+            <div class="yourStats"><i class="fas fa-cloud-upload-alt"></i> Total Hashes: <span id="yourHashes"></span></div>
         </div>
         <div class="col-sm-4">            
             <div class="userChart" data-chart="user_hashrate">
@@ -340,15 +348,33 @@
 
     <br class="yourStats">
 
-    <h4 class="yourStats">Block Candidates</h4>
+    <h4 class="yourStats">Workers</h4>
+    <div class="yourStats table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><i class="fa fa-cogs"></i> Worker</th>
+                <th><i class="fas fa-tachometer-alt"></i> Hashrate (15m average)</th>
+                <th><i class="fas fa-clock"></i> Last Share</th>
+                <th><i class="fa fa-exclamation-triangle"></i> Bad Shares</th>
+                <th><i class="fas fa-stopwatch"></i> Avg. Job Time</th>
+            </tr>
+            </thead>
+            <tbody id="workers_rows">
+
+            </tbody>
+        </table>
+    </div>
+
+	<h4 class="yourStats">Block Candidates</h4>
     <div class="yourStats table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
                 <th><i class="fa fa-bars"></i> Height</th>
-                <th><i class="fa fa-clock-o"></i> Time Found</th>
-                <th><i class="fa fa-cloud-upload"></i> Pool Shares</th>
-                <th><i class="fa fa-cloud-upload"></i> Your Shares</th>
+                <th><i class="fas fa-clock"></i> Time Found</th>
+                <th><i class="fas fa-cloud"></i> Pool Shares</th>
+                <th><i class="fas fa-cloud-upload-alt"></i> Your Shares</th>
             </tr>
             </thead>
             <tbody id="candidates_rows">
@@ -363,11 +389,11 @@
             <thead>
             <tr>
                 <th><i class="fa fa-bars"></i> Height</th>
-                <th><i class="fa fa-clock-o"></i> Time Found</th>
-                <th><i class="fa fa-money"></i> Block Reward</th>
-                <th><i class="fa fa-cloud-upload"></i> Pool Shares</th>
-                <th><i class="fa fa-cloud-upload"></i> Your Shares</th>
-                <th><i class="fa fa-money"></i> Amount</th>
+                <th><i class="fas fa-clock"></i> Time Found</th>
+                <th><i class="fas fa-trophy"></i> Block Reward</th>
+                <th><i class="fas fa-cloud"></i> Pool Shares</th>
+                <th><i class="fas fa-cloud-upload-alt"></i> Your Shares</th>
+                <th><i class="fa fa-money-bill-alt"></i> Amount</th>
             </tr>
             </thead>
             <tbody id="blocks_rows">
@@ -384,9 +410,9 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th><i class="fa fa-clock-o"></i> Time Sent</th>
-                <th><i class="fa fa-paw"></i> Transaction Hash</th>
-                <th><i class="fa fa-money"></i> Amount</th>
+                <th><i class="fas fa-clock"></i> Time Sent</th>
+                <th><i class="fas fa-dna"></i> Transaction Hash</th>
+                <th><i class="fa fa-money-bill-alt"></i> Amount</th>
                 <th><i class="fa fa-sitemap"></i> Mixin</th>
             </tr>
             </thead>
@@ -417,27 +443,22 @@
 
 
 
+//		$.get('/api/BTC-ELYA.xml',function(data) {
 
-		$.get('/api/price.xml',function(data) {
 
-
-			if(data.error) {
-				return;
-			}
+	//		if(data.error) {
+	//			return;
+	//		}
 			
-			for (var i=0; i < data.length - 1; i++){
-			
-				if(data[i].market_name.toString() === "ELYA_BTC")
-				{
-					coin_in_btc = data[i].sell;
-					updateText('coin_btc',data[i].sell);
-					if(btc_in_usd) updateText('coin_usd',(data[i].sell*btc_in_usd).toFixed(8));
-					$('.marketRate').show();
-					calcEstimateProfit();
-				}
-				
-			}
-		},'json');
+			coin_in_btc = 0.00000001;
+			updateText('coin_btc',coin_in_btc.toFixed(8));
+			if(coin_in_btc != 0)
+				updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
+			$('.marketRate').show();
+			calcEstimateProfit();
+
+//		},'json');
+
 		
 		
 		$.get('/api/BTC-USD.xml',function(data) {
@@ -455,7 +476,7 @@
 			btc_in_usd=price;
 			if(coin_in_btc) updateText('coin_usd',(coin_in_btc*btc_in_usd).toFixed(8));
 			calcEstimateProfit();
-			$marketHeader.after('<div class="marketTicker">' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
+			$marketHeader.after('<div class="marketTicker"><i class="fas fa-chart-line"></i> ' + 'BTC' + ': <span>' + price + ' ' + 'USD' + '</span></div>');
 			$('.marketRate').show();
 
 		},'json');
@@ -618,6 +639,14 @@
                 '<td>' + candidate.totalShares + '</td>' +
                 '<td>' + candidate.workerShares + ' ('+(candidate.workerShares/candidate.totalShares*100).toFixed(2)+'%)</td>';
     }
+    function getWorkerCells(worker,rate){
+        
+		return '<td>' + worker + '</td>' +
+				'<td>' + rate[0] + '</td>'+
+				'<td>' + jQuery.timeago(rate[1]*1000) + '</td>'+
+				'<td>' + rate[3].toFixed(2) + ' %</td>'+
+				'<td>' + getReadableTime(rate[2].toFixed(0)) + '</td>';
+    }
 
     var xhrAddressPoll;
     var addressTimeout;
@@ -632,6 +661,7 @@
 
         $('#addressError').hide();
         $('.yourStats').hide();
+        $('#workers_rows').empty();
         $('#candidates_rows').empty();
         $('#blocks_rows').empty();
         $('#payments_rows').empty();
@@ -684,7 +714,6 @@
 
                     renderPayments(data.payments);
                     renderUserBlocks(data.blocks);
-                    renderCandidates(data.candidates);
 
                     $('.yourStats').show();
 					
@@ -694,6 +723,8 @@
 						dataType: 'json',            
 						success: function(data) {
 							createUserCharts(data);                                
+							if(data.candidates)renderCandidates(data.candidates);
+							if(data.workers)renderWorkers(data.workers);
 						}
 					});
                     

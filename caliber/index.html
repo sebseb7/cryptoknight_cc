@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+
+    <title>Caliber Pool - CryptoKnight</title>
+	
+	<meta name="Description" content="Lifetime Zero Fee Caliber Mining Pool by CryptoKnight">
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113285469-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-113285469-1');
+	</script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.0/jquery.timeago.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link href="//gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="//gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <link href="//fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    
+	<script src="config.js?a"></script>
+    <script src="custom.js"></script>
+	<script src="/misc/socket.io.js"></script>
+
+    <style>
+        #coinName{
+            text-transform: capitalize;
+        }
+        body {
+            padding-top: 65px;
+            padding-bottom: 80px;
+            overflow-y: scroll;
+        }
+        .container{
+            font-size: 1.2em;
+        }
+        #loading{
+            font-size: 2em;
+        }
+        .stats {
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+        .stats:last-child{
+            width: auto;
+        }
+        .stats > h3 > i{
+            font-size: 0.80em;
+            width: 21px;
+        }
+        .stats > div{
+            padding: 5px 0;
+        }
+        .stats > div > .svg-inline--fa {
+  			color: #1f94b1;
+            width: 25px;
+        }
+        .stats > div > span:first-of-type{
+            font-weight: bold;
+        }
+        #stats_updated{
+            opacity: 0;
+            float: right;
+            margin-left: 30px;
+            color: #e8e8e8;
+            line-height: 47px;
+            font-size: 0.9em;
+        }
+
+        footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+        }
+
+        footer > div{
+            margin: 9px auto;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        footer > div > .social{
+            margin: 9px 2px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+    </style>
+    
+    <link href="custom.css" rel="stylesheet">
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/89/three.js"></script>
+	<script id="vertexShader" type="x-shader/x-vertex">
+		varying vec2 vUv; 
+		void main() {
+			vUv = uv;
+
+			vec4 mvPosition = modelViewMatrix * vec4(position, 1.0 );
+			gl_Position = projectionMatrix * mvPosition;
+		}
+	</script>
+	<script id="fragmentShader" type="x-shader/x-fragment">
+
+		uniform vec2 iResolution;
+		uniform float iGlobalTime;
+
+		varying vec2 vUv; 
+
+		void main(void)
+		{
+			float time=iGlobalTime*0.6;
+			vec2 uv = (-1.0 + 2.0 *vUv)* 2.0;
+
+			vec2 uv0=uv;
+			float i0=1.4;
+			float i1=1.9;
+			float i2=1.4;
+			float i4=0.6;
+			for(int s=0;s<2;s++) {
+				vec2 r;
+				r=vec2(cos(uv.y*i0-i4+time/i1),sin(uv.x*i0-i4+time/i1))/i2;
+				r+=vec2(-r.y,r.x)*0.3;
+				uv.xy+=r-0.5;
+				i0*=1.93;
+				i1*=1.15;
+				i2*=1.8;
+				i4+=0.55+2.15*time*i1;
+			}
+			float r=sin(uv.x-time)*0.1+0.1;
+			float g=sin(uv.y+time)*0.2+0.1;
+			float b=sin(i2+time)*0.1+0.1;
+	
+			gl_FragColor = vec4(0,r+g,b,1.0);
+		}
+
+	</script>
+
+
+</head>
+<body>
+<script>
+
+
+    var docCookies = {
+        getItem: function (sKey) {
+            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        },
+        setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+            if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+            var sExpires = "";
+            if (vEnd) {
+                switch (vEnd.constructor) {
+                    case Number:
+                        sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                        break;
+                    case String:
+                        sExpires = "; expires=" + vEnd;
+                        break;
+                    case Date:
+                        sExpires = "; expires=" + vEnd.toUTCString();
+                        break;
+                }
+            }
+            document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+            return true;
+        },
+        removeItem: function (sKey, sPath, sDomain) {
+            if (!sKey || !this.hasItem(sKey)) { return false; }
+            document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+            return true;
+        },
+        hasItem: function (sKey) {
+            return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+        }
+    };
+
+    function getTransactionUrl(id) {
+        return transactionExplorer.replace('{symbol}', lastStats.config.symbol.toLowerCase()).replace('{id}', id);
+    }
+    
+    $.fn.update = function(txt){
+        var el = this[0];
+        if (el.textContent !== txt)
+            el.textContent = txt;
+        return this;
+    };
+
+    function updateTextClasses(className, text){
+        var els = document.getElementsByClassName(className);
+        for (var i = 0; i < els.length; i++){
+            var el = els[i];
+            if (el.textContent !== text)
+                el.textContent = text;
+        }
+    }
+
+    function updateText(elementId, text){
+        var el = document.getElementById(elementId);
+        
+		if(!el){
+			console.log(elementId);
+		}
+		else if (el.textContent !== text){
+            if(el.textContent > text)
+				$('#'+elementId).css('color','red');
+			else
+				$('#'+elementId).css('color','#33ff33');
+			setTimeout(function(){ $('#'+elementId).css('color','');}, 300);
+            el.textContent = text;
+        }
+ 
+ 		return el;
+    }
+
+
+    var currentPage;
+    var lastStats;
+
+    function getReadableCoins(coins, digits, withoutSymbol){
+		digits=2;
+        var amount = (parseInt(coins || 0) / lastStats.config.coinUnits).toFixed(digits || lastStats.config.coinUnits.toString().length - 1);
+        return amount + (withoutSymbol ? '' : (' ' + lastStats.config.symbol));
+    }
+
+    function formatDate(time){
+        if (!time) return '';
+        return new Date(parseInt(time) * 1000).toLocaleString();
+    }
+
+    function formatPaymentLink(hash){
+        return '<a target="_blank" href="' + getTransactionUrl(hash) + '">' + hash + '</a>';
+    }
+
+    function getPaymentRowElement(payment, jsonString){
+
+        var row = document.createElement('tr');
+        row.setAttribute('data-json', jsonString);
+        row.setAttribute('data-time', payment.time);
+        row.setAttribute('id', 'paymentRow' + payment.time);
+
+        row.innerHTML = getPaymentCells(payment);
+
+        return row;
+    }
+
+    function getUserBlockRowElement(block, jsonString){
+
+        var row = document.createElement('tr');
+        row.setAttribute('data-json', jsonString);
+        row.setAttribute('data-time', block.time);
+        row.setAttribute('data-height', block.height);
+        row.setAttribute('id', 'blockRow' + block.time);
+
+        row.innerHTML = getUserBlockCells(block);
+
+        return row;
+    }
+
+	function getCandidateRowElement(candidate, jsonString){
+
+        var row = document.createElement('tr');
+        row.setAttribute('data-json', jsonString);
+        row.setAttribute('data-time', candidate.height);
+        row.setAttribute('id', 'candidateRow' + candidate.height);
+
+
+        row.innerHTML = getCandidateCells(candidate);
+
+        return row;
+    }
+
+
+    function parsePayment(time, serializedPayment){
+        var parts = serializedPayment.split(':');
+        return {
+            time: parseInt(time),
+            hash: parts[0],
+            amount: parts[1],
+            fee: parts[2],
+            mixin: parts[3],
+            recipients: parts[4]
+        };
+    }
+    
+	function parseUserBlock(height, serializedBlock){
+        var parts = serializedBlock.split(':');
+        return {
+            height: parseInt(height),
+            time: parseInt(parts[0]),
+            reward: parseInt(parts[2])-(parseInt(parts[6])+parseInt(parts[7])+parseInt(parts[8])),
+            totalShares: parts[4],
+            workerShares: parts[3],
+            amount: parts[5],
+            fullReward: parseInt(parts[2]),
+            transferFee: parseInt(parts[6]),
+            poolFee: parseInt(parts[7]),
+            donationFee: parseInt(parts[8]),
+        };
+    }
+	function parseCandidate(height, serializedCandidate){
+        var parts = serializedCandidate.split(':');
+        return {
+            height: parseInt(height),
+            time: parseInt(parts[0]),
+            totalShares: parts[1],
+            workerShares: parts[2],
+        };
+    }
+
+    function renderPayments(paymentsResults){
+
+        var $paymentsRows = $('#payments_rows');
+
+        for (var i = 0; i < paymentsResults.length; i += 2){
+
+            var payment = parsePayment(paymentsResults[i + 1], paymentsResults[i]);
+
+            var paymentJson = JSON.stringify(payment);
+
+            var existingRow = document.getElementById('paymentRow' + payment.time);
+
+            if (existingRow && existingRow.getAttribute('data-json') !== paymentJson){
+                $(existingRow).replaceWith(getPaymentRowElement(payment, paymentJson));
+            }
+            else if (!existingRow){
+
+                var paymentElement = getPaymentRowElement(payment, paymentJson);
+
+                var inserted = false;
+                var rows = $paymentsRows.children().get();
+                for (var f = 0; f < rows.length; f++) {
+                    var pTime = parseInt(rows[f].getAttribute('data-time'));
+                    if (pTime < payment.time){
+                        inserted = true;
+                        $(rows[f]).before(paymentElement);
+                        break;
+                    }
+                }
+                if (!inserted)
+                    $paymentsRows.append(paymentElement);
+            }
+
+        }
+    }
+
+	function renderUserBlocks(blocksResults){
+
+        var $blocksRows = $('#blocks_rows');
+
+        for (var i = 0; i < blocksResults.length; i += 2){
+
+            var block = parseUserBlock(blocksResults[i + 1], blocksResults[i]);
+
+            var blockJson = JSON.stringify(block);
+
+            var existingRow = document.getElementById('blockRow' + block.time);
+
+            if (existingRow && existingRow.getAttribute('data-json') !== blockJson){
+                $(existingRow).replaceWith(getUserBlockRowElement(block, blockJson));
+				$('[data-toggle="tooltip"]').tooltip();
+            }
+            else if (!existingRow){
+
+                var blockElement = getUserBlockRowElement(block, blockJson);
+
+                var inserted = false;
+                var rows = $blocksRows.children().get();
+                for (var f = 0; f < rows.length; f++) {
+                    var pTime = parseInt(rows[f].getAttribute('data-time'));
+                    if (pTime < block.time){
+                        inserted = true;
+                        $(rows[f]).before(blockElement);
+                        break;
+                    }
+                }
+                if (!inserted)
+                    $blocksRows.append(blockElement);
+            
+				$('[data-toggle="tooltip"]').tooltip();
+            }
+
+        }
+    }
+
+	function renderCandidates(candidatesResults){
+
+        var $candidatesRows = $('#candidates_rows');
+		var rows = $candidatesRows.children().get();
+		for (var f = 0; f < rows.length; f++) {
+			var stays = false;
+			var pHeight = parseInt(rows[f].getAttribute('data-time'));
+			for (var i = 0; i < candidatesResults.length; i += 2){
+            	var candidate = parseCandidate(candidatesResults[i + 1], candidatesResults[i]);
+				if (pHeight == candidate.height){
+					stays = true;
+					break;
+				}
+			}
+			if(! stays)
+				rows[f].remove();
+		}
+
+        for (var i = 0; i < candidatesResults.length; i += 2){
+		
+            var candidate = parseCandidate(candidatesResults[i + 1], candidatesResults[i]);
+
+            var candidateJson = JSON.stringify(candidate);
+
+            var existingRow = document.getElementById('candidateRow' + candidate.height);
+
+            if (existingRow && existingRow.getAttribute('data-json') !== candidateJson){
+                $(existingRow).replaceWith(getCandidateRowElement(candidate, candidateJson));
+            }
+            else if (!existingRow){
+
+                var candidateElement = getCandidateRowElement(candidate, candidateJson);
+
+                var inserted = false;
+                var rows = $candidatesRows.children().get();
+                for (var f = 0; f < rows.length; f++) {
+                    var pHeight = parseInt(rows[f].getAttribute('data-time'));
+                    if (pHeight < candidate.height){
+                        inserted = true;
+                        $(rows[f]).before(candidateElement);
+                        break;
+                    }
+                }
+                
+				if (!inserted)
+                    $candidatesRows.append(candidateElement);
+            }
+
+        }
+    }
+
+	var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+
+
+	function renderWorkers(workerResults){
+
+        var $workerRows = $('#workers_rows');
+
+		$workerRows.empty();
+
+        var keys = Object.keys(workerResults).sort();
+		for(var worker of keys){
+        	var row = document.createElement('tr');
+        	row.innerHTML = getWorkerCells(Base64.decode(worker),workerResults[worker]);
+            $workerRows.append(row);
+        }
+    }
+
+    function pulseLiveUpdate(){
+        var stats_update = document.getElementById('stats_updated');
+        stats_update.style.transition = 'opacity 100ms ease-out';
+        stats_update.style.opacity = 1;
+        setTimeout(function(){
+            stats_update.style.transition = 'opacity 7000ms linear';
+            stats_update.style.opacity = 0;
+        }, 500);
+    }
+
+    window.onhashchange = function(){
+        routePage();
+    };
+
+	var lastEv = new Date() / 1000 | 0;
+
+    function fetchLiveStats() {
+        $.ajax({
+            url: api + '/live_stats',
+            dataType: 'json',
+            cache: 'false'
+        }).done(function(data){
+            pulseLiveUpdate();
+            lastStats = data;
+            updateIndex();
+            currentPage.update();
+        }).always(function () {
+            fetchLiveStats();
+        });
+    }
+
+    function floatToString(float) {
+        return float.toFixed(6).replace(/[0\.]+$/, '');
+    }
+
+
+    var xhrPageLoading;
+    function routePage(loadedCallback) {
+
+        if (currentPage) currentPage.destroy();
+        $('#page').html('');
+        $('#loading').show();
+
+        if (xhrPageLoading)
+            xhrPageLoading.abort();
+
+        $('.hot_link').parent().removeClass('active');
+        var $link = $('a.hot_link[href="' + (window.location.hash || '#') + '"]');
+
+        $link.parent().addClass('active');
+        var page = $link.data('page');
+
+        xhrPageLoading = $.ajax({
+            url: 'pages/' + page,
+            cache: false,
+            success: function (data) {
+                $('#loading').hide();
+                $('#page').show().html(data);
+                currentPage.update();
+                if (loadedCallback) loadedCallback();
+            }
+        });
+    }
+
+    function updateIndex(){
+        updateText('coinName', lastStats.config.coin);
+    }
+
+    function getBlockchainUrl(id) {
+        return blockchainExplorer.replace('{symbol}', lastStats.config.symbol.toLowerCase()).replace('{id}', id);
+    }
+
+    $(function(){
+		var socket = io('/coin_Caliber');
+
+		$("head").append("<link rel='stylesheet' href=" + themeCss + ">");
+		
+        $.get(api + '/stats', function(data){
+            lastStats = data;
+            updateIndex();
+            routePage(fetchLiveStats);
+        });
+    });
+
+
+</script>
+
+<!--<div id="containerX" style="position:fixed;top:0;left:0;opacity: 0.4;filter: hue-rotate(120deg);overflow:hidden;z-index:-998;"></div>-->
+<div id="containerX" style="position:fixed;top:0;left:0;overflow:hidden;z-index:-998;"></div>
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><img src="/logos/caliber.png" width="32" height="32" style="margin-right:0.0em; margin-top:-0.3em;"/></a> <a class="navbar-brand">CryptoKnight Caliber</span></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a class="hot_link" data-page="home.html" href="#">
+                    <i class="fa fa-home"></i> Home
+                </a></li>
+
+                <li><a class="hot_link" data-page="getting_started.html" href="#getting_started">
+                    <i class="fas fa-plug"></i> Connect
+                </a></li>
+
+                <li><a class="hot_link" data-page="pool_blocks.html" href="#pool_blocks">
+                    <i class="fa fa-cubes"></i> Blocks
+                </a></li>
+
+                <li><a class="hot_link" data-page="payments.html" href="#payments">
+                    <i class="far fa-paper-plane"></i> Payments
+                </a></li>
+
+				<li><a class="hot_link" data-page="chat.html" href="#chat">
+                    <i class="fab fa-discord"></i> Chat & Support
+				</a></li>
+
+                
+            </ul>
+            <div id="stats_updated"><i class="fa fa-bolt"></i></div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+
+    <div id="page"></div>
+
+    <p id="loading" class="text-center"><i class="fas fa-circle-notch fa-spin"></i></p>
+
+</div>
+
+<footer>
+    <div class="text-muted" style="line-height:10px">
+        <a href="/aeon/">Aeon</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/alloy/">Alloy</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/arq/">Arqma</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/arto/">Arto</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/b2b/">B2bcoin</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/bbs/">BBScoin </a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/btcn/">BitcoiNote</a> 
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/citi/">CitiCash</a> 
+  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ipbc/">BitTube</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/edl/">eDollar</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/etn/">ETN</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/elya/">Elya</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/graft/">Graft</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/haven/">Haven</a> 
+  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ipbcrocks/">IPBC</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/iridium/">Iridium</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/italo/">Italo</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/karbo/">Karbo</a>
+  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/lethean/">Lethean</a>
+    </div>
+    <div class="text-muted" style="line-height:10px">
+        <a href="/lines/">Lines</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/loki/">Loki</a>
+  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/msr/">Masari</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/monero/">Monero</a>
+  		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/monerov/">MoneroV</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/niobio/">Niobio</a> 
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ombre/">Ombre</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/qwerty/">Qwerty</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/ryo/">Ryo</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/safex/">SafeX</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/saronite/">Saronite</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/solace/">Solace</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/stellite/">Stellite</a>
+		<i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/sumo/">Sumo</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/triton/">Triton</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> <a href="/wownero/">Wownero</a>
+        <i class="fas fa-circle" style="color:black;font-size:50%;margin:3px 6px;"></i> 
+		<a target="_blank" class="social" href="https://discord.gg/kaejJWc"><i class="fab fa-discord"></i></a>
+		<a target="_blank" class="social" href="//github.com/sebseb7"><i class="fab fa-github"></i></a>
+		<a target="_blank" class="social" href="//youtube.com/c/sebgreen"><i class="fab fa-youtube"></i></a>
+		<a target="_blank" class="social" href="//twitter.com/sebseb7"><i class="fab fa-twitter"></i></a>
+		<a class="social" href="/data"><i class="far fa-chart-bar"></i></a>
+    </div>
+</footer>
+
+
+
+<script>
+var container;
+var camera, scene, renderer, mesh;
+var uniforms;
+var startTime;
+var running = 0;
+
+if(docCookies.getItem('3d')!=='off')
+{
+	start_3d();
+}
+
+function start_3d()
+{
+	running = 1;
+	init3d();
+	animate();
+}
+
+
+function init3d() {
+  container = document.getElementById( 'containerX' );
+  startTime = Date.now();
+  camera = new THREE.Camera();
+  camera.position.z = 1;
+  scene = new THREE.Scene();
+  var geometry = new THREE.PlaneBufferGeometry(2, 2 );
+  uniforms = {
+    iGlobalTime: { type: "f", value: 1.0 },
+    iResolution: { type: "v1", value: new THREE.Vector2(), }
+  };
+
+  var material = new THREE.ShaderMaterial( {
+    uniforms: uniforms,
+    vertexShader: document.getElementById( 'vertexShader' ).textContent,
+    fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+  });
+
+  mesh = new THREE.Mesh( geometry, material );
+  scene.add( mesh );
+  renderer = new THREE.WebGLRenderer();
+  container.appendChild( renderer.domElement );
+  onWindowResize();
+  window.addEventListener( 'resize', onWindowResize, false );
+}
+
+function onWindowResize( event ) {
+  uniforms.iResolution.value.x = window.innerWidth;
+  uniforms.iResolution.value.y = window.innerHeight;
+  renderer.setSize( window.innerWidth, window.innerHeight );
+}
+function animate() {
+  requestAnimationFrame( animate );
+  if(running) render();
+}
+
+function render() {
+  var currentTime = Date.now();
+  uniforms.iGlobalTime.value = (currentTime - startTime) * 0.0004;
+  renderer.render( scene, camera );
+}
+
+function deinit3d() {
+
+	scene.remove(mesh);
+	$('#containerX' ).empty();
+	scene = null;
+	camera = null;
+	renderer = null;
+	running = 0;
+}
+
+</script>
+
+
+</body>
+</html>

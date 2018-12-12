@@ -5,8 +5,11 @@ function BTC() {
 
 	request('https://blockchain.info/de/ticker', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+
 		const data = JSON.parse(body);
-		value = parseFloat(data.USD.last);
+		value = data.USD.last;
 
 
 		if(value)
@@ -21,6 +24,9 @@ function BTC() {
 function BBS() {
 
 	request('https://tradeogre.com/api/v1/ticker/LTC-BBS', (error, response, body) => {
+		
+		if(error) console.log(error);
+		if(error) return;
 
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
@@ -38,6 +44,9 @@ function SOLACE() {
 
 	request('https://tradeogre.com/api/v1/ticker/LTC-SOLACE', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
 
@@ -54,6 +63,9 @@ function RYO() {
 
 	request('https://tradeogre.com/api/v1/ticker/BTC-RYO', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
 
@@ -70,6 +82,10 @@ function LTC() {
 
 	request('https://tradeogre.com/api/v1/ticker/BTC-LTC', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
+		
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
 
@@ -86,6 +102,9 @@ function XMV() {
 
 	request('https://tradeogre.com/api/v1/ticker/BTC-XMV', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
 
@@ -102,6 +121,9 @@ function LTHN() {
 
 	request('https://tradeogre.com/api/v1/ticker/BTC-LTHN', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
 
@@ -118,6 +140,11 @@ function IRD() {
 
 	request('https://tradeogre.com/api/v1/ticker/BTC-IRD', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
+		console.log(body);
+		
 		const data = JSON.parse(body);
 		value = parseFloat(data.price);
 
@@ -131,7 +158,7 @@ function IRD() {
 	});
 }
 function B2B() {
-
+/*
 	request('https://maplechange.com:443//api/v2/tickers/b2bbtc.json', (error, response, body) => {
 
 		const data = JSON.parse(body);
@@ -144,12 +171,15 @@ function B2B() {
 
 			fs.writeFile("../../api/BTC-B2B.xml", JSON.stringify(json), function(err) {}); 
 		}
-	});
+	});*/
 }
 function BTCN() {
 
 	request('https://app.stocks.exchange/api2/ticker', (error, response, body) => {
 
+		if(error) console.log(error);
+		if(error) return;
+		
 		const data = JSON.parse(body);
 
 		for (var i in data) {
@@ -174,9 +204,8 @@ function BTCN() {
 }
 
 function update(){
-	BTC();
 	LTHN();
-	B2B();
+//	B2B();
 	BTCN();
 	IRD();
 	BBS();
@@ -184,10 +213,11 @@ function update(){
 	LTC();
 	RYO();
 	XMV();
+	BTC();
 }
 
 setInterval(()=>{
 	update();
-}, 60*1000);
+}, 120*1000);
 update();
 

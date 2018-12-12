@@ -30,19 +30,26 @@
 			"algo":"_l1",
 			"logo":"/logos/btcn.png"
 		},{
+			"name":"Bittorium",
+			"class":"",
+			"api":"/rpc/btor",
+			"url":"/bittorium",
+			"algo":"_l1",
+			"logo":"/logos/btor.png"
+		},{
+			"name":"Swap",
+			"class":"",
+			"api":"/rpc/swap",
+			"url":"/swap",
+			"algo":"_sf",
+			"logo":"/logos/swap.png"
+		},{
 			"name":"CitiCash",
 			"class":"",
 			"api":"/rpc/citi",
 			"url":"/citi",
-			"algo":"_v1",
+			"algo":"_hv",
 			"logo":"/logos/citi.png"
-		},{
-			"name":"SafeX",
-			"class":"",
-			"api":"/rpc/safex",
-			"url":"/safex",
-			"algo":"_v1",
-			"logo":"/logos/safex.png"
 		},{
 			"name":"Masari",
 			"class":"",
@@ -104,7 +111,7 @@
 			"class":"",
 			"api":"/rpc/stellite",
 			"url":"/stellite",
-			"algo":"_v1",
+			"algo":"_x",
 			"logo":"/logos/stellite.png"
 		},{
 			"name":"Loki",
@@ -120,13 +127,6 @@
 			"url":"/saronite",
 			"algo":"_hv",
 			"logo":"/logos/saronite.png"
-		},{
-			"name":"Qwerty",
-			"class":"",
-			"api":"/rpc/qwerty",
-			"url":"/qwerty",
-			"algo":"",
-			"logo":"/logos/qwerty.png"
 		},{
 			"name":"Wownero",
 			"class":"",
@@ -153,14 +153,14 @@
 			"class":"",
 			"api":"/rpc/xmr",
 			"url":"/monero",
-			"algo":"_v1",
+			"algo":"_v2",
 			"logo":"/logos/monero.png"
 		},{
 			"name":"Graft",
 			"class":"",
 			"api":"/rpc/graft",
 			"url":"/graft",
-			"algo":"_v1",
+			"algo":"_v2",
 			"logo":"/logos/graft_small.png"
 		},{
 			"name":"Truck",
@@ -184,12 +184,19 @@
 			"algo":"_ht",
 			"logo":"/logos/ipbcrocks.png"
 		},{
-			"name":"Intense",
+			"name":"Caliber",
 			"class":"",
-			"api":"/rpc/itns",
-			"url":"/itns",
-			"algo":"_v1",
-			"logo":"/logos/intense.png"
+			"api":"/rpc/caliber",
+			"url":"/caliber",
+			"algo":"_v2",
+			"logo":"/logos/caliber.png"
+		},{
+			"name":"Lethean",
+			"class":"",
+			"api":"/rpc/lethean",
+			"url":"/lethean",
+			"algo":"_v2",
+			"logo":"/logos/lethean.png"
 		},{
 			"name":"Triton",
 			"class":"",
@@ -232,13 +239,6 @@
 			"url":"/edl",
 			"algo":"",
 			"logo":"/logos/edollar.png"
-		},{
-			"name":"Lines",
-			"class":"",
-			"api":"/rpc/lines",
-			"url":"/lines",
-			"algo":"_v1",
-			"logo":"/logos/lines.svg"
 		},{
 			"name":"Iridium",
 			"class":"",

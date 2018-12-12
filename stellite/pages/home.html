@@ -600,7 +600,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_v1',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_x',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -773,7 +773,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_v1'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_x'));
 
     if (address){
         $('#yourStatsInput').val(address);

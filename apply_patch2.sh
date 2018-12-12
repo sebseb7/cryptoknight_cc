@@ -76,3 +76,12 @@ cd ..
 cd saronite
 cat ../patch2 | patch -p1
 cd ..
+cd itns
+cat ../patch2 | patch -p1
+cd ..
+cd swap
+cat ../patch2 | patch -p1
+cd ..
+cd lethean
+cat ../patch2 | patch -p1
+cd ..

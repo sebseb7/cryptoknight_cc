@@ -16,13 +16,13 @@ cd ..
 cd elya
 cat ../patch | patch -p1
 cd ..
-cd itns
-cat ../patch | patch -p1
-cd ..
 cd karbo
 cat ../patch | patch -p1
 cd ..
 cd qwerty
+cat ../patch | patch -p1
+cd ..
+cd bittorium
 cat ../patch | patch -p1
 cd ..
 

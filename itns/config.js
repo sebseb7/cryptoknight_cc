@@ -1,6 +1,6 @@
-var api = "/rpc/itns";
+var api = "/rpc/lethean";
 
-var poolHost = "intense.ingest.cryptoknight.cc";
+var poolHost = "lethean.ingest.cryptoknight.cc";
 
 var cryptonatorWidget = ["BTC-USD"];
 
@@ -8,9 +8,9 @@ var irc = "";
 
 var email = "";
 
-var blockchainExplorer = "https://lethean.io/explorer/block/{id}";
+var blockchainExplorer = "https://lethean.explore.cryptoknight.cc/block/{id}";
 
-var transactionExplorer = "https://lethean.io/explorer/tx/{id}";
+var transactionExplorer = "https://lethean.explore.cryptoknight.cc/tx/{id}";
 
 var guiWallet = "https://intensecoin.com/#download";
 
