@@ -214,7 +214,7 @@
 
 <!-- Pool Charts -->
 <div class="row">
-    <div class="col-sm-4 poolChart">
+    <div class="col-sm-3 poolChart">
         <div class="card">
             <h4><span tkey="hashRate_ar">Graph Rate (<span class="ar">ar</span>)</span></h4>
             <div class="chart">
@@ -223,7 +223,7 @@
             </div> 
         </div>        
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="col-sm-3 poolChart">
         <div class="card">
             <h4><span tkey="hashRate_at">Graph Rate (<span class="at">at</span>)</span></h4>
             <div class="chart">
@@ -232,7 +232,7 @@
             </div> 
         </div>        
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="col-sm-3 poolChart">
         <div class="card">
             <h4><span tkey="difficulty">Difficulty</span></h4>
             <div class="chart">
@@ -241,7 +241,7 @@
             </div> 
         </div>
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="col-sm-3 poolChart">
         <div class="card">
             <h4><span tkey="miners">Miners</span></h4>
             <div class="chart">
@@ -250,7 +250,34 @@
             </div> 
         </div> 
     </div>    
-    <div class="col-sm-4 poolChart">
+    <div class="col-sm-3 poolChart">
+        <div class="card">
+            <h4><span tkey="hashRate_ar_10d">Graph Rate 10d (<span class="ar">ar</span>)</span></h4>
+            <div class="chart">
+                <canvas id="chart_hashrate_ar_10d"></canvas>
+                <a class="chart-style"></a>
+            </div> 
+        </div>        
+    </div>
+    <div class="col-sm-3 poolChart">
+        <div class="card">
+            <h4><span tkey="hashRate_at_10d">Graph Rate 10d (<span class="at">at</span>)</span></h4>
+            <div class="chart">
+                <canvas id="chart_hashrate_at_10d"></canvas>
+                <a class="chart-style"></a>
+            </div> 
+        </div>        
+    </div>
+    <div class="col-sm-3 poolChart">
+        <div class="card">
+            <h4><span tkey="difficulty_10d">Difficulty 10d</span></h4>
+            <div class="chart">
+                <canvas id="chart_diff_10d"></canvas>
+                <a class="chart-style"></a>
+            </div> 
+        </div>
+    </div>
+    <div class="col-sm-3 poolChart">
         <div class="card">
             <h4><span tkey="workers">Workers</span></h4>
             <div class="chart">
@@ -348,6 +375,9 @@ function createCharts() {
         hashrate_ar: getGraphData(data.hashrate_ar),
         hashrate_at: getGraphData(data.hashrate_at),
         diff: getGraphData(data.difficulty),
+        hashrate_ar_10d: getGraphData(data.hashrate_ar_10d),
+        hashrate_at_10d: getGraphData(data.hashrate_at_10d),
+        diff_10d: getGraphData(data.difficulty_10d),
         miners: getGraphData(data.miners),
         workers: getGraphData(data.workers)
     };

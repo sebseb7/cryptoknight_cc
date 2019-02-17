@@ -58,12 +58,14 @@
             <thead>
             <tr>
                 <th class="col1"><span tkey="timeFound">Time Found</span></th>
-                <th class="col2"><span tkey="reward">Reward</span></th>
-                <th class="col3"><span tkey="height">Height</span></th>
-                <th class="col4"><span tkey="difficulty">Difficulty</span></th>
-                <th class="col5"><span tkey="blockHash">Block Hash</span></th>
-                <th class="col6"><span tkey="effort">Effort</span></th>
-                <th class="col7" title="How many more blocks network must mine before this block is matured"><span tkey="status">Status</span></th>
+                <th class="col2"><span>Geo</span></th>
+                <th class="col3"><span>Bits</span></th>
+                <th class="col4"><span tkey="reward">Reward</span></th>
+                <th class="col5"><span tkey="height">Height</span></th>
+                <th class="col6"><span tkey="difficulty">Difficulty</span></th>
+                <th class="col7"><span tkey="blockHash">Block Hash</span></th>
+                <th class="col8"><span tkey="effort">Effort</span></th>
+                <th class="col9" title="How many more blocks network must mine before this block is matured"><span tkey="status">Status</span></th>
             </tr>
             </thead>
             <tbody id="blocksReport_rows">
@@ -190,11 +192,10 @@ function parseBlock(height, serializedBlock){
         time: parts[1],
         difficulty: parseInt(parts[2]),
         shares: parseInt(parts[3]),
-        //orphaned: parts[4].toString(),
-        orphaned: 0,
-		//parts[4].toString(),
-        reward: 60000000000000
-		//parts[5]
+        orphaned: parts[4].toString(),
+        reward: parts[5],
+        bits: parts[6],
+        geo: parts[7]
     };
 	if(!block.reward) block.orphaned='2';
 
@@ -257,12 +258,14 @@ function getBlockRowElement(block, jsonString){
     
     var columns =
         '<td class="col1">' + formatDate(block.time) + '</td>' +
-        '<td class="col2">' + reward + '</td>' +
-        '<td class="col3">' + block.height + '</td>' +
-        '<td class="col4">' + block.difficulty + '</td>' +
-        '<td class="col5">' + formatBlockLink(block.hash) + '</td>' +
-        '<td class="col6" title="' + block.shares + ' shares submitted">' + formatLuck(block.difficulty, block.shares) + '</td>' +
-        '<td class="col7">' + block.maturity + '</td>';
+        '<td class="col2">EU</td>' +
+        '<td class="col3">' + block.bits + '</td>' +
+        '<td class="col4">' + reward + '</td>' +
+        '<td class="col5">' + block.height + '</td>' +
+        '<td class="col6">' + block.difficulty + '</td>' +
+        '<td class="col7">' + formatBlockLink(block.hash) + '</td>' +
+        '<td class="col8" title="' + block.shares + ' shares submitted">' + formatLuck(block.difficulty, block.shares) + '</td>' +
+        '<td class="col9">' + block.maturity + '</td>';
 
     row.innerHTML = columns;
     

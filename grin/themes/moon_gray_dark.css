@@ -872,11 +872,11 @@ table th.sort:hover{
   font-family: 'Inconsolata', monospace;
   font-size: 0.95em;
 }
-#blocksReport table .col2,
-#blocksReport table .col3,
 #blocksReport table .col4,
+#blocksReport table .col5,
 #blocksReport table .col6,
-#blocksReport table .col7 {
+#blocksReport table .col8,
+#blocksReport table .col9 {
   text-align: center;
 }  
 @media (min-width: 768px) {
@@ -887,26 +887,32 @@ table th.sort:hover{
     white-space: nowrap;
   }
   #blocksReport table .col1 {
-    width:210px;
+    width:100px;
   }  
   #blocksReport table .col2 {
-    width:80px;
+    width:30px;
   }  
   #blocksReport table .col3 {
-    width:90px;
+    width:30px;
   }  
   #blocksReport table .col4 {
-    width:120px;
+    width:50px;
   }  
   #blocksReport table .col5 {
+    width:40px;
+  }  
+  #blocksReport table .col6 {
+    width:80px;
+  }  
+  #blocksReport table .col7 {
     overflow: hidden;
     text-overflow: ellipsis;
   }  
-  #blocksReport table .col6 {
-    width: 55px;
+  #blocksReport table .col8 {
+    width: 50px;
   }  
-  #blocksReport table .col7 {
-    width: 140px;
+  #blocksReport table .col9 {
+    width: 100px;
   }  
 }
 #blocksReport .pending td{
@@ -919,11 +925,11 @@ table th.sort:hover{
   background-color:rgba(255, 0, 0, .1);
 }
 #blocksReport .luckGood,
-#blocksReport .unlocked .col7 {
+#blocksReport .unlocked .col9 {
   color: #17a600;
 }
 #blocksReport .luckBad,
-#blocksReport .orphaned .col7 {
+#blocksReport .orphaned .col9 {
   color: #a60000;
 }
 #blocksReport .luckMid {
