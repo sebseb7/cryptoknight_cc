@@ -62,8 +62,8 @@
         update: function(){
             updateText('paymentsTotal', lastStats.pool.totalPayments.toString());
             updateText('paymentsTotalPaid', lastStats.pool.totalMinersPaid.toString());
-            updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold, 3));
-            updateText('paymentsMinimum2', getReadableCoins(lastStats.config.minPaymentThreshold2, 3));
+            updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold, 6));
+            updateText('paymentsMinimum2', getReadableCoins(lastStats.config.minPaymentThreshold2, 6));
             renderPayments(lastStats.pool.payments);
         }
     };

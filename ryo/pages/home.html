@@ -286,7 +286,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-Heavy)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight GPU)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -590,7 +590,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_hv',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_gp',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -763,7 +763,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_hv'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_gp'));
 
     if (address){
         $('#yourStatsInput').val(address);

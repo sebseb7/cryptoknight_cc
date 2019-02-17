@@ -1,0 +1,410 @@
+		<script src="/misc/tablesorter/jquery.tablesorter.min.js"></script>
+		<script>
+
+            $(document).ready(function(){
+                $.tablesorter.addParser({
+                    id: 'hashrate',
+                    is: function(s) {
+                        return s.match(new RegExp(/[0-9]+(\.[0-9]+)?\ (KB|B|GB|MB|TB)/i));
+                    },
+                    format: function(s) {
+                        if (s && s === '0') {
+                            s = s + ' H';
+						}
+                        var suf = s.match(new RegExp(/(H|KH|MH|GH|TH|PH)$/i))[1];
+                        var num = parseFloat(s.match(new RegExp(/^[0-9]+(\.[0-9]+)?/i))[0]);
+                        switch(suf) {
+                            case 'H':
+                                return num;
+                            case 'KH':
+                                return num * 1000;
+                            case 'MH':
+                                return num * 1000 * 1000;
+                            case 'GH':
+                                return num * 1000 * 1000 * 1000;
+                            case 'TH':
+                                return num * 1000 * 1000 * 1000 * 1000;
+                            case 'PH':
+                                return num * 1000 * 1000 * 1000 * 1000 * 1000;
+                        }
+                    },
+                    type: 'numeric'
+                });
+
+                $.tablesorter.addParser({
+                    id: 'duration',
+                    is: function() {
+                        return false;
+                    },
+                    format: function(s, table) {
+                        var i, time,
+                            c = table.config,
+                            t = '',
+                            duration = '',
+                            len = c.durationLength || 4,
+                            str = new Array(len + 1).join('0'),
+                            labels = (c.durationLabels || '(?:years|year|y),(?:days|day|d),(?:hours|hour|h),(?:minutes|minute|min|m),(?:seconds|second|sec|s)').split(/\s*,\s*/),
+                            llen = labels.length;
+                        // build regex
+                        if (!c.durationRegex) {
+                            for (i = 0; i < llen; i++) {
+                                t += '(?:(\\d+)\\s*' + labels[i] + '\\s*)?';
+                            }
+                            c.durationRegex = new RegExp(t, 'i');
+                        }
+                        // remove commas from value
+                        time = ( c.usNumberFormat ? s.replace(/,/g, '') : s.replace( /(\d)(?:\.|\s*)(\d)/g, '$1$2') ).match(c.durationRegex);
+                        for (i = 1; i < llen + 1; i++) {
+                            duration += ( str + ( time[i] || 0 ) ).slice(-len);
+                        }
+                        return duration;
+                    },
+                    type: 'text'
+                });
+
+                $(".tablesorter").tablesorter({
+                    headers: {
+                        1: { sorter: 'hashrate' },
+                        2: { sorter: 'hashrate' },
+                        6: { sorter: 'duration' },
+                        7: { sorter: 'duration' }
+                    }
+                });
+			});
+
+            function nice_time(data_seconds) {
+                var seconds = parseInt(data_seconds, 10);
+                var days = Math.floor(seconds / (3600 * 24));
+                seconds  -= days * 3600 * 24;
+                var hrs   = Math.floor(seconds / 3600);
+                seconds  -= hrs * 3600;
+                var mnts = Math.floor(seconds / 60);
+                seconds  -= mnts * 60;
+                return (days > 0 ? days + 'd ' : '')
+					+ (hrs > 0 ? hrs + 'h ' : '')
+					+ (mnts > 0 ? mnts + 'm ' : '')
+					+ seconds + 's';
+            }
+
+			function getReadableHashRateString2(hashrate){
+				var i = 0;
+				var byteUnits = [' <span class="hr_h">H</span>', ' <span class="hr_kh">KH</span>', ' <span class="hr_mh">MH</span>', ' <span class="hr_gh">GH</span>', ' <span class="hr_th">TH</span>', ' <span class="hr_ph">PH</span>' ];
+				while (hashrate > 1000){
+					hashrate = hashrate / 1000;
+					i++;
+				}
+				if(hashrate) return hashrate.toFixed(2) + byteUnits[i];
+			}
+
+			var docCookies = {
+				getItem: function (sKey) {
+					return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+				},
+				setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+					if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+					var sExpires = "";
+					if (vEnd) {
+						switch (vEnd.constructor) {
+							case Number:
+								sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+								break;
+							case String:
+								sExpires = "; expires=" + vEnd;
+								break;
+							case Date:
+								sExpires = "; expires=" + vEnd.toUTCString();
+								break;
+						}
+					}
+					document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+					return true;
+				},
+				removeItem: function (sKey, sPath, sDomain) {
+					if (!sKey || !this.hasItem(sKey)) { return false; }
+					document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+					return true;
+				},
+				hasItem: function (sKey) {
+					return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+				}
+			};
+
+			setInterval(() => {
+				var seconds = new Date().getTime() / 1000;
+
+				$('.lnb').each(function( index,elem ) {
+					var val1 = $(elem).data('value');
+					$(elem).text(nice_time(seconds-val1));
+				});
+				$('.lpb').each(function( index,elem ) {
+					var val1 = $(elem).data('value');
+					$(elem).text(nice_time((seconds-val1)));
+				});
+			}, 1000);
+
+			function sortlc(a, b) {
+				if (a.toLowerCase() < b.toLowerCase()) return -1;
+				if (a.toLowerCase() > b.toLowerCase()) return 1;
+				return 0;
+			}
+
+			function get_prof(prof,algo)
+			{
+				var factor = parseFloat(docCookies.getItem('hash_rate'+algo));
+				if(factor)
+					return (prof*factor).toFixed(2);
+				else
+					return 0;
+			}
+
+			var socket;
+			var combined = {phr:0,cnt:0};
+			var combined_data = {phr:{},cnt:{},watch:{}};
+			$(function () {
+			    //$('#user').val(docCookies.getItem('login')||'');
+				socket = io('/main');
+                socket.on('connect', () => {
+					socket.emit('stream', true);
+				});
+
+				socket.on('f',function(data,connected){
+
+					$('#pools').empty();
+
+					combined = {phr:0,cnt:0,watch:0};
+					combined_data = {phr:{},cnt:{},watch:{}};
+
+					var keys = Object.keys(data).sort(sortlc);
+					var seconds = new Date().getTime() / 1000;
+					for(var pool of keys){
+						$('#pools').append($(
+							'<tr class="pool" data-name="'+pool+'">'+
+								'<td class="name"><img src="'+data[pool].logo+'" height="16px"/> <a href="'+data[pool].url+'">'+(pool)+'</a></td>'+
+								'<td class="nhr" data-value="'+data[pool].nhr+'">'+getReadableHashRateString2(data[pool].nhr)+'</td>'+
+								'<td class="phr" data-value="'+data[pool].phr+'">'+(data[pool].phr?getReadableHashRateString2(data[pool].phr):'0')+'</td>'+
+								'<td class="pct" data-value="'+data[pool].pct+'">'+data[pool].pct+' %</td>'+
+								'<td class="cnt" data-value="'+data[pool].cnt+'">'+data[pool].cnt+'</td>'+
+								'<td class="watch" data-value="0"></td>'+
+								'<td class="lnb" data-value="'+data[pool].lnb+'">'+nice_time(seconds - data[pool].lnb)+'</td>'+
+								'<td class="lpb" data-value="'+data[pool].lpb+'">'+nice_time(seconds - data[pool].lpb)+'</td>'+
+								'<td class="eff" data-value="'+data[pool].eff+'">'+data[pool].eff+' %</td>'+
+								'<td class="prof" data-algo="'+data[pool].algo+'" data-value="'+data[pool].prof+'">'+get_prof(data[pool].prof,data[pool].algo)+' $</td>'+
+							'</tr>'));
+							combined.phr+=data[pool].phr;
+							combined.cnt+=data[pool].cnt;
+							combined_data.phr[pool]=data[pool].phr;
+							combined_data.cnt[pool]=data[pool].cnt;
+                        $('.tablesorter').trigger("update");
+					}
+					$('#footer').append($(
+						'<tr class="pool">'+
+							'<th class="connected">Connected: '+connected+'</th>'+
+							'<th class="nhr" data-value=""></th>'+
+							'<th class="phr combined" data-value="'+combined.phr+'">'+getReadableHashRateString2(combined.phr)+'</th>'+
+							'<th class="pct" data-value=""></th>'+
+							'<th class="cnt combined" data-value="'+combined.cnt+'">'+combined.cnt+'</th>'+
+							'<th class="watch combined" data-value=""></th>'+
+							'<th class="" data-value=""></th>'+
+							'<th class="" data-value=""></th>'+
+							'<th class="" data-value=""></th>'+
+							'<th class="" data-value=""></th>'+
+						'</tr>'));
+					socket.emit('stream_full', true);
+				});
+
+				socket.on('u2',function(data){
+					for(var pool of data){
+						var element = $('#pools').find('[data-name="'+pool[0]+'"]').find('.'+pool[1]);
+
+						if( element.data('value') < pool[2])
+						{
+							element.addClass("green");
+							setTimeout(function(el){el.removeClass("green")}, 100, element);
+						}
+						else if ( element.data('value') > pool[2])
+						{
+							element.addClass("red");
+							setTimeout(function(el){el.removeClass("red")}, 100, element);
+						}
+
+						if(pool[1]==='watch')
+						{
+							if(combined_data.watch[pool[0]]) combined.watch-=combined_data.watch[pool[0]];
+							combined.watch+=pool[2];
+							combined_data.watch[pool[0]]=pool[2];
+							$('.watch.combined').html(combined.watch);
+						}
+
+						element.text(pool[2]);
+						element.data('value',pool[2]);
+                        $('.tablesorter').trigger("update");
+					}
+				});
+				socket.on('u',function(data){
+					for(var pool of data){
+						var element = $('#pools').find('[data-name="'+pool[0]+'"]').find('.'+pool[1]);
+						if( element.data('value') < pool[2])
+						{
+							element.addClass("green");
+							setTimeout(function(el){el.removeClass("green")}, 100, element);
+						}
+						else ( element.data('value') > pool[2])
+						{
+							element.addClass("red");
+							setTimeout(function(el){el.removeClass("red")}, 100, element);
+						}
+						var seconds = new Date().getTime() / 1000;
+						if(pool[1]==='nhr'){
+							element.html(getReadableHashRateString2(pool[2]));
+						}
+						if(pool[1]==='phr')
+						{
+							var value = pool[2];
+							combined.phr-=combined_data.phr[pool[0]];
+							combined.phr+=value;
+							combined_data.phr[pool[0]]=value;
+							element.data('value',value);
+							element.html(getReadableHashRateString2(value));
+							$('.phr.combined').html(getReadableHashRateString2(combined.phr));
+						}
+						else if(pool[1]==='cnt')
+						{
+							var value = pool[2];
+							combined.cnt-=combined_data.cnt[pool[0]];
+							combined.cnt+=value;
+							combined_data.cnt[pool[0]]=value;
+							element.data('value',value);
+							element.text(value);
+							$('.cnt.combined').html(combined.cnt);
+						}
+						else
+							element.data('value',pool[2]);
+						if(pool[1]==='lnb')
+							element.text(nice_time(seconds-pool[2]));
+						if(pool[1]==='pct')
+							element.text(pool[2]+' %');
+						if(pool[1]==='eff')
+							element.text(pool[2]+' %');
+						if(pool[1]==='prof')
+							element.text(get_prof(pool[2],element.data('algo'))+' $');
+						if(pool[1]==='lpb')
+							element.text(nice_time(seconds-pool[2]));
+
+                        $('.tablesorter').trigger("update");
+					}
+				});
+				socket.on('c',function(data){
+					$('.connected').html('Connected: '+data);
+                    $('.tablesorter').trigger("update");
+				});
+			});
+
+		</script>
+		<style>
+			th,
+			td {
+				padding: 5px;
+				border:2px solid transparent;
+				font-family: monospace;
+				font-size: 10pt;
+			}
+			table {
+				margin: 30px auto 0 auto;
+			}
+			.green {
+				color: green;
+			}
+			.red {
+				color: red;
+			}
+			.prof {
+				text-align: right;
+			}
+			.phr {
+				text-align: right;
+			}
+			.nhr {
+				text-align: right;
+			}
+			.cnt {
+				text-align: right;
+			}
+			.pct {
+				text-align: right;
+			}
+			.eff {
+				text-align: right;
+			}
+			.watch {
+				text-align: right;
+			}
+			.lnb {
+				text-align: right;
+			}
+			.lpb {
+				text-align: right;
+			}
+			.hr_h {
+				color: #ffff88;
+			}
+			.connected {
+				color: #777777;
+			}
+			.hr_kh {
+				color: #9999ff;
+			}
+			.hr_mh {
+				color: #ff9999;
+			}
+			table.tablesorter thead tr .header {
+				background-image: url(../misc/tablesorter/img/bg.png);
+				background-repeat: no-repeat;
+				background-position: center left;
+				cursor: pointer;
+			}
+			table.tablesorter thead tr .header.coin-name {
+				background-position: center right;
+			}
+			table.tablesorter thead tr .headerSortUp {
+				background-image: url(../misc/tablesorter/img/asc.png);
+			}
+			table.tablesorter thead tr .headerSortDown {
+				background-image: url(../misc/tablesorter/img/desc.png);
+			}
+			table.tablesorter tbody tr td {
+				-webkit-transition: background-color 0.2s ease-in-out;
+				transition: background-color 0.2s ease-in-out;
+			}
+			table.tablesorter tbody tr:hover td {
+				background-color: #010163;
+			}
+			table.tablesorter tbody tr td img {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			table.tablesorter tfoot tr {
+				font-size: 11px;
+			}
+		</style>
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th class="coin-name">Coin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					<th>&nbsp;&nbsp;Net Hashrate</th>
+					<th>&nbsp;&nbsp;Pool Hashrate</th>
+					<th>&nbsp;&nbsp;Netshare</th>
+					<th>&nbsp;&nbsp;Miners</th>
+					<th>&nbsp;&nbsp;Browser</th>
+					<th>&nbsp;&nbsp;Netblock age</th>
+					<th>&nbsp;&nbsp;Poolblock age</th>
+					<th>&nbsp;&nbsp;Curr. Effort</th>
+					<th>&nbsp;&nbsp;KH/s/day</th>
+				</tr>
+			</thead>
+			<tbody id="pools"></tbody>
+			<tfoot id="footer"></tfoot>
+		</table>
+		<br/>
+		<br/>
+		<br/>
+		<br/>

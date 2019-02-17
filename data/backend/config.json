@@ -42,7 +42,7 @@
 			"api":"/rpc/swap",
 			"url":"/swap",
 			"algo":"_sf",
-			"logo":"/logos/swap.png"
+			"logo":"/logos/swap_small.png"
 		},{
 			"name":"CitiCash",
 			"class":"",
@@ -83,7 +83,7 @@
 			"class":"",
 			"api":"/rpc/ryo",
 			"url":"/ryo",
-			"algo":"_hv",
+			"algo":"_gp",
 			"logo":"/logos/ryo.png"
 		},{
 			"name":"Sumo",
@@ -111,7 +111,7 @@
 			"class":"",
 			"api":"/rpc/stellite",
 			"url":"/stellite",
-			"algo":"_x",
+			"algo":"_2f",
 			"logo":"/logos/stellite.png"
 		},{
 			"name":"Loki",

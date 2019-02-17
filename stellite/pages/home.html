@@ -117,10 +117,11 @@
 
 <div id="siteInfo">
 	<br/>
-	Asia Node: 
-	<a href="https://asia.cryptoknight.cc/stellite/#getting_started">cryptoknight asia stellite</a><br/>
-	NEW: US Node: 
-	<a href="https://us.cryptoknight.cc/stellite/#getting_started">cryptoknight america stellite</a>
+	ATTENTION: update your miner for the v9 fork at block 503000.<br/>
+	<a href="https://github.com/Bendr0id/xmrigCC/releases/tag/1.8.10">xmrigcc 1.8.10</a><br/>
+	<a href="https://bitcointalk.org/index.php?topic=3167363.0">srbminer 1.7.6</a><br/>
+	<a href="https://github.com/stellitecoin/xtl-stak/releases/tag/2.7.1">xtl-stak 2.7.1</a><br/>
+	<a href="https://github.com/xmrig/xmrig/releases/tag/v2.9.2">xmrig 2.9.2</a>
 	<br/><br/>
 </div>
 
@@ -292,7 +293,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-XTL)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight2-fast)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -600,7 +601,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_x',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_2f',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -773,7 +774,7 @@
 	    }
     }
 	
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_x'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_2f'));
 
     if (address){
         $('#yourStatsInput').val(address);

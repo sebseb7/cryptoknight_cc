@@ -181,8 +181,10 @@
 
     <div class="col-md-4 stats marketRate">
         <h3 id="marketHeader">Market</h3>
-        <div><i class="fab fa-btc"></i> XFH: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
-        <div><i class="fas fa-dollar-sign"></i> XFH: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div><i class="fab fa-btc"></i> XWP: <span id="coin_btc"></span> <span style="color: #01C2AB">BTC</span></div>
+        <div><i class="fas fa-dollar-sign"></i> XWP: <span id="coin_usd"></span> <span style="color: #01C2AB">USD</span></div>
+        <div class="marketFooter">Trade in <a target="_blank" href="https://discord.gg/SmcFCPu">swap discord</a></div>
+		<!--https://bitcointalk.org/index.php?topic=5083455.msg48613173#msg48613173-->
     </div>
 </div>
 
@@ -323,7 +325,7 @@
     <h3>Estimate Mining Profits</h3>
     <div id="calcHashHolder">
         <div class="input-group">
-            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-heavy)">
+            <input type="number" style="width:400px" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate (Cryptonight-superfast)">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
                     <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
@@ -484,7 +486,7 @@
 
 		$.get('/api/BTC-USD.xml',function(data) {
 
-			coin_in_btc = 4000/100000000;
+			coin_in_btc = 2200/100000000;
 			updateText('coin_btc',coin_in_btc.toFixed(8));
 			if(btc_in_usd)updateText('coin_usd',(data.price*btc_in_usd).toFixed(8));
 			$('.marketRate').show();
@@ -620,7 +622,7 @@
     });
 
     function savehr(){
-        docCookies.setItem('hash_rate_hv',$('#calcHashRate').val(), Infinity,'/');
+        docCookies.setItem('hash_rate_sf',$('#calcHashRate').val(), Infinity,'/');
 	}
 
     function calcEstimateProfit(){
@@ -793,7 +795,7 @@
 	    }
     }
 
-	$('#calcHashRate').val(docCookies.getItem('hash_rate_hv'));
+	$('#calcHashRate').val(docCookies.getItem('hash_rate_sf'));
 
     if (address){
         $('#yourStatsInput').val(address);
